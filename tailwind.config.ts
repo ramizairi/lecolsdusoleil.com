@@ -57,33 +57,65 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        sunset: {
+          coral: "hsl(var(--sunset-coral))",
+          peach: "hsl(var(--sunset-peach))",
+          gold: "hsl(var(--sunset-gold))",
+          cream: "hsl(var(--sunset-cream))",
+        },
+        warm: {
+          brown: "hsl(var(--warm-brown))",
+        },
+      },
+      fontFamily: {
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Source Sans 3', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // Larger sizes for elderly accessibility
+        'accessible-sm': ['1.125rem', { lineHeight: '1.75' }],
+        'accessible-base': ['1.25rem', { lineHeight: '1.75' }],
+        'accessible-lg': ['1.5rem', { lineHeight: '1.6' }],
+        'accessible-xl': ['1.875rem', { lineHeight: '1.5' }],
+        'accessible-2xl': ['2.25rem', { lineHeight: '1.4' }],
+        'accessible-3xl': ['3rem', { lineHeight: '1.3' }],
+        'accessible-4xl': ['3.75rem', { lineHeight: '1.2' }],
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        xl: "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 8px)",
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-up": "fade-up 0.6s ease-out forwards",
+        "fade-in": "fade-in 0.5s ease-out forwards",
+      },
+      spacing: {
+        // Larger touch targets for elderly
+        'touch': '3.5rem',
+        'touch-lg': '4rem',
       },
     },
   },
