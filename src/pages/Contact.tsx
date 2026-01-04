@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -12,9 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,171 +31,236 @@ const Contact = () => {
 
     setTimeout(() => {
       toast({
-        title: "Message envoyé!",
-        description: "Nous vous répondrons dans les plus brefs délais.",
+        title: "Demande envoyée !",
+        description: "Nous vous rappellerons très bientôt.",
       });
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setFormData({ name: "", phone: "", message: "" });
       setIsSubmitting(false);
     }, 1500);
   };
 
-  const contactInfo = [
-    { icon: MapPin, title: "Adresse", value: "123 Avenue du Soleil, 75001 Paris, France" },
-    { icon: Phone, title: "Téléphone", value: "+33 1 23 45 67 89" },
-    { icon: Mail, title: "Email", value: "contact@closdusoleil.fr" },
-    { icon: Clock, title: "Horaires", value: "Lun - Ven: 8h - 18h" },
+  const handleWhatsApp = () => {
+    window.open("https://wa.me/33123456789?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
+  };
+
+  const handleCall = () => {
+    window.location.href = "tel:+33123456789";
+  };
+
+  const trustElements = [
+    { icon: Shield, text: "Équipe qualifiée et certifiée" },
+    { icon: Heart, text: "Soins personnalisés avec bienveillance" },
+    { icon: Users, text: "À l'écoute de vous et votre famille" },
   ];
 
   return (
     <>
       <Helmet>
-        <title>Contact - Clos du Soleil</title>
-        <meta name="description" content="Contactez Clos du Soleil pour toute question sur nos services de soins pour seniors. Notre équipe est à votre écoute." />
+        <title>Contactez-nous - Clos du Soleil</title>
+        <meta name="description" content="Contactez Clos du Soleil par téléphone, WhatsApp ou formulaire. Notre équipe bienveillante est à votre écoute." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
 
         <main className="flex-1 pt-24">
-          {/* Hero Section */}
-          <section className="py-20 bg-gradient-soft">
+          {/* Hero Section - Trust focused */}
+          <section className="py-16 bg-gradient-soft">
             <div className="container mx-auto px-6 text-center">
-              <h1 className="font-serif text-accessible-4xl font-bold text-foreground mb-6 animate-fade-up opacity-0" style={{ animationFillMode: "forwards" }}>
-                Contactez-
-                <span className="bg-gradient-sunset bg-clip-text text-transparent">
-                  nous
-                </span>
+              <h1 className="font-serif text-accessible-3xl md:text-accessible-4xl font-bold text-foreground mb-4 animate-fade-up opacity-0" style={{ animationFillMode: "forwards" }}>
+                Nous sommes là pour{" "}
+                <span className="text-gradient-sunset">vous aider</span>
               </h1>
-              <p className="text-accessible-lg text-muted-foreground max-w-3xl mx-auto animate-fade-up opacity-0" style={{ animationDelay: "100ms", animationFillMode: "forwards" }}>
-                Notre équipe est à votre écoute pour répondre à toutes vos questions et vous accompagner dans vos démarches.
+              <p className="text-accessible-lg md:text-accessible-xl text-foreground/80 max-w-2xl mx-auto animate-fade-up opacity-0" style={{ animationDelay: "100ms", animationFillMode: "forwards" }}>
+                Contactez-nous de la manière qui vous convient le mieux. <br className="hidden md:block" />
+                <strong>Nous vous répondons rapidement.</strong>
               </p>
             </div>
           </section>
 
-          {/* Contact Content */}
-          <section className="py-20 bg-card">
+          {/* Quick Contact Buttons */}
+          <section className="py-10 bg-card border-y border-border/50">
             <div className="container mx-auto px-6">
-              <div className="grid lg:grid-cols-2 gap-12">
-                {/* Contact Info */}
-                <div className="space-y-8">
-                  <h2 className="font-serif text-accessible-2xl font-bold text-foreground">
-                    Nos Coordonnées
-                  </h2>
-                  
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    {contactInfo.map((info, index) => (
-                      <Card 
-                        key={info.title}
-                        className="animate-fade-up opacity-0"
-                        style={{ animationDelay: `${index * 100}ms`, animationFillMode: "forwards" }}
-                      >
-                        <CardContent className="pt-6 flex items-start gap-4">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-sunset flex items-center justify-center shrink-0">
-                            <info.icon className="w-6 h-6 text-primary-foreground" />
-                          </div>
-                          <div>
-                            <p className="font-semibold text-foreground text-accessible-lg">{info.title}</p>
-                            <p className="text-muted-foreground text-accessible-base">{info.value}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+              <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <Button
+                  onClick={handleCall}
+                  variant="accessible"
+                  className="w-full py-8 text-accessible-lg gap-4 animate-fade-up opacity-0"
+                  style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+                >
+                  <Phone className="w-7 h-7" />
+                  <div className="text-left">
+                    <div className="font-bold">Appelez-nous</div>
+                    <div className="text-primary-foreground/80 text-accessible-base">+33 1 23 45 67 89</div>
                   </div>
-                </div>
+                </Button>
 
-                {/* Contact Form */}
-                <Card className="shadow-elevated animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-                  <CardHeader>
-                    <CardTitle>Envoyez-nous un message</CardTitle>
-                    <CardDescription>
-                      Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.
+                <Button
+                  onClick={handleWhatsApp}
+                  variant="accessible"
+                  className="w-full py-8 text-accessible-lg gap-4 bg-[#25D366] hover:bg-[#20BD5A] border-none animate-fade-up opacity-0"
+                  style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+                >
+                  <MessageCircle className="w-7 h-7" />
+                  <div className="text-left">
+                    <div className="font-bold">WhatsApp</div>
+                    <div className="text-white/80 text-accessible-base">Écrivez-nous</div>
+                  </div>
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          {/* Trust Elements */}
+          <section className="py-10 bg-background">
+            <div className="container mx-auto px-6">
+              <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+                {trustElements.map((item, index) => (
+                  <div 
+                    key={item.text}
+                    className="flex items-center gap-3 text-muted-foreground animate-fade-up opacity-0"
+                    style={{ animationDelay: `${400 + index * 100}ms`, animationFillMode: "forwards" }}
+                  >
+                    <item.icon className="w-6 h-6 text-primary" />
+                    <span className="text-accessible-base">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Contact Form - Simplified */}
+          <section className="py-16 bg-card">
+            <div className="container mx-auto px-6">
+              <div className="max-w-xl mx-auto">
+                <Card className="shadow-elevated animate-fade-up opacity-0" style={{ animationDelay: "500ms", animationFillMode: "forwards" }}>
+                  <CardHeader className="text-center pb-2">
+                    <CardTitle className="text-accessible-2xl">Demandez qu'on vous rappelle</CardTitle>
+                    <CardDescription className="text-accessible-lg">
+                      Laissez vos coordonnées, nous vous contacterons
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Nom complet</Label>
-                          <Input
-                            id="name"
-                            name="name"
-                            placeholder="Jean Dupont"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Téléphone</Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            placeholder="+33 6 12 34 56 78"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            required
-                          />
-                        </div>
-                      </div>
-
+                    <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="name" className="text-accessible-lg">Votre nom</Label>
                         <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="votre@email.com"
-                          value={formData.email}
+                          id="name"
+                          name="name"
+                          placeholder="Jean Dupont"
+                          value={formData.name}
                           onChange={handleChange}
                           required
+                          className="text-accessible-lg py-6"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="subject">Sujet</Label>
+                        <Label htmlFor="phone" className="text-accessible-lg">Votre numéro de téléphone</Label>
                         <Input
-                          id="subject"
-                          name="subject"
-                          placeholder="Demande d'information"
-                          value={formData.subject}
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          placeholder="+33 6 12 34 56 78"
+                          value={formData.phone}
                           onChange={handleChange}
                           required
+                          className="text-accessible-lg py-6"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message">Message</Label>
+                        <Label htmlFor="message" className="text-accessible-lg">Comment pouvons-nous vous aider ? (optionnel)</Label>
                         <textarea
                           id="message"
                           name="message"
-                          rows={5}
-                          placeholder="Votre message..."
+                          rows={4}
+                          placeholder="Décrivez brièvement votre besoin..."
                           value={formData.message}
                           onChange={handleChange}
-                          className="flex w-full rounded-xl border-2 border-input bg-card px-5 py-4 text-accessible-base ring-offset-background transition-all duration-200 placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 resize-none"
-                          required
+                          className="flex w-full rounded-xl border-2 border-input bg-card px-5 py-4 text-accessible-lg ring-offset-background transition-all duration-200 placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                         />
                       </div>
 
                       <Button 
                         type="submit" 
                         variant="accessible" 
-                        className="w-full"
+                        className="w-full py-7 text-accessible-lg"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
                           "Envoi en cours..."
                         ) : (
                           <>
-                            <Send className="w-5 h-5" />
-                            Envoyer le message
+                            <Send className="w-6 h-6" />
+                            Demander un rappel
                           </>
                         )}
                       </Button>
                     </form>
                   </CardContent>
                 </Card>
+              </div>
+            </div>
+          </section>
+
+          {/* Location Info */}
+          <section className="py-16 bg-background">
+            <div className="container mx-auto px-6">
+              <div className="max-w-2xl mx-auto">
+                <h2 className="font-serif text-accessible-2xl font-bold text-foreground text-center mb-8">
+                  Nos coordonnées
+                </h2>
+                
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <Card className="animate-fade-up opacity-0" style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
+                    <CardContent className="pt-6 flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-sunset flex items-center justify-center shrink-0">
+                        <MapPin className="w-7 h-7 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-foreground text-accessible-lg">Adresse</p>
+                        <p className="text-muted-foreground text-accessible-base">123 Avenue du Soleil<br />75001 Paris, France</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="animate-fade-up opacity-0" style={{ animationDelay: "700ms", animationFillMode: "forwards" }}>
+                    <CardContent className="pt-6 flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-sunset flex items-center justify-center shrink-0">
+                        <Clock className="w-7 h-7 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-foreground text-accessible-lg">Horaires</p>
+                        <p className="text-muted-foreground text-accessible-base">Lundi - Vendredi<br />8h00 - 18h00</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="animate-fade-up opacity-0" style={{ animationDelay: "800ms", animationFillMode: "forwards" }}>
+                    <CardContent className="pt-6 flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-sunset flex items-center justify-center shrink-0">
+                        <Phone className="w-7 h-7 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-foreground text-accessible-lg">Téléphone</p>
+                        <p className="text-muted-foreground text-accessible-base">+33 1 23 45 67 89</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="animate-fade-up opacity-0" style={{ animationDelay: "900ms", animationFillMode: "forwards" }}>
+                    <CardContent className="pt-6 flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-sunset flex items-center justify-center shrink-0">
+                        <Mail className="w-7 h-7 text-primary-foreground" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-foreground text-accessible-lg">Email</p>
+                        <p className="text-muted-foreground text-accessible-base">contact@closdusoleil.fr</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </section>
