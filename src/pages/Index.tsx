@@ -149,34 +149,24 @@ const Index = () => {
               <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
             </div>
 
-            {/* Navigation Cards - Modern glass design */}
-            <nav className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 max-w-3xl mx-auto">
+            {/* Navigation Cards - Clean minimal design */}
+            <nav className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto">
               {navigationItems.map((item) => {
                 const CardContent = (
-                  <div className="group relative glass-strong rounded-3xl p-5 md:p-6 shadow-soft hover:shadow-glow transition-all duration-500 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-5 overflow-hidden glow-border">
-                    {/* Background gradient on hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                    
-                    {/* Icon with gradient */}
-                    <div className={`relative w-16 h-16 md:w-18 md:h-18 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:shadow-glow transition-all duration-500 group-hover:scale-105 shrink-0`}>
-                      <item.icon className="w-8 h-8 md:w-9 md:h-9 text-white" strokeWidth={1.5} />
+                  <div className="group relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 md:p-8 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col items-center text-center gap-4">
+                    {/* Icon circle */}
+                    <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
                     </div>
                     
                     {/* Text content */}
-                    <div className="relative text-left flex-1">
-                      <h2 className="font-serif text-accessible-lg md:text-accessible-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                    <div>
+                      <h2 className="font-serif text-accessible-base md:text-accessible-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                         {item.title}
                       </h2>
-                      <p className={`text-accessible-base md:text-accessible-lg mt-1 ${item.isExternal ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
+                      <p className={`text-sm md:text-accessible-base mt-1 ${item.isExternal ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
                         {item.description}
                       </p>
-                    </div>
-
-                    {/* Arrow indicator */}
-                    <div className="relative w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-primary/10 transition-all duration-300 shrink-0">
-                      <svg className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
                   </div>
                 );
