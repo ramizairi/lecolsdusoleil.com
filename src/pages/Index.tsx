@@ -149,22 +149,22 @@ const Index = () => {
               <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
             </div>
 
-            {/* Navigation Cards - Clean minimal design */}
-            <nav className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto">
+            {/* Navigation Cards - Uniform size with good responsiveness */}
+            <nav className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-4xl mx-auto">
               {navigationItems.map((item) => {
                 const CardContent = (
-                  <div className="group relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 md:p-8 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col items-center text-center gap-4">
+                  <div className="group relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col items-center justify-center text-center gap-3 h-[140px] md:h-[160px]">
                     {/* Icon circle */}
-                    <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
+                    <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0`}>
+                      <item.icon className="w-6 h-6 md:w-7 md:h-7 text-white" strokeWidth={1.5} />
                     </div>
                     
                     {/* Text content */}
-                    <div>
-                      <h2 className="font-serif text-accessible-base md:text-accessible-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                    <div className="min-h-0">
+                      <h2 className="font-serif text-sm md:text-accessible-base font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
                         {item.title}
                       </h2>
-                      <p className={`text-sm md:text-accessible-base mt-1 ${item.isExternal ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
+                      <p className={`text-xs md:text-sm mt-1 leading-tight ${item.isExternal ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
                         {item.description}
                       </p>
                     </div>
