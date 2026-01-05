@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import { Info, HeartHandshake, Phone, Calendar, MessageCircle, Sparkles } from "lucide-react";
+import { Info, HeartHandshake, Phone, Calendar, MessageCircle, Sparkles, LogIn, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-luxury.jpg";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 
@@ -54,117 +53,131 @@ const Index = () => {
       </Helmet>
 
       <div className="relative min-h-screen flex flex-col overflow-hidden bg-background">
-        {/* Animated Background */}
+        {/* Sophisticated gradient background - no image */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={heroImage} 
-            alt="Couple dans un jardin européen"
-            className="w-full h-full object-cover scale-105 animate-slow-zoom"
-          />
-          {/* Modern gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/90 to-background/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+          {/* Base gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-background" />
           
-          {/* Decorative blobs */}
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl animate-blob" />
-          <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-3xl animate-blob" style={{ animationDelay: "2s" }} />
+          {/* Animated orbs */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/25 via-accent/15 to-transparent rounded-full blur-3xl animate-blob" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-accent/20 via-primary/10 to-transparent rounded-full blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial opacity-50" />
+          
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         </div>
 
-        {/* Animated top border */}
-        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-animated" />
+        {/* Animated top accent line */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-animated z-50" />
+
+        {/* Floating Login Button - Top Right */}
+        <div className="fixed top-4 right-4 md:top-6 md:right-8 z-50 animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
+          <Link to="/login">
+            <Button 
+              className="glass-strong border-border/50 hover:border-primary/50 text-foreground hover:text-primary gap-2 px-5 py-2.5 rounded-full shadow-soft hover:shadow-elevated transition-all duration-300 hover:-translate-y-0.5"
+              variant="ghost"
+            >
+              <LogIn className="w-4 h-4" />
+              <span className="font-medium">Connexion</span>
+            </Button>
+          </Link>
+        </div>
 
         {/* Floating decorative elements */}
-        <div className="absolute top-20 right-10 w-4 h-4 rounded-full bg-primary/40 animate-float" style={{ animationDelay: "0s" }} />
-        <div className="absolute top-40 left-20 w-3 h-3 rounded-full bg-accent/40 animate-float" style={{ animationDelay: "1s" }} />
-        <div className="absolute bottom-40 right-20 w-5 h-5 rounded-full bg-sunset-gold/40 animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-32 right-16 w-3 h-3 rounded-full bg-primary/40 animate-float" style={{ animationDelay: "0s" }} />
+        <div className="absolute top-48 left-24 w-2 h-2 rounded-full bg-accent/50 animate-float" style={{ animationDelay: "1s" }} />
+        <div className="absolute bottom-32 right-24 w-4 h-4 rounded-full bg-primary/30 animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute bottom-48 left-16 w-2 h-2 rounded-full bg-accent/40 animate-float" style={{ animationDelay: "1.5s" }} />
 
         {/* Main Content */}
-        <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10">
-          <div className="max-w-5xl w-full text-center space-y-8">
+        <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-16 md:py-10">
+          <div className="max-w-5xl w-full text-center space-y-10">
             
-            {/* Logo with glow */}
+            {/* Logo with elegant glow */}
             <div 
               className="animate-fade-up opacity-0" 
               style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
             >
               <div className="relative inline-block">
-                <div className="absolute inset-0 bg-gradient-sunset rounded-full blur-2xl opacity-30 scale-150" />
+                <div className="absolute inset-0 bg-gradient-sunset rounded-full blur-3xl opacity-20 scale-[2]" />
                 <img 
                   src={logo} 
                   alt="Clos du Soleil" 
-                  className="relative h-20 md:h-28 w-auto mx-auto drop-shadow-2xl" 
+                  className="relative h-24 md:h-32 w-auto mx-auto drop-shadow-xl" 
                 />
               </div>
             </div>
 
-            {/* Hero Text with modern typography */}
+            {/* Hero Text - Clean and impactful */}
             <div 
-              className="space-y-4 animate-fade-up opacity-0"
-              style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+              className="space-y-6 animate-fade-up opacity-0"
+              style={{ animationDelay: "250ms", animationFillMode: "forwards" }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-primary text-accessible-sm font-medium mb-4">
+              {/* Premium badge */}
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-accessible-sm font-medium">
                 <Sparkles className="w-4 h-4" />
                 <span>Bienvenue chez Clos du Soleil</span>
               </div>
               
-              <h1 className="font-serif text-accessible-3xl md:text-accessible-4xl lg:text-[4.5rem] font-bold text-foreground leading-[1.1]">
-                Vous êtes au{" "}
-                <span className="text-shimmer">bon endroit</span>
-              </h1>
+              {/* Main headline - with solid background for contrast */}
+              <div className="relative">
+                <h1 className="font-serif text-accessible-4xl md:text-[4rem] lg:text-[5rem] font-bold leading-[1.05] text-foreground">
+                  Prenez soin de{" "}
+                  <span className="relative inline-block">
+                    <span className="text-gradient-sunset">vos proches</span>
+                    <svg className="absolute -bottom-2 left-0 w-full h-3 text-primary/30" viewBox="0 0 200 12" preserveAspectRatio="none">
+                      <path d="M0,6 Q50,0 100,6 T200,6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+                    </svg>
+                  </span>
+                </h1>
+              </div>
             </div>
 
-            {/* Subtitle with accent */}
+            {/* Subtitle */}
             <p 
-              className="text-accessible-lg md:text-accessible-xl text-foreground/85 max-w-2xl mx-auto leading-relaxed animate-fade-up opacity-0"
-              style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+              className="text-accessible-lg md:text-accessible-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-up opacity-0"
+              style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
             >
               Nous accompagnons les personnes âgées en Europe avec{" "}
-              <span className="text-primary font-semibold">des soins personnalisés</span>,{" "}
+              <span className="text-foreground font-medium">des soins personnalisés</span>,{" "}
               de la bienveillance et du professionnalisme.
             </p>
 
-            {/* Trust badges with glass effect */}
+            {/* Star rating trust element */}
             <div 
-              className="flex flex-wrap justify-center gap-3 md:gap-4 animate-fade-up opacity-0"
-              style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
-            >
-              {["Équipe qualifiée", "À votre écoute", "Service humain"].map((badge, i) => (
-                <span 
-                  key={badge}
-                  className="flex items-center gap-2 glass px-5 py-2.5 rounded-full text-accessible-base text-foreground/80 font-medium shadow-soft hover:shadow-elevated transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <span className="w-2 h-2 rounded-full bg-gradient-sunset" />
-                  {badge}
-                </span>
-              ))}
-            </div>
-
-            {/* Elegant divider */}
-            <div 
-              className="flex items-center justify-center gap-4 py-2 animate-fade-up opacity-0"
+              className="flex items-center justify-center gap-1 animate-fade-up opacity-0"
               style={{ animationDelay: "500ms", animationFillMode: "forwards" }}
             >
-              <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-              <div className="w-3 h-3 rounded-full bg-gradient-sunset animate-pulse-glow" />
-              <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+              ))}
+              <span className="ml-3 text-muted-foreground text-accessible-base font-medium">
+                Plus de 500 familles accompagnées
+              </span>
             </div>
 
-            {/* Navigation Cards - Uniform size with good responsiveness */}
-            <nav className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-4xl mx-auto">
-              {navigationItems.map((item) => {
+            {/* Navigation Cards - Refined design */}
+            <nav 
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 w-full max-w-4xl mx-auto pt-4 animate-fade-up opacity-0"
+              style={{ animationDelay: "600ms", animationFillMode: "forwards" }}
+            >
+              {navigationItems.map((item, index) => {
                 const CardContent = (
-                  <div className="group relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-4 md:p-6 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col items-center justify-center text-center gap-3 h-[140px] md:h-[160px]">
-                    {/* Icon circle */}
-                    <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 shrink-0`}>
-                      <item.icon className="w-6 h-6 md:w-7 md:h-7 text-white" strokeWidth={1.5} />
+                  <div className="group relative bg-card border border-border/80 rounded-2xl p-5 md:p-6 hover:border-primary/60 transition-all duration-300 hover:-translate-y-2 hover:shadow-elevated flex flex-col items-center justify-center text-center gap-4 h-[150px] md:h-[170px] overflow-hidden">
+                    {/* Hover gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Icon with gradient background */}
+                    <div className={`relative w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shrink-0`}>
+                      <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
                     </div>
                     
                     {/* Text content */}
-                    <div className="min-h-0">
-                      <h2 className="font-serif text-sm md:text-accessible-base font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
+                    <div className="relative">
+                      <h2 className="font-serif text-accessible-base md:text-accessible-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
                         {item.title}
                       </h2>
-                      <p className={`text-xs md:text-sm mt-1 leading-tight ${item.isExternal ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
+                      <p className={`text-sm mt-1.5 leading-tight ${item.isExternal ? 'text-primary font-semibold' : 'text-muted-foreground'}`}>
                         {item.description}
                       </p>
                     </div>
@@ -175,8 +188,7 @@ const Index = () => {
                   <a
                     key={item.title}
                     href={item.to}
-                    className="animate-fade-up opacity-0"
-                    style={{ animationDelay: `${item.delay}ms`, animationFillMode: "forwards" }}
+                    className="block"
                   >
                     {CardContent}
                   </a>
@@ -184,8 +196,7 @@ const Index = () => {
                   <Link
                     key={item.title}
                     to={item.to}
-                    className="animate-fade-up opacity-0"
-                    style={{ animationDelay: `${item.delay}ms`, animationFillMode: "forwards" }}
+                    className="block"
                   >
                     {CardContent}
                   </Link>
@@ -193,17 +204,16 @@ const Index = () => {
               })}
             </nav>
 
-            {/* WhatsApp CTA - Eye-catching design */}
+            {/* WhatsApp CTA */}
             <div 
-              className="animate-fade-up opacity-0 pt-4"
-              style={{ animationDelay: "1000ms", animationFillMode: "forwards" }}
+              className="animate-fade-up opacity-0 pt-6"
+              style={{ animationDelay: "800ms", animationFillMode: "forwards" }}
             >
               <Button
                 onClick={handleWhatsApp}
-                className="relative overflow-hidden bg-[#25D366] hover:bg-[#20BD5A] text-white border-none shadow-lg hover:shadow-xl gap-3 text-accessible-lg py-7 px-8 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95"
+                className="relative overflow-hidden bg-[#25D366] hover:bg-[#1fb855] text-white border-none shadow-lg hover:shadow-xl gap-3 text-accessible-lg py-7 px-10 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 group"
               >
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                 <MessageCircle className="w-6 h-6" />
                 <span className="font-semibold">Écrivez-nous sur WhatsApp</span>
               </Button>
@@ -214,17 +224,15 @@ const Index = () => {
           </div>
         </main>
 
-        {/* Modern Footer */}
+        {/* Minimal Footer */}
         <footer 
           className="relative z-10 text-center py-8 px-6 animate-fade-up opacity-0"
-          style={{ animationDelay: "1100ms", animationFillMode: "forwards" }}
+          style={{ animationDelay: "1000ms", animationFillMode: "forwards" }}
         >
           <div className="flex items-center justify-center gap-3 text-muted-foreground text-accessible-sm">
-            <div className="w-8 h-px bg-gradient-to-r from-transparent to-border" />
             <span>© 2024 Clos du Soleil</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-            <span>Avec bienveillance</span>
-            <div className="w-8 h-px bg-gradient-to-l from-transparent to-border" />
+            <span className="w-1 h-1 rounded-full bg-primary/50" />
+            <span>Avec bienveillance ❤️</span>
           </div>
         </footer>
       </div>
