@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Info, HeartHandshake, Phone, Calendar, MessageCircle, ArrowRight, Sun } from "lucide-react";
+import { Info, HeartHandshake, Phone, Calendar, MessageCircle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import heroImage from "@/assets/hero-luxury.jpg";
@@ -70,23 +70,28 @@ const Index = () => {
 
         {/* Top Navigation Bar */}
         <header className="relative z-20 flex items-center justify-between px-6 md:px-12 py-6">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
-              <Sun className="w-5 h-5 text-white" />
+          {/* Logo - Real image */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <img 
+                src={logo} 
+                alt="Clos du Soleil" 
+                className="h-14 md:h-18 w-auto drop-shadow-2xl transition-transform duration-300 group-hover:scale-105" 
+              />
+              {/* Glow effect behind logo */}
+              <div className="absolute inset-0 blur-xl bg-amber-400/20 -z-10 scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
-            <span className="font-serif text-xl md:text-2xl font-bold text-white tracking-tight">
-              Clos du Soleil
-            </span>
-          </div>
+          </Link>
 
-          {/* Login Button */}
+          {/* Login Button - Enhanced */}
           <Link to="/login">
             <Button 
               variant="ghost"
-              className="text-white/90 hover:text-white hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-full px-6 py-2 backdrop-blur-sm transition-all duration-300"
+              className="relative overflow-hidden text-white/90 hover:text-white bg-white/5 hover:bg-white/15 border border-white/20 hover:border-amber-400/50 rounded-full px-8 py-3 backdrop-blur-md transition-all duration-300 group"
             >
-              Connexion
+              <span className="relative z-10 font-semibold tracking-wide">Connexion</span>
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </Button>
           </Link>
         </header>
@@ -103,7 +108,8 @@ const Index = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
-                <span className="inline-block px-4 py-1.5 text-xs font-bold tracking-[0.2em] uppercase text-amber-400 border border-amber-400/30 rounded-full">
+                <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-amber-400 border border-amber-400/30 rounded-full bg-amber-400/5 backdrop-blur-sm">
+                  <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
                   Soins Premium pour Seniors
                 </span>
               </div>
@@ -115,8 +121,33 @@ const Index = () => {
               >
                 L'excellence au
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">
-                  service du cœur
+                <span className="relative inline-block">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">
+                    service du cœur
+                  </span>
+                  {/* Decorative underline with animation */}
+                  <svg 
+                    className="absolute -bottom-2 left-0 w-full h-4" 
+                    viewBox="0 0 300 12" 
+                    preserveAspectRatio="none"
+                  >
+                    <path 
+                      d="M0,8 Q75,0 150,8 T300,8" 
+                      fill="none" 
+                      stroke="url(#gradient)" 
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      className="animate-[dash_2s_ease-in-out_forwards]"
+                      style={{ strokeDasharray: 400, strokeDashoffset: 400 }}
+                    />
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#fcd34d" />
+                        <stop offset="50%" stopColor="#fb923c" />
+                        <stop offset="100%" stopColor="#fb7185" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </span>
               </h1>
 
@@ -136,17 +167,19 @@ const Index = () => {
               >
                 <Button
                   onClick={handleWhatsApp}
-                  className="group bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white border-none shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 gap-3 text-lg py-7 px-8 rounded-full transition-all duration-300 hover:scale-105"
+                  className="group relative overflow-hidden bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white border-none shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 gap-3 text-lg py-7 px-10 rounded-full transition-all duration-300 hover:scale-105"
                 >
-                  <MessageCircle className="w-5 h-5" />
-                  <span className="font-semibold">Nous contacter</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <MessageCircle className="w-5 h-5 relative z-10" />
+                  <span className="font-semibold relative z-10">Nous contacter</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 </Button>
 
                 <Link to="/services">
                   <Button
                     variant="ghost"
-                    className="text-white hover:text-white hover:bg-white/10 border border-white/30 hover:border-white/50 gap-2 text-lg py-7 px-8 rounded-full transition-all duration-300"
+                    className="text-white hover:text-white hover:bg-white/10 border border-white/30 hover:border-white/50 gap-2 text-lg py-7 px-10 rounded-full transition-all duration-300"
                   >
                     Découvrir nos services
                   </Button>
@@ -154,35 +187,51 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Navigation Cards - Bottom section */}
+            {/* Navigation Cards - BIGGER with special effects */}
             <nav 
               className="mt-16 md:mt-24 animate-fade-up opacity-0"
               style={{ animationDelay: "600ms", animationFillMode: "forwards" }}
             >
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                {navigationItems.map((item) => {
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                {navigationItems.map((item, index) => {
                   const CardContent = (
-                    <div className="group relative backdrop-blur-md bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 rounded-2xl p-5 md:p-6 transition-all duration-300 hover:-translate-y-1 flex items-center gap-4 h-[90px] md:h-[100px]">
-                      {/* Accent bar */}
-                      <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 ${item.accent} rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                    <div 
+                      className="group relative overflow-hidden backdrop-blur-xl bg-white/[0.07] border border-white/[0.12] hover:border-white/30 hover:bg-white/[0.12] rounded-3xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/20 flex flex-col justify-between h-[160px] md:h-[180px]"
+                      style={{ animationDelay: `${600 + index * 100}ms` }}
+                    >
+                      {/* Gradient overlay on hover */}
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${item.accent.replace('bg-', 'from-')}/10 to-transparent`} />
                       
-                      {/* Icon */}
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/15 transition-colors">
-                        <item.icon className="w-5 h-5 text-white/80" strokeWidth={1.5} />
+                      {/* Floating particles effect */}
+                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <div className="absolute w-20 h-20 -top-10 -right-10 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-all duration-700 group-hover:scale-150" />
+                        <div className="absolute w-16 h-16 -bottom-8 -left-8 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-all duration-700 group-hover:scale-150" />
                       </div>
                       
-                      {/* Text */}
-                      <div className="min-w-0">
-                        <h2 className="font-semibold text-white text-base md:text-lg leading-tight truncate">
+                      {/* Top section with icon */}
+                      <div className="relative z-10 flex items-start justify-between">
+                        <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${item.accent} bg-opacity-20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                          <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
+                        </div>
+                        
+                        {/* Arrow with rotate effect */}
+                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 group-hover:rotate-[-45deg]">
+                          <ArrowRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+                        </div>
+                      </div>
+                      
+                      {/* Text section */}
+                      <div className="relative z-10 space-y-1">
+                        <h2 className="font-serif font-bold text-white text-xl md:text-2xl leading-tight">
                           {item.title}
                         </h2>
-                        <p className="text-white/50 text-sm truncate">
+                        <p className="text-white/50 text-sm md:text-base">
                           {item.subtitle}
                         </p>
                       </div>
 
-                      {/* Arrow */}
-                      <ArrowRight className="w-4 h-4 text-white/30 ml-auto shrink-0 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
+                      {/* Bottom accent line */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-1 ${item.accent} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
                     </div>
                   );
 
