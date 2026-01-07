@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import heroImage from "@/assets/hero-luxury.jpg";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Index = () => {
   const navigationItems = [
@@ -83,17 +84,21 @@ const Index = () => {
             </div>
           </Link>
 
-          {/* Login Button - Enhanced */}
-          <Link to="/login">
-            <Button 
-              variant="ghost"
-              className="relative overflow-hidden text-white/90 hover:text-white bg-white/5 hover:bg-white/15 border border-white/20 hover:border-amber-400/50 rounded-full px-8 py-3 backdrop-blur-md transition-all duration-300 group"
-            >
-              <span className="relative z-10 font-semibold tracking-wide">Connexion</span>
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            </Button>
-          </Link>
+          {/* Right side - Theme toggle and Login */}
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            
+            <Link to="/login">
+              <Button 
+                variant="ghost"
+                className="relative overflow-hidden text-white/90 hover:text-white bg-white/5 hover:bg-white/15 border border-white/20 hover:border-amber-400/50 rounded-full px-8 py-3 backdrop-blur-md transition-all duration-300 group"
+              >
+                <span className="relative z-10 font-semibold tracking-wide">Connexion</span>
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+              </Button>
+            </Link>
+          </div>
         </header>
 
         {/* Main Content */}
