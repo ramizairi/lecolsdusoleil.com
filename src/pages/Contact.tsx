@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users, Sparkles } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import SunEffect from "@/components/SunEffect";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
