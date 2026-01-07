@@ -6,77 +6,77 @@
 
 @layer base {
   :root {
-    /* Modern warm palette */
-    --background: 30 30% 98%;
-    --foreground: 20 25% 15%;
+    /* Warm luxurious light palette */
+    --background: 35 35% 96%;
+    --foreground: 25 30% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 20 25% 15%;
+    --card: 40 30% 99%;
+    --card-foreground: 25 30% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 25% 15%;
+    --popover: 40 30% 99%;
+    --popover-foreground: 25 30% 12%;
 
-    /* Vibrant coral primary */
-    --primary: 15 85% 55%;
-    --primary-foreground: 0 0% 100%;
+    /* Rich amber primary */
+    --primary: 25 90% 50%;
+    --primary-foreground: 40 30% 99%;
 
-    /* Soft cream secondary */
-    --secondary: 35 40% 94%;
-    --secondary-foreground: 20 25% 20%;
+    /* Warm cream secondary */
+    --secondary: 38 45% 92%;
+    --secondary-foreground: 25 35% 18%;
 
-    /* Muted warm tones */
-    --muted: 30 20% 92%;
-    --muted-foreground: 20 15% 45%;
+    /* Elegant muted tones */
+    --muted: 35 25% 90%;
+    --muted-foreground: 25 20% 40%;
 
     /* Golden accent */
-    --accent: 35 80% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 40 85% 52%;
+    --accent-foreground: 40 30% 99%;
 
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 88%;
-    --input: 30 20% 88%;
-    --ring: 15 85% 55%;
+    --border: 35 25% 85%;
+    --input: 35 25% 85%;
+    --ring: 25 90% 50%;
 
     --radius: 1rem;
 
-    /* Custom sunset colors */
-    --sunset-coral: 15 85% 60%;
-    --sunset-peach: 25 70% 75%;
-    --sunset-gold: 40 85% 55%;
-    --sunset-cream: 35 50% 96%;
-    --warm-brown: 20 30% 25%;
+    /* Custom sunset colors - warmer */
+    --sunset-coral: 18 88% 58%;
+    --sunset-peach: 28 75% 72%;
+    --sunset-gold: 42 90% 52%;
+    --sunset-cream: 38 50% 94%;
+    --warm-brown: 25 35% 22%;
 
-    /* Glass effect */
-    --glass: 0 0% 100% / 0.7;
-    --glass-border: 0 0% 100% / 0.3;
+    /* Glass effect - warmer */
+    --glass: 40 30% 99% / 0.85;
+    --glass-border: 35 40% 80% / 0.5;
 
     /* Gradients */
-    --gradient-sunset: linear-gradient(135deg, hsl(15, 85%, 60%) 0%, hsl(40, 85%, 55%) 100%);
-    --gradient-soft: linear-gradient(180deg, hsl(30, 30%, 98%) 0%, hsl(35, 40%, 94%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(15, 80%, 65%) 0%, hsl(30, 75%, 60%) 50%, hsl(40, 80%, 55%) 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+    --gradient-sunset: linear-gradient(135deg, hsl(18, 88%, 58%) 0%, hsl(42, 90%, 52%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(35, 35%, 96%) 0%, hsl(38, 45%, 92%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(18, 85%, 60%) 0%, hsl(30, 80%, 55%) 50%, hsl(42, 85%, 50%) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,252,245,0.95) 0%, rgba(255,248,235,0.75) 100%);
 
-    /* Shadows */
-    --shadow-soft: 0 4px 24px hsl(20 30% 20% / 0.06);
-    --shadow-elevated: 0 12px 40px hsl(20 30% 20% / 0.1);
-    --shadow-glow: 0 0 50px hsl(15 85% 55% / 0.25);
-    --shadow-glow-strong: 0 0 80px hsl(15 85% 55% / 0.4);
+    /* Shadows - warmer */
+    --shadow-soft: 0 4px 24px hsl(25 40% 20% / 0.08);
+    --shadow-elevated: 0 12px 40px hsl(25 40% 20% / 0.12);
+    --shadow-glow: 0 0 50px hsl(25 90% 50% / 0.2);
+    --shadow-glow-strong: 0 0 80px hsl(25 90% 50% / 0.35);
 
     /* Typography */
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Source Sans 3', system-ui, sans-serif;
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 20 25% 20%;
-    --sidebar-primary: 15 85% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 35 40% 94%;
-    --sidebar-accent-foreground: 20 25% 20%;
-    --sidebar-border: 30 20% 88%;
-    --sidebar-ring: 15 85% 55%;
+    --sidebar-background: 40 30% 99%;
+    --sidebar-foreground: 25 30% 18%;
+    --sidebar-primary: 25 90% 50%;
+    --sidebar-primary-foreground: 40 30% 99%;
+    --sidebar-accent: 38 45% 92%;
+    --sidebar-accent-foreground: 25 30% 18%;
+    --sidebar-border: 35 25% 85%;
+    --sidebar-ring: 25 90% 50%;
   }
 
   .dark {

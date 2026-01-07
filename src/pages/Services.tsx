@@ -1,10 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { Stethoscope, Brain, Activity, Home, Utensils, Heart, Phone, MessageCircle, ArrowRight } from "lucide-react";
+import { Stethoscope, Brain, Activity, Home, Utensils, Heart, Phone, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import SunEffect from "@/components/SunEffect";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import ctaBg from "@/assets/cta-bg-sunset.jpg";
 
 const Services = () => {
   const services = [
@@ -68,14 +70,16 @@ const Services = () => {
         <main className="flex-1 pt-24">
           {/* Hero Section */}
           <section className="py-20 md:py-28 relative">
-            <div className="container mx-auto px-6 text-center">
+            <SunEffect variant="corner" className="inset-0 z-0" />
+            
+            <div className="container mx-auto px-6 text-center relative z-10">
               {/* Eyebrow */}
               <div 
                 className="animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm">
-                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm shadow-soft">
+                  <Sparkles className="w-4 h-4" />
                   Nos Expertises
                 </span>
               </div>
@@ -98,20 +102,20 @@ const Services = () => {
           </section>
 
           {/* Services Grid */}
-          <section className="py-16 bg-card/50 backdrop-blur-sm border-y border-border/50">
+          <section className="py-16 bg-card/60 backdrop-blur-sm border-y border-border/50 relative">
             <div className="container mx-auto px-6">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {services.map((service, index) => (
                   <Card 
                     key={service.title}
-                    className="group relative overflow-hidden hover:shadow-glow transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 animate-fade-up opacity-0 border-2 border-border/50 hover:border-primary/30 bg-card/80 backdrop-blur-sm"
+                    className="group relative overflow-hidden hover:shadow-glow transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 animate-fade-up opacity-0 border-2 border-border/50 hover:border-primary/30 bg-card backdrop-blur-sm"
                     style={{ animationDelay: `${200 + index * 100}ms`, animationFillMode: "forwards" }}
                   >
                     {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-gradient-to-br ${service.color}`} />
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 bg-gradient-to-br ${service.color}`} />
                     
-                    {/* Floating decoration */}
-                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500" />
+                    {/* Floating sun decoration */}
+                    <div className="absolute -top-16 -right-16 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 group-hover:scale-150 transition-all duration-700" />
                     
                     <CardHeader className="pb-3 relative z-10">
                       <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
@@ -133,37 +137,80 @@ const Services = () => {
             </div>
           </section>
 
-          {/* CTA Section */}
-          <section className="py-24 bg-gradient-hero relative overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float" style={{ animationDuration: "12s" }} />
-              <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-float" style={{ animationDuration: "15s", animationDelay: "2s" }} />
+          {/* CTA Section with Background Image */}
+          <section className="py-32 relative overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src={ctaBg} 
+                alt="" 
+                className="w-full h-full object-cover"
+              />
+              {/* Elegant overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30" />
             </div>
             
+            {/* Sun rays effect */}
+            <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+              <div 
+                className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full"
+                style={{
+                  background: "radial-gradient(circle, hsl(42 90% 70% / 0.15) 0%, transparent 50%)",
+                  filter: "blur(40px)",
+                }}
+              />
+            </div>
+            
+            {/* Vignette */}
+            <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 150px rgba(0,0,0,0.4)' }} />
+            
             <div className="container mx-auto px-6 text-center relative z-10">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              <div 
+                className="animate-fade-up opacity-0"
+                style={{ animationFillMode: "forwards" }}
+              >
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-amber-300 border border-amber-400/30 rounded-full bg-amber-400/10 backdrop-blur-sm">
+                  <Phone className="w-4 h-4" />
+                  Contactez-nous
+                </span>
+              </div>
+              
+              <h2 
+                className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mt-8 mb-6 animate-fade-up opacity-0"
+                style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
+              >
                 Des questions sur nos services ?
               </h2>
-              <p className="text-lg md:text-xl text-primary-foreground/90 max-w-xl mx-auto mb-10">
+              <p 
+                className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-12 animate-fade-up opacity-0"
+                style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+              >
                 Notre équipe est à votre écoute pour vous conseiller et répondre à toutes vos questions.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div 
+                className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up opacity-0"
+                style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+              >
                 <Button 
                   onClick={handleCall}
-                  className="group bg-card text-foreground hover:bg-card/90 text-lg py-7 px-10 rounded-full shadow-elevated gap-3 transition-all duration-300 hover:scale-105"
+                  className="group relative overflow-hidden bg-white text-foreground hover:bg-white/95 text-lg py-7 px-10 rounded-full shadow-elevated gap-3 transition-all duration-300 hover:scale-105"
                 >
                   <Phone className="w-5 h-5" />
-                  Appelez-nous
+                  <span className="font-semibold">Appelez-nous</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
                 </Button>
                 <Button 
                   onClick={handleWhatsApp}
-                  className="group bg-[#25D366] hover:bg-[#20BD5A] border-none text-white text-lg py-7 px-10 rounded-full shadow-elevated gap-3 transition-all duration-300 hover:scale-105"
+                  className="group relative overflow-hidden bg-[#25D366] hover:bg-[#20BD5A] border-none text-white text-lg py-7 px-10 rounded-full shadow-elevated gap-3 transition-all duration-300 hover:scale-105"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  WhatsApp
+                  <span className="font-semibold">WhatsApp</span>
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 </Button>
               </div>
             </div>
