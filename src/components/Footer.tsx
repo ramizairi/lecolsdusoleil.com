@@ -26,16 +26,14 @@ const Footer = () => {
               Prendre soin de nos aînés avec dignité, compassion et excellence depuis plus de 20 ans.
             </p>
           </div>
-          
+
           <div className="space-y-4">
-            <h4 className="font-serif text-accessible-lg font-semibold text-foreground">
-              Navigation
-            </h4>
+            <h4 className="font-serif text-accessible-lg font-semibold text-foreground">Navigation</h4>
             <nav className="flex flex-col gap-3">
               {navLinks.map((link) => (
-                <Link 
+                <Link
                   key={link.to}
-                  to={link.to} 
+                  to={link.to}
                   className="flex items-center gap-2 text-accessible-base text-muted-foreground hover:text-primary transition-colors group"
                 >
                   <link.icon className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
@@ -46,9 +44,7 @@ const Footer = () => {
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-serif text-accessible-lg font-semibold text-foreground">
-              Contact
-            </h4>
+            <h4 className="font-serif text-accessible-lg font-semibold text-foreground">Contact</h4>
             <div className="space-y-3">
               {contactInfo.map((item, index) => (
                 <p key={index} className="flex items-center gap-3 text-accessible-base text-muted-foreground">
@@ -63,9 +59,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-10 pt-8 text-center">
-          <p className="text-muted-foreground text-accessible-sm">
-            © {new Date().getFullYear()} Clos du Soleil. Tous droits réservés.
-          </p>
+          <p className="text-muted-foreground text-accessible-sm">© 2026 Clos du Soleil. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
