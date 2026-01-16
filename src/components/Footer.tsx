@@ -1,7 +1,21 @@
 import { Link } from "react-router-dom";
+import { MapPin, Phone, Mail, Home, Info, Stethoscope, MessageSquare } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
+  const navLinks = [
+    { to: "/", label: "Accueil", icon: Home },
+    { to: "/about", label: "À propos", icon: Info },
+    { to: "/services", label: "Services", icon: Stethoscope },
+    { to: "/contact", label: "Contact", icon: MessageSquare },
+  ];
+
+  const contactInfo = [
+    { icon: MapPin, text: "123 Avenue du Soleil, Paris" },
+    { icon: Phone, text: "+33 1 23 45 67 89" },
+    { icon: Mail, text: "contact@closdusoleil.fr" },
+  ];
+
   return (
     <footer className="bg-card border-t border-border py-12 mt-auto">
       <div className="container mx-auto px-6">
@@ -18,18 +32,16 @@ const Footer = () => {
               Navigation
             </h4>
             <nav className="flex flex-col gap-3">
-              <Link to="/" className="text-accessible-base text-muted-foreground hover:text-primary transition-colors">
-                Accueil
-              </Link>
-              <Link to="/about" className="text-accessible-base text-muted-foreground hover:text-primary transition-colors">
-                À propos
-              </Link>
-              <Link to="/services" className="text-accessible-base text-muted-foreground hover:text-primary transition-colors">
-                Services
-              </Link>
-              <Link to="/contact" className="text-accessible-base text-muted-foreground hover:text-primary transition-colors">
-                Contact
-              </Link>
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.to}
+                  to={link.to} 
+                  className="flex items-center gap-2 text-accessible-base text-muted-foreground hover:text-primary transition-colors group"
+                >
+                  <link.icon className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
+                  {link.label}
+                </Link>
+              ))}
             </nav>
           </div>
 
@@ -37,10 +49,15 @@ const Footer = () => {
             <h4 className="font-serif text-accessible-lg font-semibold text-foreground">
               Contact
             </h4>
-            <div className="space-y-3 text-accessible-base text-muted-foreground">
-              <p>📍 123 Avenue du Soleil, Paris</p>
-              <p>📞 +33 1 23 45 67 89</p>
-              <p>✉️ contact@closdusoleil.fr</p>
+            <div className="space-y-3">
+              {contactInfo.map((item, index) => (
+                <p key={index} className="flex items-center gap-3 text-accessible-base text-muted-foreground">
+                  <span className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <item.icon className="w-4 h-4 text-primary" />
+                  </span>
+                  {item.text}
+                </p>
+              ))}
             </div>
           </div>
         </div>

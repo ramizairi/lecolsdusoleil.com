@@ -263,19 +263,34 @@ const Index = () => {
           <div className="max-w-6xl mx-auto px-6 md:px-12 py-6">
             <div className="flex flex-wrap items-center justify-between gap-6">
               <div className="flex items-center gap-8 md:gap-12">
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-white">500+</div>
-                  <div className="text-xs text-white/50 uppercase tracking-wider">Familles</div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <HeartHandshake className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold text-white">500+</div>
+                    <div className="text-xs text-white/50 uppercase tracking-wider">Familles</div>
+                  </div>
                 </div>
-                <div className="w-px h-8 bg-white/20" />
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-white">15+</div>
-                  <div className="text-xs text-white/50 uppercase tracking-wider">Années</div>
+                <div className="w-px h-10 bg-white/20" />
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold text-white">15+</div>
+                    <div className="text-xs text-white/50 uppercase tracking-wider">Années</div>
+                  </div>
                 </div>
-                <div className="w-px h-8 bg-white/20 hidden md:block" />
-                <div className="hidden md:block">
-                  <div className="text-2xl md:text-3xl font-bold text-white">24/7</div>
-                  <div className="text-xs text-white/50 uppercase tracking-wider">Disponible</div>
+                <div className="w-px h-10 bg-white/20 hidden md:block" />
+                <div className="hidden md:flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold text-white">24/7</div>
+                    <div className="text-xs text-white/50 uppercase tracking-wider">Disponible</div>
+                  </div>
                 </div>
               </div>
               
