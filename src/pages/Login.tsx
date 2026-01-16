@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, ArrowRight, User } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Footer from "@/components/Footer";
@@ -120,8 +120,9 @@ const Login = () => {
                 <div className="flex justify-end">
                   <Link 
                     to="/forgot-password" 
-                    className="text-sm text-primary hover:underline font-medium"
+                    className="flex items-center gap-1.5 text-sm text-primary hover:underline font-medium"
                   >
+                    <Lock className="w-3.5 h-3.5" />
                     Mot de passe oublié?
                   </Link>
                 </div>
@@ -142,7 +143,8 @@ const Login = () => {
                 </Button>
 
                 <div className="text-center pt-4 border-t border-border">
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground flex items-center justify-center gap-2">
+                    <User className="w-4 h-4" />
                     Pas encore de compte?{" "}
                     <Link to="/register" className="text-primary font-semibold hover:underline">
                       Créer un compte
