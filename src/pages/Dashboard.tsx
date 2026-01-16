@@ -11,11 +11,15 @@ import {
   Bell,
   Heart,
   Pill,
-  Clock
+  Clock,
+  History
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import ProfileSection from "@/components/dashboard/ProfileSection";
+import SettingsSection from "@/components/dashboard/SettingsSection";
+import AppointmentsSection from "@/components/dashboard/AppointmentsSection";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -30,8 +34,8 @@ const Dashboard = () => {
   ];
 
   const upcomingAppointments = [
-    { date: "15 Jan 2025", time: "10:00", doctor: "Dr. Marie Laurent", type: "Consultation générale" },
-    { date: "22 Jan 2025", time: "14:30", doctor: "Dr. Pierre Dumont", type: "Suivi traitement" },
+    { date: "15 Jan 2025", time: "10:00", doctor: "Dr. Marie Laurent", type: "Consultation générale", status: "paid" },
+    { date: "22 Jan 2025", time: "14:30", doctor: "Dr. Pierre Dumont", type: "Suivi traitement", status: "pending" },
   ];
 
   const currentTreatments = [
@@ -211,10 +215,17 @@ const Dashboard = () => {
               </div>
             )}
 
-            {activeTab !== "overview" && (
+            {activeTab === "profile" && <ProfileSection />}
+
+            {activeTab === "settings" && <SettingsSection />}
+
+            {activeTab === "appointments" && <AppointmentsSection />}
+
+            {(activeTab === "treatments" || activeTab === "documents") && (
               <Card>
                 <CardHeader>
-                  <CardTitle>
+                  <CardTitle className="flex items-center gap-3">
+                    {activeTab === "treatments" ? <Pill className="w-6 h-6 text-primary" /> : <FileText className="w-6 h-6 text-primary" />}
                     {menuItems.find((item) => item.id === activeTab)?.label}
                   </CardTitle>
                   <CardDescription>
