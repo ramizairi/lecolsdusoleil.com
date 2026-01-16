@@ -64,7 +64,7 @@ const Footer = () => {
 
         <div className="border-t border-border mt-10 pt-8 text-center">
           <p className="text-muted-foreground text-accessible-sm">
-            © 2024 Clos du Soleil. Tous droits réservés.
+            © {new Date().getFullYear()} Clos du Soleil. Tous droits réservés.
           </p>
         </div>
       </div>
