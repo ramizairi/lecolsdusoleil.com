@@ -1,24 +1,37 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users, Sparkles } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users, CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import SunEffect from "@/components/SunEffect";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
     message: "",
   });
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [selectedTime, setSelectedTime] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  const timeSlots = [
+    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+    "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
+  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -34,9 +47,13 @@ const Contact = () => {
     setTimeout(() => {
       toast({
         title: "Demande envoyée !",
-        description: "Nous vous rappellerons très bientôt.",
+        description: selectedDate && selectedTime 
+          ? `Rendez-vous demandé le ${format(selectedDate, "d MMMM yyyy", { locale: fr })} à ${selectedTime}.`
+          : "Nous vous rappellerons très bientôt.",
       });
-      setFormData({ name: "", phone: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setSelectedDate(undefined);
+      setSelectedTime("");
       setIsSubmitting(false);
     }, 1500);
   };
@@ -179,9 +196,9 @@ const Contact = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-5">
                       <div className="space-y-2">
-                        <Label htmlFor="name" className="text-base">Votre nom</Label>
+                        <Label htmlFor="name" className="text-base font-medium">Votre nom</Label>
                         <Input
                           id="name"
                           name="name"
@@ -189,12 +206,26 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="text-base py-6 rounded-xl"
+                          className="text-base py-6 rounded-xl border-2 focus:border-primary transition-colors"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-base">Votre numéro de téléphone</Label>
+                        <Label htmlFor="email" className="text-base font-medium">Votre email</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="jean.dupont@email.com"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="text-base py-6 rounded-xl border-2 focus:border-primary transition-colors"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="phone" className="text-base font-medium">Votre numéro de téléphone</Label>
                         <Input
                           id="phone"
                           name="phone"
@@ -203,16 +234,67 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           required
-                          className="text-base py-6 rounded-xl"
+                          className="text-base py-6 rounded-xl border-2 focus:border-primary transition-colors"
                         />
                       </div>
 
+                      {/* Date & Time Selection */}
                       <div className="space-y-2">
-                        <Label htmlFor="message" className="text-base">Comment pouvons-nous vous aider ? (optionnel)</Label>
+                        <Label className="text-base font-medium">Choisissez une date pour le premier rendez-vous</Label>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                "w-full justify-start text-left font-normal py-6 rounded-xl border-2 hover:border-primary transition-colors",
+                                !selectedDate && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarIcon className="mr-3 h-5 w-5 text-primary" />
+                              {selectedDate ? (
+                                format(selectedDate, "EEEE d MMMM yyyy", { locale: fr })
+                              ) : (
+                                <span>Sélectionner une date</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={selectedDate}
+                              onSelect={setSelectedDate}
+                              disabled={(date) =>
+                                date < new Date() || date.getDay() === 0 || date.getDay() === 6
+                              }
+                              initialFocus
+                              className={cn("p-3 pointer-events-auto")}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label className="text-base font-medium">Choisissez un créneau horaire</Label>
+                        <Select value={selectedTime} onValueChange={setSelectedTime}>
+                          <SelectTrigger className="w-full py-6 rounded-xl border-2 hover:border-primary transition-colors text-base">
+                            <SelectValue placeholder="Sélectionner un horaire" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {timeSlots.map((time) => (
+                              <SelectItem key={time} value={time} className="text-base py-3">
+                                {time}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message" className="text-base font-medium">Comment pouvons-nous vous aider ? (optionnel)</Label>
                         <textarea
                           id="message"
                           name="message"
-                          rows={4}
+                          rows={3}
                           placeholder="Décrivez brièvement votre besoin..."
                           value={formData.message}
                           onChange={handleChange}
