@@ -1,10 +1,16 @@
 import { Helmet } from "react-helmet-async";
-import { Info, HeartHandshake, Phone, Calendar, MessageCircle, ArrowRight } from "lucide-react";
+import { Info, HeartHandshake, Phone, Calendar, MessageCircle, ArrowRight, Mail, Send } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { z } from "zod";
 import logo from "@/assets/logo.png";
 import heroImage from "@/assets/hero-luxury.jpg";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useToast } from "@/hooks/use-toast";
+
+const emailSchema = z.string().trim().email({ message: "Veuillez entrer une adresse email valide" }).max(255);
 
 const Index = () => {
   const navigationItems = [
@@ -39,11 +45,42 @@ const Index = () => {
     },
   ];
 
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
   const handleWhatsApp = () => {
     window.open(
       "https://wa.me/33123456789?text=Bonjour, je souhaite avoir des informations sur vos services.",
       "_blank",
     );
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const result = emailSchema.safeParse(email);
+    if (!result.success) {
+      toast({
+        title: "Email invalide",
+        description: result.error.errors[0].message,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "Merci pour votre inscription !",
+      description: "Vous recevrez nos actualités très prochainement.",
+    });
+    
+    setEmail("");
+    setIsSubmitting(false);
   };
 
   return (
@@ -256,6 +293,73 @@ const Index = () => {
             </nav>
           </div>
         </main>
+
+        {/* Newsletter Section */}
+        <section 
+          className="relative z-10 py-16 md:py-20 animate-fade-up opacity-0"
+          style={{ animationDelay: "700ms", animationFillMode: "forwards" }}
+        >
+          <div className="max-w-4xl mx-auto px-6 md:px-12">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 p-8 md:p-12 shadow-2xl shadow-orange-500/20">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              
+              <div className="relative z-10 text-center">
+                {/* Icon */}
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm mb-6">
+                  <Mail className="w-8 h-8 text-white" />
+                </div>
+                
+                {/* Heading */}
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+                  Restez informé de nos actualités
+                </h2>
+                <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
+                  Inscrivez-vous à notre newsletter pour recevoir nos dernières nouvelles et offres exclusives.
+                </p>
+                
+                {/* Email Form */}
+                <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                  <div className="relative flex-1">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600" />
+                    <Input
+                      type="email"
+                      placeholder="Votre adresse email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="pl-12 h-14 rounded-full bg-white border-0 text-foreground placeholder:text-muted-foreground shadow-lg focus-visible:ring-2 focus-visible:ring-white/50"
+                      required
+                      maxLength={255}
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="h-14 px-8 rounded-full bg-white text-amber-600 hover:bg-white/90 font-semibold shadow-lg gap-2 transition-all duration-300 hover:scale-105 disabled:opacity-70"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-amber-600/30 border-t-amber-600 rounded-full animate-spin" />
+                        Envoi...
+                      </>
+                    ) : (
+                      <>
+                        S'inscrire
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+                
+                {/* Privacy note */}
+                <p className="text-white/60 text-sm mt-4">
+                  Nous respectons votre vie privée. Désabonnez-vous à tout moment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Bottom Stats Bar */}
         <footer
