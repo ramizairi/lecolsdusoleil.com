@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Heart, Shield, Users, Star, Gem, ArrowRight, Sparkles } from "lucide-react";
+import { Heart, Shield, Users, Star, Home, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -13,26 +13,26 @@ const About = () => {
   const values = [
     {
       icon: Heart,
-      title: "Compassion",
-      description: "Chaque résident est traité avec l'amour et le respect qu'il mérite.",
+      title: "Bienveillance",
+      description: "Un accompagnement quotidien dans le respect et la dignité de chaque résident.",
       color: "from-rose-500 to-pink-500",
     },
     {
       icon: Shield,
-      title: "Excellence",
-      description: "Les plus hauts standards de qualité dans chaque aspect de nos soins.",
+      title: "Sécurité",
+      description: "Un cadre calme et sécurisé pour vivre sereinement au quotidien.",
       color: "from-amber-500 to-orange-500",
     },
     {
-      icon: Gem,
-      title: "Prestige",
-      description: "Un environnement raffiné et élégant pour une expérience exceptionnelle.",
+      icon: Home,
+      title: "Confort",
+      description: "Une résidence hôtelière pensée pour votre bien-être et votre épanouissement.",
       color: "from-violet-500 to-purple-500",
     },
     {
       icon: Star,
-      title: "Distinction",
-      description: "Un accompagnement personnalisé pour les attentes les plus exigeantes.",
+      title: "Excellence",
+      description: "Des soins personnalisés et une attention particulière à chaque détail.",
       color: "from-emerald-500 to-teal-500",
     },
   ];
@@ -40,8 +40,8 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>À Propos - Clos du Soleil | Excellence & Prestige</title>
-        <meta name="description" content="Découvrez l'histoire et la mission de Clos du Soleil, votre partenaire de prestige pour les soins aux personnes âgées en Europe." />
+        <title>Qui Sommes-Nous - Clos du Soleil | Résidence pour Seniors en Tunisie</title>
+        <meta name="description" content="Le Clos du Soleil est une résidence hôtelière pour seniors en Tunisie. Découvrez notre mission : accompagnement, soins personnalisés et bien-être." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
@@ -61,7 +61,7 @@ const About = () => {
               >
                 <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm shadow-soft">
                   <Sparkles className="w-4 h-4" />
-                  Notre Histoire
+                  Qui Sommes-Nous
                 </span>
               </div>
               
@@ -69,17 +69,17 @@ const About = () => {
                 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mt-8 mb-6 animate-fade-up opacity-0" 
                 style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
-                L'Excellence au Service
+                Une résidence d'exception
                 <br />
-                <span className="text-gradient-sunset">de l'Humanité</span>
+                <span className="text-gradient-sunset">en Tunisie</span>
               </h1>
               
               <p 
                 className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-up opacity-0" 
                 style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
-                Depuis plus de 20 ans, nous accompagnons les personnes les plus exigeantes 
-                avec des soins d'exception et un engagement sans faille.
+                Le Clos du Soleil est une résidence hôtelière pour seniors située en Tunisie.
+                Nous accueillons des personnes âgées dans un cadre calme, sécurisé et bienveillant.
               </p>
             </div>
           </section>
@@ -106,10 +106,16 @@ const About = () => {
                   className="text-lg text-muted-foreground leading-relaxed animate-fade-up opacity-0"
                   style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
                 >
-                  Chez Clos du Soleil, nous croyons que chaque personne mérite de vivre ses années dorées 
-                  dans le confort, la dignité et l'élégance. Notre mission est d'offrir une expérience 
-                  de soins inégalée, où chaque détail est pensé pour le bien-être de nos résidents.
+                  Nous offrons un accompagnement quotidien, des soins personnalisés et une attention 
+                  particulière au bien-être et à la dignité de chaque résident. Notre équipe dévouée 
+                  s'engage à créer un environnement chaleureux où chacun peut profiter pleinement 
+                  de ses journées dans le confort et la sérénité.
                 </p>
+                
+                <div className="flex items-center justify-center gap-2 mt-8 text-primary animate-fade-up opacity-0" style={{ animationDelay: "300ms", animationFillMode: "forwards" }}>
+                  <MapPin className="w-5 h-5" />
+                  <span className="font-medium">Tunisie</span>
+                </div>
               </div>
             </div>
           </section>
@@ -196,13 +202,13 @@ const About = () => {
                 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                Découvrez Notre Excellence
+                Découvrez Notre Résidence
               </h2>
               <p 
                 className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-12 animate-fade-up opacity-0"
                 style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
-                Contactez-nous pour organiser une visite privée de nos établissements.
+                Contactez-nous pour organiser une visite et découvrir le cadre de vie exceptionnel du Clos du Soleil.
               </p>
               <Link to="/contact">
                 <Button 
