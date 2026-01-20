@@ -294,70 +294,48 @@ const Index = () => {
           </div>
         </main>
 
-        {/* Newsletter Section */}
+        {/* Newsletter Section - Simple */}
         <section 
-          className="relative z-10 py-16 md:py-20 animate-fade-up opacity-0"
+          className="relative z-10 py-12 md:py-16 border-t border-amber-200/30 animate-fade-up opacity-0"
           style={{ animationDelay: "700ms", animationFillMode: "forwards" }}
         >
-          <div className="max-w-4xl mx-auto px-6 md:px-12">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 p-8 md:p-12 shadow-2xl shadow-orange-500/20">
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-              
-              <div className="relative z-10 text-center">
-                {/* Icon */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm mb-6">
-                  <Mail className="w-8 h-8 text-white" />
-                </div>
-                
-                {/* Heading */}
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
-                  Restez informé de nos actualités
-                </h2>
-                <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-                  Inscrivez-vous à notre newsletter pour recevoir nos dernières nouvelles et offres exclusives.
-                </p>
-                
-                {/* Email Form */}
-                <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                  <div className="relative flex-1">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600" />
-                    <Input
-                      type="email"
-                      placeholder="Votre adresse email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-12 h-14 rounded-full bg-white border-0 text-foreground placeholder:text-muted-foreground shadow-lg focus-visible:ring-2 focus-visible:ring-white/50"
-                      required
-                      maxLength={255}
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="h-14 px-8 rounded-full bg-white text-amber-600 hover:bg-white/90 font-semibold shadow-lg gap-2 transition-all duration-300 hover:scale-105 disabled:opacity-70"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-amber-600/30 border-t-amber-600 rounded-full animate-spin" />
-                        Envoi...
-                      </>
-                    ) : (
-                      <>
-                        S'inscrire
-                        <Send className="w-4 h-4" />
-                      </>
-                    )}
-                  </Button>
-                </form>
-                
-                {/* Privacy note */}
-                <p className="text-white/60 text-sm mt-4">
-                  Nous respectons votre vie privée. Désabonnez-vous à tout moment.
-                </p>
+          <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
+            <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-3">
+              Restez informé
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Recevez nos actualités et offres exclusives.
+            </p>
+            
+            {/* Email Form */}
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <div className="relative flex-1">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="email"
+                  placeholder="Votre adresse email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="pl-12 h-12 rounded-full bg-white/80 border border-amber-200 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-amber-400"
+                  required
+                  maxLength={255}
+                />
               </div>
-            </div>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="h-12 px-6 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold gap-2 transition-all duration-300 hover:scale-105 disabled:opacity-70"
+              >
+                {isSubmitting ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    S'inscrire
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
+            </form>
           </div>
         </section>
 
