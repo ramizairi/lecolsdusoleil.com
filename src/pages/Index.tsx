@@ -57,21 +57,21 @@ const Index = () => {
       </Helmet>
 
       <div className="relative min-h-screen flex flex-col overflow-x-hidden">
-        {/* Cinematic Background */}
+        {/* Light Luminous Background */}
         <div className="absolute inset-0 z-0">
           <img src={heroImage} alt="" className="w-full h-full object-cover object-top" />
-          {/* Dark cinematic overlay - stronger for text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-black/50" />
+          {/* Light overlay with warm cream tones */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-amber-50/70 to-orange-50/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-amber-100/40" />
 
-          {/* Warm color accent at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-orange-950/40 to-transparent" />
+          {/* Warm golden accent at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-amber-100/50 to-transparent" />
         </div>
 
-        {/* Subtle vignette */}
+        {/* Subtle warm vignette */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none"
-          style={{ boxShadow: "inset 0 0 200px rgba(0,0,0,0.5)" }}
+          style={{ boxShadow: "inset 0 0 150px rgba(255,248,240,0.4)" }}
         />
 
         {/* Top Navigation Bar */}
@@ -96,11 +96,11 @@ const Index = () => {
             <Link to="/login">
               <Button
                 variant="ghost"
-                className="relative overflow-hidden text-white/90 hover:text-white bg-white/5 hover:bg-white/15 border border-white/20 hover:border-amber-400/50 rounded-full px-8 py-3 backdrop-blur-md transition-all duration-300 group"
+                className="relative overflow-hidden text-foreground hover:text-foreground bg-white/70 hover:bg-white/90 border border-amber-200 hover:border-amber-400 rounded-full px-8 py-3 backdrop-blur-md shadow-lg shadow-amber-100/50 transition-all duration-300 group"
               >
                 <span className="relative z-10 font-semibold tracking-wide">Connexion</span>
                 {/* Shimmer effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-amber-200/30 to-transparent" />
               </Button>
             </Link>
           </div>
@@ -116,21 +116,21 @@ const Index = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-amber-400 border border-amber-400/30 rounded-full bg-amber-400/5 backdrop-blur-sm">
-                  <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-amber-700 border border-amber-400/50 rounded-full bg-white/80 backdrop-blur-sm shadow-sm">
+                  <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
                   Soins Premium pour Seniors
                 </span>
               </div>
 
               {/* Main Headline */}
               <h1
-                className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight animate-fade-up opacity-0"
+                className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-warm-brown leading-[0.95] tracking-tight animate-fade-up opacity-0"
                 style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
                 L'excellence au
                 <br />
                 <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-500 to-rose-500">
                     service du cœur
                   </span>
                   {/* Decorative underline with animation */}
@@ -146,9 +146,9 @@ const Index = () => {
                     />
                     <defs>
                       <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#fcd34d" />
-                        <stop offset="50%" stopColor="#fb923c" />
-                        <stop offset="100%" stopColor="#fb7185" />
+                        <stop offset="0%" stopColor="#d97706" />
+                        <stop offset="50%" stopColor="#ea580c" />
+                        <stop offset="100%" stopColor="#e11d48" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -157,7 +157,7 @@ const Index = () => {
 
               {/* Subtitle */}
               <p
-                className="text-lg md:text-xl text-white/70 max-w-xl leading-relaxed animate-fade-up opacity-0"
+                className="text-lg md:text-xl text-foreground/70 max-w-xl leading-relaxed animate-fade-up opacity-0"
                 style={{ animationDelay: "350ms", animationFillMode: "forwards" }}
               >
                 Accompagnement bienveillant et soins personnalisés pour vos proches, partout en Europe.
@@ -182,7 +182,7 @@ const Index = () => {
                 <Link to="/services">
                   <Button
                     variant="ghost"
-                    className="text-white hover:text-white hover:bg-white/10 border border-white/30 hover:border-white/50 gap-2 text-lg py-7 px-10 rounded-full transition-all duration-300"
+                    className="text-foreground hover:text-foreground hover:bg-white/80 border border-amber-300 hover:border-amber-400 bg-white/50 backdrop-blur-sm gap-2 text-lg py-7 px-10 rounded-full transition-all duration-300 shadow-lg shadow-amber-100/30"
                   >
                     Découvrir nos services
                   </Button>
@@ -199,40 +199,40 @@ const Index = () => {
                 {navigationItems.map((item, index) => {
                   const CardContent = (
                     <div
-                      className="group relative overflow-hidden backdrop-blur-xl bg-white/[0.07] border border-white/[0.12] hover:border-white/30 hover:bg-white/[0.12] rounded-3xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/20 flex flex-col justify-between h-[160px] md:h-[180px]"
+                      className="group relative overflow-hidden backdrop-blur-xl bg-white/80 border border-amber-200/50 hover:border-amber-300 hover:bg-white/95 rounded-3xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-200/40 flex flex-col justify-between h-[160px] md:h-[180px] shadow-lg shadow-amber-100/30"
                       style={{ animationDelay: `${600 + index * 100}ms` }}
                     >
                       {/* Gradient overlay on hover */}
                       <div
-                        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${item.accent.replace("bg-", "from-")}/10 to-transparent`}
+                        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${item.accent.replace("bg-", "from-")}/5 to-transparent`}
                       />
 
                       {/* Floating particles effect */}
                       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        <div className="absolute w-20 h-20 -top-10 -right-10 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-all duration-700 group-hover:scale-150" />
-                        <div className="absolute w-16 h-16 -bottom-8 -left-8 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-all duration-700 group-hover:scale-150" />
+                        <div className="absolute w-20 h-20 -top-10 -right-10 bg-amber-200/20 rounded-full blur-xl group-hover:bg-amber-300/30 transition-all duration-700 group-hover:scale-150" />
+                        <div className="absolute w-16 h-16 -bottom-8 -left-8 bg-orange-200/20 rounded-full blur-xl group-hover:bg-orange-300/30 transition-all duration-700 group-hover:scale-150" />
                       </div>
 
                       {/* Top section with icon */}
                       <div className="relative z-10 flex items-start justify-between">
                         <div
-                          className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${item.accent} bg-opacity-20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}
+                          className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${item.accent} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                         >
                           <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
                         </div>
 
                         {/* Arrow with rotate effect */}
-                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 group-hover:rotate-[-45deg]">
-                          <ArrowRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+                        <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-all duration-300 group-hover:rotate-[-45deg]">
+                          <ArrowRight className="w-5 h-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
                         </div>
                       </div>
 
                       {/* Text section */}
                       <div className="relative z-10 space-y-1">
-                        <h2 className="font-serif font-bold text-white text-xl md:text-2xl leading-tight">
+                        <h2 className="font-serif font-bold text-foreground text-xl md:text-2xl leading-tight">
                           {item.title}
                         </h2>
-                        <p className="text-white/50 text-sm md:text-base">{item.subtitle}</p>
+                        <p className="text-muted-foreground text-sm md:text-base">{item.subtitle}</p>
                       </div>
 
                       {/* Bottom accent line */}
@@ -259,44 +259,44 @@ const Index = () => {
 
         {/* Bottom Stats Bar */}
         <footer
-          className="relative z-10 border-t border-white/10 backdrop-blur-sm bg-black/20 animate-fade-up opacity-0"
+          className="relative z-10 border-t border-amber-200/50 backdrop-blur-sm bg-white/70 animate-fade-up opacity-0"
           style={{ animationDelay: "800ms", animationFillMode: "forwards" }}
         >
           <div className="max-w-6xl mx-auto px-6 md:px-12 py-6">
             <div className="flex flex-wrap items-center justify-between gap-6">
               <div className="flex items-center gap-8 md:gap-12">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <HeartHandshake className="w-5 h-5 text-amber-400" />
+                  <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                    <HeartHandshake className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
-                    <div className="text-2xl md:text-3xl font-bold text-white">500+</div>
-                    <div className="text-xs text-white/50 uppercase tracking-wider">Familles</div>
+                    <div className="text-2xl md:text-3xl font-bold text-foreground">500+</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Familles</div>
                   </div>
                 </div>
-                <div className="w-px h-10 bg-white/20" />
+                <div className="w-px h-10 bg-amber-200" />
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-amber-400" />
+                  <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
-                    <div className="text-2xl md:text-3xl font-bold text-white">15+</div>
-                    <div className="text-xs text-white/50 uppercase tracking-wider">Années</div>
+                    <div className="text-2xl md:text-3xl font-bold text-foreground">15+</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Années</div>
                   </div>
                 </div>
-                <div className="w-px h-10 bg-white/20 hidden md:block" />
+                <div className="w-px h-10 bg-amber-200 hidden md:block" />
                 <div className="hidden md:flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-amber-400" />
+                  <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
-                    <div className="text-2xl md:text-3xl font-bold text-white">24/7</div>
-                    <div className="text-xs text-white/50 uppercase tracking-wider">Disponible</div>
+                    <div className="text-2xl md:text-3xl font-bold text-foreground">24/7</div>
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Disponible</div>
                   </div>
                 </div>
               </div>
 
-              <div className="text-white/40 text-sm">© 2026 Clos du Soleil</div>
+              <div className="text-muted-foreground text-sm">© {new Date().getFullYear()} Clos du Soleil</div>
             </div>
           </div>
         </footer>
