@@ -23,15 +23,9 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [selectedTime, setSelectedTime] = useState<string>("");
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
-  const timeSlots = [
-    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-    "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
-  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -44,18 +38,38 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        toast({
+          title: "Envoi impossible",
+          description: data?.error?.message ?? "Une erreur est survenue. Reessayez.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       toast({
-        title: "Demande envoyée !",
-        description: selectedDate && selectedTime 
-          ? `Rendez-vous demandé le ${format(selectedDate, "d MMMM yyyy", { locale: fr })} à ${selectedTime}.`
-          : "Nous vous rappellerons très bientôt.",
+        title: "Demande envoyee !",
+        description: "Nous vous contacterons tres bientot. Verifiez votre email pour vos acces.",
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
-      setSelectedDate(undefined);
-      setSelectedTime("");
+    } catch (error) {
+      toast({
+        title: "Connexion impossible",
+        description: "Impossible de joindre le serveur. Reessayez plus tard.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const handleWhatsApp = () => {
@@ -236,57 +250,6 @@ const Contact = () => {
                           required
                           className="text-base py-6 rounded-xl border-2 focus:border-primary transition-colors"
                         />
-                      </div>
-
-                      {/* Date & Time Selection */}
-                      <div className="space-y-2">
-                        <Label className="text-base font-medium">Choisissez une date pour le premier rendez-vous</Label>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button
-                              variant="outline"
-                              className={cn(
-                                "w-full justify-start text-left font-normal py-6 rounded-xl border-2 hover:border-primary transition-colors",
-                                !selectedDate && "text-muted-foreground"
-                              )}
-                            >
-                              <CalendarIcon className="mr-3 h-5 w-5 text-primary" />
-                              {selectedDate ? (
-                                format(selectedDate, "EEEE d MMMM yyyy", { locale: fr })
-                              ) : (
-                                <span>Sélectionner une date</span>
-                              )}
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={selectedDate}
-                              onSelect={setSelectedDate}
-                              disabled={(date) =>
-                                date < new Date() || date.getDay() === 0 || date.getDay() === 6
-                              }
-                              initialFocus
-                              className={cn("p-3 pointer-events-auto")}
-                            />
-                          </PopoverContent>
-                        </Popover>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label className="text-base font-medium">Choisissez un créneau horaire</Label>
-                        <Select value={selectedTime} onValueChange={setSelectedTime}>
-                          <SelectTrigger className="w-full py-6 rounded-xl border-2 hover:border-primary transition-colors text-base">
-                            <SelectValue placeholder="Sélectionner un horaire" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {timeSlots.map((time) => (
-                              <SelectItem key={time} value={time} className="text-base py-3">
-                                {time}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
                       </div>
 
                       <div className="space-y-2">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Settings, Bell, Lock, Globe, Moon, Sun, Shield, Eye, EyeOff, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,10 +7,16 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/router";
 
 const SettingsSection = () => {
   const { toast } = useToast();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSavingPreferences, setIsSavingPreferences] = useState(false);
+  const [isSavingPassword, setIsSavingPassword] = useState(false);
   
   const [notifications, setNotifications] = useState({
     email: true,
@@ -24,18 +30,153 @@ const SettingsSection = () => {
     theme: "light",
   });
 
-  const handleSavePassword = () => {
-    toast({
-      title: "Mot de passe mis à jour",
-      description: "Votre nouveau mot de passe a été enregistré.",
-    });
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const loadSettings = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/me", { credentials: "include" });
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          router.push("/login");
+          return;
+        }
+        throw new Error(data?.error?.message ?? "Erreur de chargement");
+      }
+
+      if (!data?.data?.settings) {
+        throw new Error("Reponse invalide");
+      }
+
+      setNotifications(data.data.settings.notifications);
+      setPreferences(data.data.settings.preferences);
+    } catch (error) {
+      toast({
+        title: "Chargement impossible",
+        description: "Impossible de charger vos parametres. Reessayez.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleSaveNotifications = () => {
-    toast({
-      title: "Préférences enregistrées",
-      description: "Vos préférences de notification ont été mises à jour.",
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const saveSettings = async ({
+    setLoading,
+    successTitle,
+    successDescription,
+  }: {
+    setLoading: (value: boolean) => void;
+    successTitle: string;
+    successDescription: string;
+  }) => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/me/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ notifications, preferences }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          router.push("/login");
+          return;
+        }
+        throw new Error(data?.error?.message ?? "Mise a jour impossible");
+      }
+
+      if (!data?.data) {
+        throw new Error("Reponse invalide");
+      }
+
+      setNotifications(data.data.notifications);
+      setPreferences(data.data.preferences);
+      toast({
+        title: successTitle,
+        description: successDescription,
+      });
+    } catch (error) {
+      toast({
+        title: "Mise a jour impossible",
+        description: error instanceof Error ? error.message : "Une erreur est survenue.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSaveNotifications = () =>
+    saveSettings({
+      setLoading: setIsSaving,
+      successTitle: "Preferences enregistrees",
+      successDescription: "Vos parametres ont ete mis a jour.",
     });
+
+  const handleSavePreferences = () =>
+    saveSettings({
+      setLoading: setIsSavingPreferences,
+      successTitle: "Preferences enregistrees",
+      successDescription: "Vos preferences ont ete mises a jour.",
+    });
+
+  const handleSavePassword = async () => {
+    if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmPassword) {
+      toast({
+        title: "Champs manquants",
+        description: "Veuillez remplir tous les champs du mot de passe.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSavingPassword(true);
+    try {
+      const response = await fetch("/api/me/password", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(passwordForm),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          router.push("/login");
+          return;
+        }
+        throw new Error(data?.error?.message ?? "Mise a jour impossible");
+      }
+
+      setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
+      toast({
+        title: "Mot de passe mis a jour",
+        description: "Votre nouveau mot de passe a ete enregistre.",
+      });
+    } catch (error) {
+      toast({
+        title: "Mise a jour impossible",
+        description: error instanceof Error ? error.message : "Une erreur est survenue.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingPassword(false);
+    }
   };
 
   return (
@@ -65,6 +206,7 @@ const SettingsSection = () => {
             <Switch
               checked={notifications.email}
               onCheckedChange={(checked) => setNotifications({ ...notifications, email: checked })}
+              disabled={isLoading}
             />
           </div>
 
@@ -81,6 +223,7 @@ const SettingsSection = () => {
             <Switch
               checked={notifications.sms}
               onCheckedChange={(checked) => setNotifications({ ...notifications, sms: checked })}
+              disabled={isLoading}
             />
           </div>
 
@@ -97,6 +240,7 @@ const SettingsSection = () => {
             <Switch
               checked={notifications.appointments}
               onCheckedChange={(checked) => setNotifications({ ...notifications, appointments: checked })}
+              disabled={isLoading}
             />
           </div>
 
@@ -113,12 +257,13 @@ const SettingsSection = () => {
             <Switch
               checked={notifications.promotions}
               onCheckedChange={(checked) => setNotifications({ ...notifications, promotions: checked })}
+              disabled={isLoading}
             />
           </div>
 
-          <Button onClick={handleSaveNotifications} className="w-full gap-2">
+          <Button onClick={handleSaveNotifications} className="w-full gap-2" disabled={isSaving || isLoading}>
             <Save className="w-4 h-4" />
-            Enregistrer les préférences
+            {isSaving ? "Enregistrement..." : "Enregistrer les preferences"}
           </Button>
         </CardContent>
       </Card>
@@ -142,6 +287,8 @@ const SettingsSection = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 className="bg-secondary pr-12"
+                value={passwordForm.currentPassword}
+                onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
               />
               <button
                 type="button"
@@ -159,6 +306,8 @@ const SettingsSection = () => {
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               className="bg-secondary"
+              value={passwordForm.newPassword}
+              onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
             />
           </div>
 
@@ -168,12 +317,14 @@ const SettingsSection = () => {
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               className="bg-secondary"
+              value={passwordForm.confirmPassword}
+              onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
             />
           </div>
 
-          <Button onClick={handleSavePassword} className="w-full gap-2">
+          <Button onClick={handleSavePassword} className="w-full gap-2" disabled={isSavingPassword || isLoading}>
             <Shield className="w-4 h-4" />
-            Mettre à jour le mot de passe
+            {isSavingPassword ? "Mise a jour..." : "Mettre a jour le mot de passe"}
           </Button>
         </CardContent>
       </Card>
@@ -204,7 +355,7 @@ const SettingsSection = () => {
               value={preferences.language}
               onValueChange={(value) => setPreferences({ ...preferences, language: value })}
             >
-              <SelectTrigger className="w-40">
+              <SelectTrigger className="w-40" disabled={isLoading}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -233,7 +384,7 @@ const SettingsSection = () => {
               value={preferences.theme}
               onValueChange={(value) => setPreferences({ ...preferences, theme: value })}
             >
-              <SelectTrigger className="w-40">
+              <SelectTrigger className="w-40" disabled={isLoading}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -243,6 +394,11 @@ const SettingsSection = () => {
               </SelectContent>
             </Select>
           </div>
+
+          <Button onClick={handleSavePreferences} className="w-full gap-2" disabled={isSavingPreferences || isLoading}>
+            <Save className="w-4 h-4" />
+            {isSavingPreferences ? "Enregistrement..." : "Enregistrer les preferences"}
+          </Button>
         </CardContent>
       </Card>
     </div>

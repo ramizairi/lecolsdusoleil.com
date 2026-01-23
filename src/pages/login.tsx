@@ -24,22 +24,46 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
-      if (email && password) {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
         toast({
-          title: "Connexion réussie!",
-          description: "Bienvenue dans votre espace client.",
-        });
-        router.push("/dashboard");
-      } else {
-        toast({
-          title: "Erreur",
-          description: "Veuillez remplir tous les champs.",
+          title: "Connexion impossible",
+          description: data?.error?.message ?? "Email ou mot de passe incorrect.",
           variant: "destructive",
         });
+        return;
       }
+
+      if (data?.data?.mustChangePassword) {
+        toast({
+          title: "Mot de passe temporaire",
+          description: "Pour votre securite, changez votre mot de passe des votre premiere connexion.",
+        });
+      }
+
+      toast({
+        title: "Connexion reussie !",
+        description: "Bienvenue dans votre espace client.",
+      });
+      router.push("/dashboard");
+    } catch (error) {
+      toast({
+        title: "Connexion impossible",
+        description: "Impossible de joindre le serveur. Reessayez plus tard.",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -147,8 +171,8 @@ const Login = () => {
                   <p className="text-muted-foreground flex items-center justify-center gap-2">
                     <User className="w-4 h-4" />
                     Pas encore de compte?{" "}
-                    <Link href="/register" className="text-primary font-semibold hover:underline">
-                      Créer un compte
+                    <Link href="/contact" className="text-primary font-semibold hover:underline">
+                      Prenez rendez-vous
                     </Link>
                   </p>
                 </div>

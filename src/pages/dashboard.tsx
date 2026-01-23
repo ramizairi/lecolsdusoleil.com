@@ -1,56 +1,111 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
-import { 
-  Calendar, 
-  ClipboardList, 
-  FileText, 
-  User, 
-  Settings, 
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import {
+  Calendar,
+  ClipboardList,
+  User,
+  Settings,
   LogOut,
   Bell,
-  Clock,
   CreditCard,
   CheckCircle2,
-  Timer
+  Timer,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 import ProfileSection from "@/components/dashboard/ProfileSection";
 import SettingsSection from "@/components/dashboard/SettingsSection";
 import AppointmentsSection from "@/components/dashboard/AppointmentsSection";
+import { useToast } from "@/hooks/use-toast";
+import { getAppointmentStatusLabel, type AppointmentStatus } from "@/lib/appointments";
+
+type AppointmentSummary = {
+  id: string;
+  title: string;
+  status: AppointmentStatus;
+  price: number | null;
+  rendezvousDate: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type ProfileSummary = {
+  firstName: string;
+  lastName: string;
+  email: string;
+};
 
 const Dashboard = () => {
+  const router = useRouter();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("overview");
+  const [profile, setProfile] = useState<ProfileSummary | null>(null);
+  const [appointments, setAppointments] = useState<AppointmentSummary[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const menuItems = [
     { id: "overview", label: "Tableau de bord", icon: ClipboardList },
     { id: "appointments", label: "Mes rendez-vous", icon: Calendar },
-    { id: "documents", label: "Documents", icon: FileText },
     { id: "profile", label: "Mon profil", icon: User },
     { id: "settings", label: "Paramètres", icon: Settings },
   ];
 
-  const upcomingAppointments = [
-    { date: "20 Jan 2025", time: "10:00", service: "Consultation initiale", status: "approved", price: 80 },
-    { date: "25 Jan 2025", time: "14:30", service: "Suivi thérapeutique", status: "pending", price: 60 },
-    { date: "15 Jan 2025", time: "09:00", service: "Bilan complet", status: "paid", price: 150 },
-  ];
+  const loadDashboard = async () => {
+    setIsLoading(true);
+    try {
+      const [meResponse, appointmentResponse] = await Promise.all([
+        fetch("/api/me", { credentials: "include" }),
+        fetch("/api/me/appointments", { credentials: "include" }),
+      ]);
 
-  const getStatusConfig = (status: string) => {
-    switch (status) {
-      case "pending":
-        return { label: "En attente", color: "bg-amber-100 text-amber-800", icon: Timer };
-      case "approved":
-        return { label: "À payer", color: "bg-blue-100 text-blue-800", icon: CreditCard };
-      case "paid":
-        return { label: "Confirmé", color: "bg-green-100 text-green-800", icon: CheckCircle2 };
-      default:
-        return { label: status, color: "bg-gray-100 text-gray-800", icon: Clock };
+      if (meResponse.status === 401 || appointmentResponse.status === 401) {
+        router.push("/login");
+        return;
+      }
+
+      const meData = await meResponse.json().catch(() => null);
+      const appointmentData = await appointmentResponse.json().catch(() => null);
+
+      if (!meResponse.ok) {
+        throw new Error(meData?.error?.message ?? "Chargement impossible");
+      }
+
+      if (!appointmentResponse.ok) {
+        throw new Error(appointmentData?.error?.message ?? "Chargement impossible");
+      }
+
+      setProfile(meData.data.profile);
+      setAppointments(appointmentData.data.appointments ?? []);
+    } catch (error) {
+      toast({
+        title: "Chargement impossible",
+        description: error instanceof Error ? error.message : "Une erreur est survenue.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadDashboard();
+  }, []);
+
+  const totalAppointments = appointments.length;
+  const pendingPayments = appointments.filter((apt) => apt.status === "payement").length;
+  const upcomingPayment = appointments.find((apt) => apt.status === "payement" && apt.price !== null) ?? null;
+
+  const recentUpdates = useMemo(() => {
+    return [...appointments]
+      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+      .slice(0, 2);
+  }, [appointments]);
+
+  const fullName = profile ? `${profile.firstName} ${profile.lastName}`.trim() : "";
+  const initials = profile ? `${profile.firstName?.[0] ?? ""}${profile.lastName?.[0] ?? ""}`.toUpperCase() : "--";
 
   return (
     <>
@@ -101,7 +156,7 @@ const Dashboard = () => {
           <header className="h-20 bg-card border-b border-border flex items-center justify-between px-8">
             <div>
               <h1 className="font-serif text-accessible-2xl font-bold text-foreground">
-                Bienvenue, Jean Dupont
+                {fullName ? `Bienvenue, ${fullName}` : "Bienvenue"}
               </h1>
               <p className="text-muted-foreground text-accessible-base">
                 Votre espace personnel
@@ -114,7 +169,7 @@ const Dashboard = () => {
                 <span className="absolute top-1 right-1 w-3 h-3 bg-primary rounded-full" />
               </button>
               <div className="w-12 h-12 rounded-full bg-gradient-sunset flex items-center justify-center text-primary-foreground font-bold text-accessible-lg">
-                JD
+                {initials || "--"}
               </div>
             </div>
           </header>
@@ -124,14 +179,16 @@ const Dashboard = () => {
             {activeTab === "overview" && (
               <div className="space-y-8">
                 {/* Stats Cards */}
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
                   <Card className="hover:shadow-elevated transition-shadow">
                     <CardContent className="pt-6 flex items-center gap-4">
                       <div className="w-16 h-16 rounded-2xl bg-gradient-sunset flex items-center justify-center">
                         <Calendar className="w-8 h-8 text-primary-foreground" />
                       </div>
                       <div>
-                        <p className="text-accessible-3xl font-bold text-foreground">3</p>
+                        <p className="text-accessible-3xl font-bold text-foreground">
+                          {isLoading ? "-" : totalAppointments}
+                        </p>
                         <p className="text-muted-foreground text-accessible-base">Rendez-vous à venir</p>
                       </div>
                     </CardContent>
@@ -143,73 +200,14 @@ const Dashboard = () => {
                         <CreditCard className="w-8 h-8 text-primary-foreground" />
                       </div>
                       <div>
-                        <p className="text-accessible-3xl font-bold text-foreground">1</p>
+                        <p className="text-accessible-3xl font-bold text-foreground">
+                          {isLoading ? "-" : pendingPayments}
+                        </p>
                         <p className="text-muted-foreground text-accessible-base">Paiement en attente</p>
                       </div>
                     </CardContent>
                   </Card>
-
-                  <Card className="hover:shadow-elevated transition-shadow">
-                    <CardContent className="pt-6 flex items-center gap-4">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-sunset flex items-center justify-center">
-                        <CheckCircle2 className="w-8 h-8 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <p className="text-accessible-3xl font-bold text-foreground">12</p>
-                        <p className="text-muted-foreground text-accessible-base">Séances complétées</p>
-                      </div>
-                    </CardContent>
-                  </Card>
                 </div>
-
-                {/* Upcoming Appointments */}
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between">
-                    <div>
-                      <CardTitle className="flex items-center gap-3">
-                        <Calendar className="w-7 h-7 text-primary" />
-                        Prochains rendez-vous
-                      </CardTitle>
-                      <CardDescription>Vos réservations à venir</CardDescription>
-                    </div>
-                    <Button asChild variant="outline" size="sm" className="gap-2">
-                      <Link href="/contact">
-                        <Calendar className="w-4 h-4" />
-                        Nouveau RDV
-                      </Link>
-                    </Button>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {upcomingAppointments.map((apt, index) => {
-                      const statusConfig = getStatusConfig(apt.status);
-                      const StatusIcon = statusConfig.icon;
-                      
-                      return (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between p-5 bg-secondary rounded-xl"
-                        >
-                          <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 rounded-xl bg-card flex items-center justify-center border border-border">
-                              <Clock className="w-7 h-7 text-primary" />
-                            </div>
-                            <div>
-                              <p className="font-semibold text-accessible-lg text-foreground">{apt.service}</p>
-                              <p className="text-muted-foreground text-accessible-base">{apt.date} à {apt.time}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <Badge className={statusConfig.color}>
-                              <StatusIcon className="w-4 h-4 mr-1" />
-                              {statusConfig.label}
-                            </Badge>
-                            <p className="font-bold text-foreground">{apt.price}€</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </CardContent>
-                </Card>
 
                 {/* Quick Actions */}
                 <div className="grid md:grid-cols-2 gap-6">
@@ -222,14 +220,24 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="flex items-center justify-between p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
-                        <div>
-                          <p className="font-semibold text-foreground">Consultation initiale</p>
-                          <p className="text-sm text-muted-foreground">20 Jan 2025 - 10:00</p>
-                        </div>
-                        <Button size="sm" className="gap-2">
-                          <CreditCard className="w-4 h-4" />
-                          Payer 80€
-                        </Button>
+                        {upcomingPayment ? (
+                          <>
+                            <div>
+                              <p className="font-semibold text-foreground">{upcomingPayment.title}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {upcomingPayment.rendezvousDate
+                                  ? new Date(upcomingPayment.rendezvousDate).toLocaleDateString("fr-FR")
+                                  : "Date a confirmer"}
+                              </p>
+                            </div>
+                            <Button size="sm" className="gap-2" onClick={() => setActiveTab("appointments")}>
+                              <CreditCard className="w-4 h-4" />
+                              Payer {upcomingPayment.price}€
+                            </Button>
+                          </>
+                        ) : (
+                          <div className="text-sm text-muted-foreground">Aucun paiement en attente.</div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
@@ -242,20 +250,46 @@ const Dashboard = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <div className="flex items-start gap-3 p-3 bg-secondary rounded-lg">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-sm font-medium text-foreground">Rendez-vous confirmé</p>
-                          <p className="text-xs text-muted-foreground">Bilan complet - 15 Jan 2025</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3 p-3 bg-secondary rounded-lg">
-                        <Timer className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-sm font-medium text-foreground">En attente de validation</p>
-                          <p className="text-xs text-muted-foreground">Suivi thérapeutique - 25 Jan 2025</p>
-                        </div>
-                      </div>
+                      {recentUpdates.length === 0 ? (
+                        <div className="text-sm text-muted-foreground">Aucune notification recente.</div>
+                      ) : (
+                        recentUpdates.map((appointment) => {
+                          const StatusIcon =
+                            appointment.status === "completed"
+                              ? CheckCircle2
+                              : appointment.status === "payement"
+                                ? CreditCard
+                                : appointment.status === "rendezvous"
+                                  ? Calendar
+                                  : Timer;
+
+                          const iconColor =
+                            appointment.status === "completed"
+                              ? "text-green-600"
+                              : appointment.status === "payement"
+                                ? "text-purple-600"
+                                : appointment.status === "rendezvous"
+                                  ? "text-blue-600"
+                                  : "text-amber-600";
+
+                          return (
+                            <div key={appointment.id} className="flex items-start gap-3 p-3 bg-secondary rounded-lg">
+                              <StatusIcon className={`w-5 h-5 shrink-0 mt-0.5 ${iconColor}`} />
+                              <div>
+                                <p className="text-sm font-medium text-foreground">
+                                  {getAppointmentStatusLabel(appointment.status)}
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                  {appointment.title} •{" "}
+                                  {appointment.updatedAt
+                                    ? new Date(appointment.updatedAt).toLocaleDateString("fr-FR")
+                                    : "-"}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
                     </CardContent>
                   </Card>
                 </div>
@@ -267,27 +301,6 @@ const Dashboard = () => {
             {activeTab === "settings" && <SettingsSection />}
 
             {activeTab === "appointments" && <AppointmentsSection />}
-
-            {activeTab === "documents" && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <FileText className="w-6 h-6 text-primary" />
-                    Documents
-                  </CardTitle>
-                  <CardDescription>
-                    Vos documents et factures
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-12 text-muted-foreground">
-                    <FileText className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg">Aucun document disponible</p>
-                    <p className="text-sm mt-2">Vos factures apparaîtront ici après paiement</p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
           </div>
         </main>
       </div>

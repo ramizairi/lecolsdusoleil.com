@@ -58,7 +58,7 @@ const Index = () => {
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const result = emailSchema.safeParse(email);
     if (!result.success) {
       toast({
@@ -70,17 +70,47 @@ const Index = () => {
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Merci pour votre inscription !",
-      description: "Vous recevrez nos actualités très prochainement.",
-    });
-    
-    setEmail("");
-    setIsSubmitting(false);
+
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: result.data }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        toast({
+          title: "Inscription impossible",
+          description: data?.error?.message ?? "Une erreur est survenue. Réessayez.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const description =
+        data?.data?.reactivated
+          ? "Votre inscription est réactivée."
+          : data?.data?.isNew
+            ? "Vous recevrez nos actualités très prochainement."
+            : "Vous êtes déjà inscrit(e) à notre newsletter.";
+
+      toast({
+        title: data?.message ?? "Merci pour votre inscription !",
+        description,
+      });
+
+      setEmail("");
+    } catch (error) {
+      toast({
+        title: "Connexion impossible",
+        description: "Impossible de joindre le serveur. Réessayez plus tard.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

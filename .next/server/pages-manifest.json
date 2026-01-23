@@ -2,5 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/login": "pages/login.js",
+  "/admin/dashboard": "pages/admin/dashboard.js",
+  "/dashboard": "pages/dashboard.js",
+  "/api/admin/appointments/[id]": "pages/api/admin/appointments/[id].js",
+  "/api/me": "pages/api/me.js",
+  "/api/me/appointments": "pages/api/me/appointments.js"
 }
