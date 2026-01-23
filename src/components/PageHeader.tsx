@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import logo from "@/assets/logo.png";
 import ThemeToggle from "./ThemeToggle";
@@ -23,25 +23,26 @@ const PageHeader = ({ showBack = true, variant = "light" }: PageHeaderProps) => 
           {/* Left - Back button or Logo */}
           <div className="flex items-center gap-4">
             {showBack && (
-              <Link to="/">
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className={`rounded-full transition-all duration-300 ${
-                    isDark 
-                      ? "text-white/80 hover:text-white hover:bg-white/10" 
-                      : "text-foreground/70 hover:text-foreground hover:bg-primary/5 border border-border/50 hover:border-primary/30"
-                  }`}
-                >
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className={`rounded-full transition-all duration-300 ${
+                  isDark
+                    ? "text-white/80 hover:text-white hover:bg-white/10"
+                    : "text-foreground/70 hover:text-foreground hover:bg-primary/5 border border-border/50 hover:border-primary/30"
+                }`}
+              >
+                <Link href="/">
                   <ArrowLeft className="w-5 h-5" />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             )}
             
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <img 
-                  src={logo} 
+                  src={logo.src}
                   alt="Clos du Soleil" 
                   className="h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105" 
                 />
@@ -57,19 +58,20 @@ const PageHeader = ({ showBack = true, variant = "light" }: PageHeaderProps) => 
               <ThemeToggle />
             </div>
             
-            <Link to="/login">
-              <Button 
-                className={`relative overflow-hidden rounded-full px-6 py-2 transition-all duration-300 group ${
-                  isDark
-                    ? "text-white/90 hover:text-white bg-white/5 hover:bg-white/15 border border-white/20 hover:border-amber-400/50 backdrop-blur-sm"
-                    : "bg-gradient-sunset text-primary-foreground hover:opacity-90 shadow-soft hover:shadow-elevated"
-                }`}
-              >
+            <Button
+              asChild
+              className={`relative overflow-hidden rounded-full px-6 py-2 transition-all duration-300 group ${
+                isDark
+                  ? "text-white/90 hover:text-white bg-white/5 hover:bg-white/15 border border-white/20 hover:border-amber-400/50 backdrop-blur-sm"
+                  : "bg-gradient-sunset text-primary-foreground hover:opacity-90 shadow-soft hover:shadow-elevated"
+              }`}
+            >
+              <Link href="/login">
                 <span className="relative z-10 font-semibold">Connexion</span>
                 {/* Shimmer effect */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

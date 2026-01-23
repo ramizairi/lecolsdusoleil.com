@@ -18,7 +18,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 type AppointmentStatus = "pending" | "approved" | "rejected" | "paid" | "completed" | "cancelled";
 
@@ -215,12 +215,12 @@ const AppointmentsSection = () => {
     <div className="space-y-8">
       {/* New Appointment Button */}
       <div className="flex justify-end">
-        <Link to="/contact">
-          <Button className="gap-2">
+        <Button asChild className="gap-2">
+          <Link href="/contact">
             <Plus className="w-5 h-5" />
             Nouveau rendez-vous
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       {/* Active Appointments */}
@@ -239,12 +239,12 @@ const AppointmentsSection = () => {
             <div className="text-center py-12 text-muted-foreground">
               <Calendar className="w-16 h-16 mx-auto mb-4 opacity-50" />
               <p className="text-lg">Aucun rendez-vous en cours</p>
-              <Link to="/contact">
-                <Button className="mt-4 gap-2">
+              <Button asChild className="mt-4 gap-2">
+                <Link href="/contact">
                   <Plus className="w-4 h-4" />
                   Prendre rendez-vous
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           ) : (
             activeAppointments.map((appointment) => {

@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface NavigationCardProps {
   title: string;
@@ -12,7 +12,7 @@ interface NavigationCardProps {
 const NavigationCard = ({ title, description, icon: Icon, to, delay = 0 }: NavigationCardProps) => {
   return (
     <Link
-      to={to}
+      href={to}
       className="group block animate-fade-up opacity-0"
       style={{ animationDelay: `${delay}ms`, animationFillMode: "forwards" }}
     >

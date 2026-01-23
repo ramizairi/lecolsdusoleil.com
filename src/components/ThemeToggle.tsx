@@ -1,35 +1,13 @@
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    
-    // Default to light mode - only enable dark if explicitly saved as dark
-    if (saved === "dark") {
-      setIsDark(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      // Ensure light mode is set
-      document.documentElement.classList.remove("dark");
-      if (!saved) {
-        localStorage.setItem("theme", "light");
-      }
-    }
-  }, []);
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
-    if (isDark) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
+    setTheme(isDark ? "light" : "dark");
   };
 
   return (

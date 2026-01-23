@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MapPin, Phone, Mail, Home, Info, Stethoscope, MessageSquare } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -21,7 +21,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-3 gap-10">
           <div className="space-y-4">
-            <img src={logo} alt="Clos du Soleil" className="h-12 w-auto" />
+            <img src={logo.src} alt="Clos du Soleil" className="h-12 w-auto" />
             <p className="text-accessible-base text-muted-foreground max-w-xs">
               Prendre soin de nos aînés avec dignité, compassion et excellence depuis plus de 20 ans.
             </p>
@@ -33,7 +33,7 @@ const Footer = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
-                  to={link.to}
+                  href={link.to}
                   className="flex items-center gap-2 text-accessible-base text-muted-foreground hover:text-primary transition-colors group"
                 >
                   <link.icon className="w-4 h-4 text-primary/60 group-hover:text-primary transition-colors" />
