@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { Calendar, ClipboardList, Mail, Phone, User, Loader2, Save } from "lucide-react";
@@ -203,12 +204,20 @@ const AdminDashboard = () => {
 
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-6 py-10 space-y-6">
-          <div className="flex items-center gap-3">
-            <ClipboardList className="w-7 h-7 text-primary" />
-            <div>
-              <h1 className="text-3xl font-serif font-bold">Dashboard Admin</h1>
-              <p className="text-muted-foreground">Suivi des demandes et rendez-vous</p>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center gap-3">
+              <ClipboardList className="w-7 h-7 text-primary" />
+              <div>
+                <h1 className="text-3xl font-serif font-bold">Dashboard Admin</h1>
+                <p className="text-muted-foreground">Suivi des demandes et rendez-vous</p>
+              </div>
             </div>
+            <Button asChild variant="outline" className="gap-2">
+              <Link href="/admin/newsletter">
+                <Mail className="w-4 h-4" />
+                Newsletter
+              </Link>
+            </Button>
           </div>
 
           <div className="grid lg:grid-cols-[1.1fr_1.5fr] gap-6">
