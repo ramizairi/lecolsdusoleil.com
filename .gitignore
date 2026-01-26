@@ -15,6 +15,7 @@ dist-ssr
 .env
 package-lock.json
 .next
+/.next
 
 
 # Editor directories and files

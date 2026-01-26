@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-10 pt-8 text-center">
-          <p className="text-muted-foreground text-accessible-sm">© 2026 Clos du Soleil. Tous droits réservés.</p>
+          <p className="text-muted-foreground text-accessible-sm">© 2025 Clos du Soleil. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

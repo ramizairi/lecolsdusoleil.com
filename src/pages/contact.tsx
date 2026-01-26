@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users, CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Footer from "@/components/Footer";
@@ -10,11 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -58,7 +52,7 @@ const Contact = () => {
 
       toast({
         title: "Demande envoyee !",
-        description: "Nous vous contacterons tres bientot. Verifiez votre email pour vos acces.",
+        description: data?.message ?? "Nous vous contacterons tres bientot.",
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
@@ -73,11 +67,11 @@ const Contact = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/33123456789?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
+    window.open("https://wa.me/3228860614?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
   };
 
   const handleCall = () => {
-    window.location.href = "tel:+33123456789";
+    window.location.href = "tel:+3228860614";
   };
 
   const trustElements = [
@@ -87,9 +81,7 @@ const Contact = () => {
   ];
 
   const contactInfo = [
-    { icon: MapPin, label: "Adresse", value: "123 Avenue du Soleil\n75001 Paris, France" },
-    { icon: Clock, label: "Horaires", value: "Lundi - Vendredi\n8h00 - 18h00" },
-    { icon: Phone, label: "Téléphone", value: "+33 1 23 45 67 89" },
+    { icon: Phone, label: "Téléphone", value: "+32 2 886 06 14" },
     { icon: Mail, label: "Email", value: "contact@closdusoleil.fr" },
   ];
 
@@ -204,7 +196,7 @@ const Contact = () => {
                   <div className="h-1 bg-gradient-sunset" />
                   
                   <CardHeader className="text-center pb-2">
-                    <CardTitle className="text-2xl font-serif">Demandez qu'on vous rappelle</CardTitle>
+                    <CardTitle className="text-2xl font-serif">Prendre rendez-vous</CardTitle>
                     <CardDescription className="text-base">
                       Laissez vos coordonnées, nous vous contacterons
                     </CardDescription>
@@ -253,7 +245,7 @@ const Contact = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message" className="text-base font-medium">Comment pouvons-nous vous aider ? (optionnel)</Label>
+                        <Label htmlFor="message" className="text-base font-medium">Laissez-nous un message, nous vous répondrons rapidement</Label>
                         <textarea
                           id="message"
                           name="message"

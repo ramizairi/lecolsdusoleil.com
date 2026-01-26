@@ -89,14 +89,13 @@ export const createAccountFromContact = async ({
   const now = new Date();
   const users = await getUsersCollection();
   const contacts = await getContactCollection();
-  const password = generatePassword();
-  const passwordHash = await hashPassword(password);
   const nameParts = splitName(name);
 
   const existingUser = await findUserByEmail(normalizedEmail);
 
   let userId: ObjectId;
   let isNewUser = false;
+  let password: string | null = null;
 
   if (existingUser) {
     await users.updateOne(
@@ -107,8 +106,6 @@ export const createAccountFromContact = async ({
           firstName: nameParts.firstName || existingUser.firstName,
           lastName: nameParts.lastName || existingUser.lastName,
           phone,
-          passwordHash,
-          mustChangePassword: true,
           updatedAt: now,
           lastContactAt: now,
         },
@@ -117,6 +114,8 @@ export const createAccountFromContact = async ({
 
     userId = existingUser._id;
   } else {
+    password = generatePassword();
+    const passwordHash = await hashPassword(password);
     const result = await users.insertOne({
       email: normalizedEmail,
       name: nameParts.fullName || name,

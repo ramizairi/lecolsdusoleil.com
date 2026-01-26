@@ -70,27 +70,34 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) =
     });
 
     const loginUrl = getLoginUrl(req);
-    let emailSent = true;
+    let emailSent = false;
 
-    try {
-      await sendRendezvousEmail({
-        to: email,
-        name,
-        email,
-        password: result.password,
-        loginUrl,
-      });
-    } catch (error) {
-      emailSent = false;
-      if (!isMailerSoftFail()) {
-        throw error;
+    if (result.isNewUser && result.password) {
+      try {
+        await sendRendezvousEmail({
+          to: email,
+          name,
+          email,
+          password: result.password,
+          loginUrl,
+        });
+        emailSent = true;
+      } catch (error) {
+        emailSent = false;
+        if (!isMailerSoftFail()) {
+          throw error;
+        }
+        console.error("Mailer soft-fail", error);
       }
-      console.error("Mailer soft-fail", error);
     }
+
+    const responseMessage = result.isNewUser
+      ? "Votre demande a ete envoyee. Vous allez recevoir un email de confirmation."
+      : "Votre demande a ete envoyee. Si vous avez deja un compte, connectez-vous avec vos identifiants.";
 
     return res.status(201).json({
       ok: true,
-      message: "Merci ! Votre demande a ete envoyee. Vous allez recevoir un email de confirmation.",
+      message: responseMessage,
       data: {
         userCreated: result.isNewUser,
         emailSent,

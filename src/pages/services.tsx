@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, Phone, MessageCircle, ArrowRight, Sparkles, Sun, Waves, Apple, Heart } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
@@ -12,62 +12,33 @@ const Services = () => {
   const services = [
     {
       icon: HandHeart,
-      title: "Accompagnement Quotidien",
-      description: "Aide aux gestes de la vie courante avec respect et discrétion, pour un accompagnement personnalisé.",
+      title: "Accompagnement quotidien et personnalisé",
+      description: "Accompagnement quotidien et personnalisé : aide aux gestes de la vie courante avec respect et discrétion.",
       color: "from-rose-500 to-pink-500",
     },
     {
       icon: Plane,
-      title: "Accueil & Transport",
-      description: "Transport individuel depuis l'aéroport, avec une prise en charge adaptée aux personnes à mobilité réduite.",
+      title: "Accueil et transport individuel",
+      description: "Accueil et transport individuel depuis l'aéroport, avec une prise en charge adaptée aux personnes à mobilité réduite.",
       color: "from-sky-500 to-blue-500",
     },
     {
       icon: Stethoscope,
-      title: "Soins Médicaux",
-      description: "Équipe compétente d'infirmier(ère)s et kinésithérapeute, proposant rééducation et maintien de la mobilité.",
+      title: "Soins médicaux et paramédicaux",
+      description: "Présence d'une équipe compétente composée d'infirmier(ère)s et d'un kinésithérapeute, proposant des séances de rééducation et de maintien de la mobilité adaptées aux besoins de chacun.",
       color: "from-emerald-500 to-teal-500",
     },
     {
       icon: Palette,
-      title: "Activités & Loisirs",
+      title: "Activités et loisirs",
       description: "Ateliers créatifs, moments de détente, sorties culturelles et sociales pour stimuler le corps et l'esprit.",
       color: "from-violet-500 to-purple-500",
     },
     {
       icon: Utensils,
-      title: "Repas All Inclusive",
-      description: "Repas équilibrés et conviviaux, préparés avec soin et adaptés aux besoins de chacun, formule all inclusive soft.",
+      title: "Repas équilibrés et conviviaux",
+      description: "Repas équilibrés et conviviaux : préparés avec soin et adaptés aux besoins de chacun, avec la formule all inclusive soft.",
       color: "from-amber-500 to-orange-500",
-    },
-    {
-      icon: Heart,
-      title: "Bien-être & Dignité",
-      description: "Chaque service pensé pour offrir confort, sécurité et plaisir de vivre, en respectant le rythme de nos résidents.",
-      color: "from-red-500 to-rose-500",
-    },
-  ];
-
-  const whyChooseUs = [
-    {
-      icon: Sun,
-      title: "Soleil & Climat",
-      description: "La Tunisie offre sécurité, soleil et un climat agréable toute l'année.",
-    },
-    {
-      icon: Waves,
-      title: "Bord de Mer",
-      description: "Profitez de la proximité de la mer et d'un cadre de vie apaisant.",
-    },
-    {
-      icon: Apple,
-      title: "Alimentation Saine",
-      description: "Une alimentation fraîche, équilibrée et préparée avec des produits locaux.",
-    },
-    {
-      icon: HandHeart,
-      title: "Attention Personnalisée",
-      description: "Chaque résident bénéficie d'une attention personnalisée et d'un suivi adapté.",
     },
   ];
 
@@ -83,7 +54,7 @@ const Services = () => {
     <>
       <Head>
         <title>Nos Services - Clos du Soleil | Résidence Hôtelière pour Seniors en Tunisie</title>
-        <meta name="description" content="Découvrez nos services : accompagnement quotidien, soins médicaux, transport aéroport, activités et repas all inclusive au Clos du Soleil en Tunisie." />
+        <meta name="description" content="Découvrez nos services : accompagnement quotidien et personnalisé, soins médicaux et paramédicaux, transport aéroport, activités et repas équilibrés au Clos du Soleil en Tunisie." />
       </Head>
 
       <div className="min-h-screen flex flex-col">
@@ -119,7 +90,7 @@ const Services = () => {
                 className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-up opacity-0" 
                 style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
-                Au Clos du Soleil, nous offrons des services pensés pour le confort, la sécurité et le plaisir de vivre de nos résidents.
+                Au Clos du Soleil, nous offrons une gamme complète de services pour le bien-être de nos résidents.
               </p>
             </div>
           </section>
@@ -157,49 +128,50 @@ const Services = () => {
                   </Card>
                 ))}
               </div>
+              <p className="text-center text-muted-foreground text-lg max-w-3xl mx-auto mt-10">
+                Chaque service est pensé pour offrir confort, sécurité et plaisir de vivre, tout en respectant le rythme et les envies de nos résidents.
+              </p>
             </div>
           </section>
 
-          {/* Why Choose Us Section */}
+          {/* Qui sommes-nous Section */}
+          <section className="py-20 relative">
+            <SunEffect variant="subtle" className="inset-0" />
+
+            <div className="container mx-auto px-6 relative z-10">
+              <div className="text-center max-w-3xl mx-auto">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6 shadow-soft">
+                  <Sun className="w-4 h-4" />
+                  Qui sommes-nous ?
+                </span>
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+                  Le Clos du Soleil, une résidence dédiée au bien-être
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Le Clos du Soleil est une résidence hôtelière pour seniors située en Tunisie. Nous accueillons des personnes âgées dans un cadre calme, sécurisé et bienveillant. Nous offrons un accompagnement quotidien, des soins personnalisés et une attention particulière au bien-être et à la dignité de chaque résident.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Pourquoi nous choisir Section */}
           <section className="py-20 relative">
             <SunEffect variant="subtle" className="inset-0" />
             
             <div className="container mx-auto px-6 relative z-10">
-              <div className="text-center mb-16">
+              <div className="text-center max-w-3xl mx-auto">
                 <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6 shadow-soft">
                   <Sun className="w-4 h-4" />
-                  Pourquoi nous choisir
+                  Pourquoi nous choisir ?
                 </span>
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
                   La Tunisie, un cadre de vie idéal
                 </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Sécurité, soleil, mer et climat agréable pour une qualité de vie exceptionnelle.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                {whyChooseUs.map((item, index) => (
-                  <Card 
-                    key={item.title}
-                    className="group relative overflow-hidden text-center hover:shadow-glow transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 bg-card backdrop-blur-sm border-border/50 animate-fade-up opacity-0"
-                    style={{ animationDelay: `${index * 100 + 100}ms`, animationFillMode: "forwards" }}
-                  >
-                    <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 group-hover:scale-150 transition-all duration-700" />
-                    
-                    <CardContent className="pt-8 pb-6 relative z-10">
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="w-7 h-7 text-white" strokeWidth={1.5} />
-                      </div>
-                      <h3 className="font-serif text-lg font-bold text-foreground mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {item.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
+                <div className="text-lg text-muted-foreground leading-relaxed space-y-3">
+                  <p>La Tunisie, c’est la sécurité, le soleil, la mer et un climat agréable.</p>
+                  <p>C’est aussi une alimentation fraîche et équilibrée.</p>
+                  <p>Au Clos du Soleil, nous offrons à chaque résident une attention personnalisée et un cadre de vie apaisant.</p>
+                </div>
               </div>
             </div>
           </section>

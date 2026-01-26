@@ -22,7 +22,7 @@ const Index = () => {
       accent: "bg-amber-500",
     },
     {
-      title: "Nos Soins",
+      title: "Nos Services",
       subtitle: "Services sur mesure",
       icon: HeartHandshake,
       to: "/services",
@@ -186,7 +186,7 @@ const Index = () => {
               >
                 <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-amber-700 border border-amber-400/50 rounded-full bg-white/80 backdrop-blur-sm shadow-sm">
                   <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
-                  Soins Premium pour Seniors
+                  Séjours pour Seniors
                 </span>
               </div>
 
@@ -326,7 +326,7 @@ const Index = () => {
 
         {/* Newsletter Section - Simple */}
         <section 
-          className="relative z-10 py-12 md:py-16 border-t border-amber-200/30 animate-fade-up opacity-0"
+          className="relative z-10 w-full py-12 md:py-16 border-t border-amber-200/30 animate-fade-up opacity-0"
           style={{ animationDelay: "700ms", animationFillMode: "forwards" }}
         >
           <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
