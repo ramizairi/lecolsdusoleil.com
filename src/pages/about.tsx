@@ -1,9 +1,9 @@
-import Head from "next/head";
 import Link from "next/link";
 import { Heart, Shield, Users, Star, Home, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -39,10 +39,10 @@ const About = () => {
 
   return (
     <>
-      <Head>
-        <title>Qui Sommes-Nous - Clos du Soleil | Résidence pour Seniors en Tunisie</title>
-        <meta name="description" content="Le Clos du Soleil est une résidence hôtelière pour seniors en Tunisie. Découvrez notre mission : accompagnement, soins personnalisés et bien-être." />
-      </Head>
+      <Seo
+        title="Qui Sommes-Nous - Clos du Soleil | Résidence pour Seniors en Tunisie"
+        description="Le Clos du Soleil est une résidence hôtelière pour seniors en Tunisie. Découvrez notre mission : accompagnement, soins personnalisés et bien-être."
+      />
 
       <div className="min-h-screen flex flex-col">
         <AnimatedBackground variant="sunrise" />

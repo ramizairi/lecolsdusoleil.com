@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { AlertTriangle, Home, ArrowLeft } from "lucide-react";
+import Seo from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
@@ -14,6 +15,12 @@ const NotFound = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
+      <Seo
+        title="Page introuvable - Clos du Soleil"
+        description="La page demandée n'existe pas. Retournez à l'accueil pour continuer votre navigation."
+        noindex
+        canonicalPath="/404"
+      />
       <AnimatedBackground variant="minimal" />
       
       <div className="text-center relative z-10 px-6">

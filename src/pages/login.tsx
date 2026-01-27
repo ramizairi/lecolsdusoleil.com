@@ -1,10 +1,10 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, ArrowRight, User } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -68,10 +68,11 @@ const Login = () => {
 
   return (
     <>
-      <Head>
-        <title>Connexion - Clos du Soleil</title>
-        <meta name="description" content="Connectez-vous à votre espace client Clos du Soleil pour accéder à vos informations personnelles." />
-      </Head>
+      <Seo
+        title="Connexion - Clos du Soleil"
+        description="Connectez-vous à votre espace client Clos du Soleil pour accéder à vos informations personnelles."
+        noindex
+      />
 
       <div className="min-h-screen flex flex-col">
         <AnimatedBackground variant="minimal" />

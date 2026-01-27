@@ -5,8 +5,8 @@ import clientPromise from "@/lib/mongodb";
 import { hashPassword, verifyPassword } from "@/lib/security";
 import { normalizeEmail } from "@/lib/users";
 
-const ADMIN_SEED_EMAIL = "ramizeyri@gmail.com";
-const ADMIN_SEED_PASSWORD = "Admin@123";
+const ADMIN_SEED_EMAIL = "admin@leclosdusoleil.com";
+const ADMIN_SEED_PASSWORD = "Admin@932!";
 const OTP_TTL_MINUTES = 10;
 
 export type AdminAccount = {

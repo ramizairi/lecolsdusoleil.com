@@ -1,10 +1,10 @@
-import Head from "next/head";
 import { Info, HeartHandshake, Phone, Calendar, MessageCircle, ArrowRight, Mail, Send } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { z } from "zod";
 import logo from "@/assets/logo.png";
 import heroImage from "@/assets/hero-luxury.jpg";
+import Seo from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -115,13 +115,10 @@ const Index = () => {
 
   return (
     <>
-      <Head>
-        <title>Clos du Soleil - Soins et Accompagnement pour Seniors en Europe</title>
-        <meta
-          name="description"
-          content="Clos du Soleil accompagne les personnes âgées en Europe avec des soins personnalisés, de la bienveillance et du professionnalisme."
-        />
-      </Head>
+      <Seo
+        title="Clos du Soleil - Soins et Accompagnement pour Seniors en Europe"
+        description="Clos du Soleil accompagne les personnes âgées en Europe avec des soins personnalisés, de la bienveillance et du professionnalisme."
+      />
 
       <div className="relative min-h-screen flex flex-col overflow-x-hidden">
         {/* Light Luminous Background */}

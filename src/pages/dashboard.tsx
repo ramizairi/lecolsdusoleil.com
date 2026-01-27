@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
@@ -16,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
+import Seo from "@/components/Seo";
 import ProfileSection from "@/components/dashboard/ProfileSection";
 import SettingsSection from "@/components/dashboard/SettingsSection";
 import AppointmentsSection from "@/components/dashboard/AppointmentsSection";
@@ -109,10 +109,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <Head>
-        <title>Tableau de bord - Clos du Soleil</title>
-        <meta name="description" content="Gérez vos rendez-vous, traitements et informations personnelles sur votre espace client Clos du Soleil." />
-      </Head>
+      <Seo
+        title="Tableau de bord - Clos du Soleil"
+        description="Gérez vos rendez-vous, traitements et informations personnelles sur votre espace client Clos du Soleil."
+        noindex
+      />
 
       <div className="min-h-screen flex bg-background">
         {/* Sidebar */}

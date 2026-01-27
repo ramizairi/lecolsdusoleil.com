@@ -1,8 +1,8 @@
-import Head from "next/head";
 import { HandHeart, Plane, Stethoscope, Palette, Utensils, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -52,10 +52,10 @@ const Services = () => {
 
   return (
     <>
-      <Head>
-        <title>Nos Services - Clos du Soleil | Résidence Hôtelière pour Seniors en Tunisie</title>
-        <meta name="description" content="Découvrez nos services : accompagnement quotidien et personnalisé, soins médicaux et paramédicaux, transport aéroport, activités et repas équilibrés au Clos du Soleil en Tunisie." />
-      </Head>
+      <Seo
+        title="Nos Services - Clos du Soleil | Résidence Hôtelière pour Seniors en Tunisie"
+        description="Découvrez nos services : accompagnement quotidien et personnalisé, soins médicaux et paramédicaux, transport aéroport, activités et repas équilibrés au Clos du Soleil en Tunisie."
+      />
 
       <div className="min-h-screen flex flex-col">
         <AnimatedBackground variant="sunset" />

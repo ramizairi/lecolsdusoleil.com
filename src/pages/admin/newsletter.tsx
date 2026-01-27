@@ -1,7 +1,7 @@
-import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { ArrowLeft, Download, Loader2, Mail, Users } from "lucide-react";
+import Seo from "@/components/Seo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -102,10 +102,11 @@ const AdminNewsletter = () => {
 
   return (
     <>
-      <Head>
-        <title>Admin - Newsletter</title>
-        <meta name="description" content="Liste des inscrits a la newsletter" />
-      </Head>
+      <Seo
+        title="Admin - Newsletter"
+        description="Liste des inscrits a la newsletter"
+        noindex
+      />
 
       <div className="min-h-screen bg-background">
         <div className="max-w-6xl mx-auto px-6 py-10 space-y-6">

@@ -1,8 +1,8 @@
-import Head from "next/head";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users, CalendarIcon } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import Seo from "@/components/Seo";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -87,10 +87,10 @@ const Contact = () => {
 
   return (
     <>
-      <Head>
-        <title>Contactez-nous - Clos du Soleil</title>
-        <meta name="description" content="Contactez Clos du Soleil par téléphone, WhatsApp ou formulaire. Notre équipe bienveillante est à votre écoute." />
-      </Head>
+      <Seo
+        title="Contactez-nous - Clos du Soleil"
+        description="Contactez Clos du Soleil par téléphone, WhatsApp ou formulaire. Notre équipe bienveillante est à votre écoute."
+      />
 
       <div className="min-h-screen flex flex-col">
         <AnimatedBackground variant="minimal" />

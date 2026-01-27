@@ -1,8 +1,8 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { Calendar, ClipboardList, Mail, Phone, User, Loader2, Save } from "lucide-react";
+import Seo from "@/components/Seo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -197,10 +197,11 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <Head>
-        <title>Admin - Tableau de bord</title>
-        <meta name="description" content="Administration des rendez-vous" />
-      </Head>
+      <Seo
+        title="Admin - Tableau de bord"
+        description="Administration des rendez-vous"
+        noindex
+      />
 
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-6 py-10 space-y-6">
