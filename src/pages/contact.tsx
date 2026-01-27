@@ -82,7 +82,7 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: Phone, label: "Téléphone", value: "+32 2 886 06 14" },
-    { icon: Mail, label: "Email", value: "contact@closdusoleil.fr" },
+    { icon: Mail, label: "Email", value: "contact@leclosdusoleil.com" },
   ];
 
   return (
@@ -141,7 +141,7 @@ const Contact = () => {
                   <Phone className="w-7 h-7" />
                   <div className="text-left">
                     <div className="font-bold">Appelez-nous</div>
-                    <div className="text-primary-foreground/80 text-base">+33 1 23 45 67 89</div>
+                    <div className="text-primary-foreground/80 text-base">+32 2 886 06 14</div>
                   </div>
                   {/* Shine effect */}
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />

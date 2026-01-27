@@ -11,9 +11,8 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: MapPin, text: "123 Avenue du Soleil, Paris" },
-    { icon: Phone, text: "+33 1 23 45 67 89" },
-    { icon: Mail, text: "contact@closdusoleil.fr" },
+    { icon: Phone, text: "+32 2 886 06 14" },
+    { icon: Mail, text: "contact@leclosdusoleil.com" },
   ];
 
   return (

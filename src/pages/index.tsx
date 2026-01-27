@@ -37,7 +37,7 @@ const Index = () => {
     },
     {
       title: "Appeler",
-      subtitle: "+33 1 23 45 67 89",
+      subtitle: "+32 2 886 06 14",
       icon: Phone,
       to: "tel:+33123456789",
       isExternal: true,
