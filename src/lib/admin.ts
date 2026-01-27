@@ -5,8 +5,8 @@ import clientPromise from "@/lib/mongodb";
 import { hashPassword, verifyPassword } from "@/lib/security";
 import { normalizeEmail } from "@/lib/users";
 
-const ADMIN_SEED_EMAIL = "  ";
-const ADMIN_SEED_PASSWORD = "Admin@932!";
+const ADMIN_SEED_EMAIL = process.env.ADMIN_SEED_EMAIL ?? process.env.NEXT_PUBLIC_ADMIN_SEED_EMAIL ?? "";
+const ADMIN_SEED_PASSWORD = process.env.ADMIN_SEED_PASSWORD ?? process.env.NEXT_PUBLIC_ADMIN_SEED_PASSWORD ?? "";
 const OTP_TTL_MINUTES = 10;
 
 export type AdminAccount = {
@@ -59,9 +59,14 @@ const getAdminOtpCollection = async (): Promise<Collection<AdminOtp>> => {
   return collection;
 };
 
-export const ensureAdminSeed = async () => {
+export const ensureAdminSeed = async (): Promise<WithId<AdminAccount> | null> => {
+  const seedEmail = normalizeEmail(ADMIN_SEED_EMAIL);
+  if (!seedEmail || !ADMIN_SEED_PASSWORD) {
+    return null;
+  }
+
   const admins = await getAdminsCollection();
-  const existing = await admins.findOne({ email: normalizeEmail(ADMIN_SEED_EMAIL) });
+  const existing = await admins.findOne({ email: seedEmail });
 
   if (existing) {
     return existing;
@@ -70,7 +75,7 @@ export const ensureAdminSeed = async () => {
   const now = new Date();
   const passwordHash = await hashPassword(ADMIN_SEED_PASSWORD);
   const result = await admins.insertOne({
-    email: normalizeEmail(ADMIN_SEED_EMAIL),
+    email: seedEmail,
     passwordHash,
     status: "active",
     createdAt: now,
@@ -79,7 +84,7 @@ export const ensureAdminSeed = async () => {
 
   return {
     _id: result.insertedId,
-    email: normalizeEmail(ADMIN_SEED_EMAIL),
+    email: seedEmail,
     passwordHash,
     status: "active" as const,
     createdAt: now,
