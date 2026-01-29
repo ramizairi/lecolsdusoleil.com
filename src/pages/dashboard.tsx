@@ -115,9 +115,9 @@ const Dashboard = () => {
         noindex
       />
 
-      <div className="min-h-screen flex bg-background">
+      <div className="h-screen flex bg-background overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-72 bg-card border-r border-border shadow-soft flex flex-col">
+        <aside className="w-72 bg-card border-r border-border shadow-soft flex flex-col h-screen">
           <div className="p-6 border-b border-border">
             <Link href="/">
               <img src={logo.src} alt="Clos du Soleil" className="h-12 w-auto" />
@@ -152,9 +152,9 @@ const Dashboard = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col min-h-0">
           {/* Top Bar */}
-          <header className="h-20 bg-card border-b border-border flex items-center justify-between px-8">
+          <header className="h-20 bg-card border-b border-border flex items-center justify-between px-8 shrink-0">
             <div>
               <h1 className="font-serif text-accessible-2xl font-bold text-foreground">
                 {fullName ? `Bienvenue, ${fullName}` : "Bienvenue"}
@@ -176,7 +176,7 @@ const Dashboard = () => {
           </header>
 
           {/* Dashboard Content */}
-          <div className="flex-1 p-8 overflow-auto">
+          <div className="flex-1 p-8 overflow-y-auto">
             {activeTab === "overview" && (
               <div className="space-y-8">
                 {/* Stats Cards */}

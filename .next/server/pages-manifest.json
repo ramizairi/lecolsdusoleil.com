@@ -3,11 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/login": "pages/login.js",
-  "/": "pages/index.js",
   "/contact": "pages/contact.js",
-  "/api/contact": "pages/api/contact.js",
-  "/api/auth/login": "pages/api/auth/login.js",
-  "/dashboard": "pages/dashboard.js",
   "/api/me": "pages/api/me.js",
+  "/dashboard": "pages/dashboard.js",
   "/api/me/appointments": "pages/api/me/appointments.js"
 }
