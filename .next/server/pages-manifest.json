@@ -4,7 +4,5 @@
   "/_document": "pages/_document.js",
   "/login": "pages/login.js",
   "/contact": "pages/contact.js",
-  "/api/me": "pages/api/me.js",
-  "/dashboard": "pages/dashboard.js",
-  "/api/me/appointments": "pages/api/me/appointments.js"
+  "/dashboard": "pages/dashboard.js"
 }
