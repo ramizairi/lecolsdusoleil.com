@@ -1,5 +1,10 @@
 import nodemailer from "nodemailer";
-import { buildAdminOtpEmail, buildAppointmentStatusEmail, buildRendezvousEmail } from "@/lib/emails";
+import {
+  buildAdminOtpEmail,
+  buildAppointmentStatusEmail,
+  buildContactReservationNotificationEmail,
+  buildRendezvousEmail,
+} from "@/lib/emails";
 import { getMailerConfig } from "@/lib/env";
 
 type MailPayload = {
@@ -74,6 +79,28 @@ export const sendRendezvousEmail = async ({
 
 export const sendAdminOtpEmail = async ({ to, otp }: { to: string; otp: string }) => {
   const { subject, text, html } = buildAdminOtpEmail({ otp });
+  return sendMail({ to, subject, text, html });
+};
+
+export const sendContactReservationNotificationEmail = async ({
+  to,
+  name,
+  email,
+  phone,
+  message,
+}: {
+  to: string;
+  name: string;
+  email: string;
+  phone: string;
+  message?: string | null;
+}) => {
+  const { subject, text, html } = buildContactReservationNotificationEmail({
+    name,
+    email,
+    phone,
+    message,
+  });
   return sendMail({ to, subject, text, html });
 };
 

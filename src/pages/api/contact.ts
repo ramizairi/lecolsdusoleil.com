@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getClientIp, getCountryFromRequest, getErrorDetails, parseRequestBody } from "@/lib/api";
 import { contactRequestSchema, createAccountFromContact } from "@/lib/contact";
-import { sendRendezvousEmail } from "@/lib/mailer";
+import { sendContactReservationNotificationEmail, sendRendezvousEmail } from "@/lib/mailer";
 import { isMailerSoftFail } from "@/lib/env";
 import { buildLoginUrl } from "@/lib/urls";
 
@@ -24,6 +24,7 @@ type ApiResponse =
     };
 
 const getLoginUrl = (req: NextApiRequest) => buildLoginUrl(req);
+const CONTACT_NOTIFICATION_EMAIL = "closdusoleil2026@gmail.com";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) => {
   res.setHeader("Cache-Control", "no-store");
@@ -71,6 +72,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) =
 
     const loginUrl = getLoginUrl(req);
     let emailSent = false;
+
+    try {
+      await sendContactReservationNotificationEmail({
+        to: CONTACT_NOTIFICATION_EMAIL,
+        name,
+        email,
+        phone,
+        message: message ?? null,
+      });
+    } catch (error) {
+      if (!isMailerSoftFail()) {
+        throw error;
+      }
+      console.error("Contact notification mail soft-fail", error);
+    }
 
     if (result.isNewUser && result.password) {
       try {

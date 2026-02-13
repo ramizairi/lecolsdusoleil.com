@@ -1,8 +1,9 @@
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
 import Seo from "@/components/Seo";
+import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,13 @@ const Services = () => {
       description: "Repas équilibrés et conviviaux : préparés avec soin et adaptés aux besoins de chacun, avec la formule all inclusive soft.",
       color: "from-amber-500 to-orange-500",
     },
+    {
+      icon: BedDouble,
+      title: "CONFORT ET PROPRETÉ",
+      description:
+        "L’hébergement en chambre moderne et spacieuse avec terrasse ou balcon privatif.\nPassage quotidien d’une femme de chambre.\nLa blanchisserie : linge de maison fourni et vêtements personnels entretenus avec soin.",
+      color: "from-indigo-500 to-blue-500",
+    },
   ];
 
   const handleCall = () => {
@@ -47,7 +55,7 @@ const Services = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/33123456789?text=Bonjour, je souhaite en savoir plus sur vos services.", "_blank");
+    window.open("https://wa.me/0032465200310?text=Bonjour, je souhaite en savoir plus sur vos services.", "_blank");
   };
 
   return (
@@ -72,10 +80,7 @@ const Services = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm shadow-soft">
-                  <Sparkles className="w-4 h-4" />
-                  Nos Services
-                </span>
+                <Eyebrow label="Nos Services" icon={<Sparkles className="w-4 h-4" />} className="text-lg" />
               </div>
               
               <h1 
@@ -118,7 +123,7 @@ const Services = () => {
                       <CardTitle className="text-xl font-serif">{service.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="relative z-10">
-                      <CardDescription className="text-base text-muted-foreground leading-relaxed">
+                      <CardDescription className="text-[1.06rem] md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
                         {service.description}
                       </CardDescription>
                     </CardContent>
@@ -140,10 +145,7 @@ const Services = () => {
 
             <div className="container mx-auto px-6 relative z-10">
               <div className="text-center max-w-3xl mx-auto">
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6 shadow-soft">
-                  <Sun className="w-4 h-4" />
-                  Qui sommes-nous ?
-                </span>
+                <Eyebrow label="Qui sommes-nous ?" icon={<Sun className="w-4 h-4" />} className="mb-6" />
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
                   Le Clos du Soleil, une résidence dédiée au bien-être
                 </h2>
@@ -160,10 +162,7 @@ const Services = () => {
             
             <div className="container mx-auto px-6 relative z-10">
               <div className="text-center max-w-3xl mx-auto">
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6 shadow-soft">
-                  <Sun className="w-4 h-4" />
-                  Pourquoi nous choisir ?
-                </span>
+                <Eyebrow label="Pourquoi nous choisir ?" icon={<Sun className="w-4 h-4" />} className="mb-6" />
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
                   La Tunisie, un cadre de vie idéal
                 </h2>
@@ -209,10 +208,11 @@ const Services = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-amber-300 border border-amber-400/30 rounded-full bg-amber-400/10 backdrop-blur-sm">
-                  <Phone className="w-4 h-4" />
-                  Contactez-nous
-                </span>
+                <Eyebrow
+                  label="Contactez-nous"
+                  icon={<Phone className="w-4 h-4" />}
+                  className="text-amber-300 border-amber-400/30 bg-amber-400/10 shadow-none"
+                />
               </div>
               
               <h2 

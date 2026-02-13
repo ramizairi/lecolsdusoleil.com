@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import logo from "@/assets/logo.png";
-import ThemeToggle from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
 
 interface PageHeaderProps {
@@ -52,12 +51,8 @@ const PageHeader = ({ showBack = true, variant = "light" }: PageHeaderProps) => 
             </Link>
           </div>
 
-          {/* Right - Theme toggle and Login */}
+          {/* Right - Login */}
           <div className="flex items-center gap-3">
-            <div className={`${isDark ? "" : "bg-secondary/50 rounded-full p-1"}`}>
-              <ThemeToggle />
-            </div>
-            
             <Button
               asChild
               className={`relative overflow-hidden rounded-full px-6 py-2 transition-all duration-300 group ${

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Settings, Bell, Lock, Globe, Moon, Sun, Shield, Eye, EyeOff, Save } from "lucide-react";
+import { Settings, Bell, Lock, Globe, Shield, Eye, EyeOff, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -362,35 +362,6 @@ const SettingsSection = () => {
                 <SelectItem value="fr">Français</SelectItem>
                 <SelectItem value="en">English</SelectItem>
                 <SelectItem value="es">Español</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex items-center justify-between p-4 bg-secondary rounded-xl">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-card flex items-center justify-center border border-border">
-                {preferences.theme === "dark" ? (
-                  <Moon className="w-6 h-6 text-primary" />
-                ) : (
-                  <Sun className="w-6 h-6 text-primary" />
-                )}
-              </div>
-              <div>
-                <p className="font-semibold text-foreground">Thème</p>
-                <p className="text-sm text-muted-foreground">Mode clair ou sombre</p>
-              </div>
-            </div>
-            <Select
-              value={preferences.theme}
-              onValueChange={(value) => setPreferences({ ...preferences, theme: value })}
-            >
-              <SelectTrigger className="w-40" disabled={isLoading}>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">Clair</SelectItem>
-                <SelectItem value="dark">Sombre</SelectItem>
-                <SelectItem value="system">Système</SelectItem>
               </SelectContent>
             </Select>
           </div>

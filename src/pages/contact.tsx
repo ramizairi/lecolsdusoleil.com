@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Shield, Heart, Users, 
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Seo from "@/components/Seo";
+import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,7 +68,7 @@ const Contact = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/3228860614?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
+    window.open("https://wa.me/0032465200310?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
   };
 
   const handleCall = () => {
@@ -105,10 +106,11 @@ const Contact = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm">
-                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                  Contact
-                </span>
+                <Eyebrow
+                  label="Contact"
+                  icon={<span className="w-2 h-2 bg-primary rounded-full animate-pulse" />}
+                  className="px-4 py-2 shadow-none"
+                />
               </div>
               
               <h1 
@@ -267,7 +269,7 @@ const Contact = () => {
                         ) : (
                           <>
                             <Send className="w-5 h-5" />
-                            Demander un rappel
+                            Envoyer
                           </>
                         )}
                       </Button>

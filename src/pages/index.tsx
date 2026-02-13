@@ -5,9 +5,9 @@ import { z } from "zod";
 import logo from "@/assets/logo.png";
 import heroImage from "@/assets/hero-luxury.jpg";
 import Seo from "@/components/Seo";
+import Eyebrow from "@/components/Eyebrow";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import ThemeToggle from "@/components/ThemeToggle";
 import { useToast } from "@/hooks/use-toast";
 
 const emailSchema = z.string().trim().email({ message: "Veuillez entrer une adresse email valide" }).max(255);
@@ -51,7 +51,7 @@ const Index = () => {
 
   const handleWhatsApp = () => {
     window.open(
-      "https://wa.me/33123456789?text=Bonjour, je souhaite avoir des informations sur vos services.",
+      "https://wa.me/0032465200310?text=Bonjour, je souhaite avoir des informations sur vos services.",
       "_blank",
     );
   };
@@ -153,10 +153,8 @@ const Index = () => {
             </div>
           </Link>
 
-          {/* Right side - Theme toggle and Login */}
+          {/* Right side - Login */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
-
             <Button
               asChild
               variant="ghost"
@@ -181,22 +179,23 @@ const Index = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-[0.2em] uppercase text-amber-700 border border-amber-400/50 rounded-full bg-white/80 backdrop-blur-sm shadow-sm">
-                  <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
-                  Séjours pour Seniors
-                </span>
+                <Eyebrow
+                  label="Séjours pour Seniors"
+                  icon={<span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />}
+                  className="px-4 py-2 text-amber-700 border-amber-400/50 bg-white/80 shadow-sm"
+                />
               </div>
 
               {/* Main Headline */}
               <h1
-                className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-warm-brown leading-[0.95] tracking-tight animate-fade-up opacity-0"
+                className="font-serif text-4xl md:text-7xl lg:text-8xl font-bold text-warm-brown leading-[0.95] tracking-tight animate-fade-up opacity-0"
                 style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
-                L'excellence au
+                La douceur du soleil
                 <br />
                 <span className="relative inline-block">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-500 to-rose-500">
-                    service du cœur
+                    la chaleur humaine.
                   </span>
                   {/* Decorative underline with animation */}
                   <svg className="absolute -bottom-2 left-0 w-full h-4" viewBox="0 0 300 12" preserveAspectRatio="none">
@@ -222,7 +221,7 @@ const Index = () => {
 
               {/* Subtitle */}
               <p
-                className="text-lg md:text-xl text-foreground/70 max-w-xl leading-relaxed animate-fade-up opacity-0"
+                className="text-xl md:text-2xl text-foreground/75 max-w-2xl leading-relaxed tracking-[0.005em] animate-fade-up opacity-0"
                 style={{ animationDelay: "350ms", animationFillMode: "forwards" }}
               >
                 Accompagnement bienveillant et soins personnalisés pour vos proches, partout en Europe.
@@ -259,11 +258,11 @@ const Index = () => {
               className="mt-16 md:mt-24 animate-fade-up opacity-0"
               style={{ animationDelay: "600ms", animationFillMode: "forwards" }}
             >
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {navigationItems.map((item, index) => {
                   const CardContent = (
                     <div
-                      className="group relative overflow-hidden backdrop-blur-xl bg-white/80 border border-amber-200/50 hover:border-amber-300 hover:bg-white/95 rounded-3xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-200/40 flex flex-col justify-between h-[160px] md:h-[180px] shadow-lg shadow-amber-100/30"
+                      className="group relative overflow-hidden backdrop-blur-xl bg-white/80 border border-amber-200/50 hover:border-amber-300 hover:bg-white/95 rounded-3xl p-7 md:p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-200/40 flex flex-col justify-between h-[190px] md:h-[230px] shadow-lg shadow-amber-100/30"
                       style={{ animationDelay: `${600 + index * 100}ms` }}
                     >
                       {/* Gradient overlay on hover */}
@@ -280,23 +279,23 @@ const Index = () => {
                       {/* Top section with icon */}
                       <div className="relative z-10 flex items-start justify-between">
                         <div
-                          className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${item.accent} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                          className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl ${item.accent} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                         >
-                          <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.5} />
+                          <item.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
                         </div>
 
                         {/* Arrow with rotate effect */}
-                        <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-all duration-300 group-hover:rotate-[-45deg]">
-                          <ArrowRight className="w-5 h-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
+                        <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-all duration-300 group-hover:rotate-[-45deg]">
+                          <ArrowRight className="w-6 h-6 text-amber-600 group-hover:text-amber-700 transition-colors" />
                         </div>
                       </div>
 
                       {/* Text section */}
-                      <div className="relative z-10 space-y-1">
-                        <h2 className="font-serif font-bold text-foreground text-xl md:text-2xl leading-tight">
+                      <div className="relative z-10 space-y-2">
+                        <h2 className="font-serif font-bold text-foreground text-2xl md:text-3xl leading-tight">
                           {item.title}
                         </h2>
-                        <p className="text-muted-foreground text-sm md:text-base">{item.subtitle}</p>
+                        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">{item.subtitle}</p>
                       </div>
 
                       {/* Bottom accent line */}
@@ -330,7 +329,7 @@ const Index = () => {
             <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-3">
               Restez informé
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
               Recevez nos actualités et offres exclusives.
             </p>
             
@@ -366,47 +365,46 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Bottom Stats Bar */}
-        <footer
-          className="relative z-10 border-t border-amber-200/50 backdrop-blur-sm bg-white/70 animate-fade-up opacity-0"
+        {/* Stats section */}
+        <section
+          className="relative z-10 w-full py-12 md:py-16 px-6 md:px-12 animate-fade-up opacity-0"
           style={{ animationDelay: "800ms", animationFillMode: "forwards" }}
         >
-          <div className="max-w-6xl mx-auto px-6 md:px-12 py-6">
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              <div className="flex items-center gap-8 md:gap-12">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-                    <HeartHandshake className="w-5 h-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold text-foreground">500+</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Familles</div>
-                  </div>
-                </div>
-                <div className="w-px h-10 bg-amber-200" />
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold text-foreground">15+</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Années</div>
-                  </div>
-                </div>
-                <div className="w-px h-10 bg-amber-200 hidden md:block" />
-                <div className="hidden md:flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold text-foreground">24/7</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Disponible</div>
-                  </div>
-                </div>
+          <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+            {[
+              {
+                value: "5+",
+                label: "Années d'expérience",
+              },
+              {
+                value: "24/7",
+                label: "Équipe présente",
+              },
+              {
+                value: "4★",
+                label: "Standing hôtelier",
+              },
+              {
+                value: "300",
+                label: "Jours en soleil",
+              },
+            ].map((stat, index) => (
+              <div
+                key={stat.label}
+                className="group rounded-2xl border border-amber-200/80 bg-white/75 backdrop-blur-xl min-h-[130px] md:min-h-[160px] px-3 py-5 md:px-6 md:py-7 flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-200/30 hover:border-amber-300"
+                style={{ animationDelay: `${850 + index * 80}ms` }}
+              >
+                <p className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-none text-foreground">{stat.value}</p>
+                <p className="mt-2 text-xs sm:text-sm md:text-base font-semibold text-foreground/85 leading-tight">{stat.label}</p>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="text-muted-foreground text-sm">© {new Date().getFullYear()} Clos du Soleil</div>
-            </div>
+        {/* Small Footer */}
+        <footer className="relative z-10 border-t border-amber-200/50 bg-white/60 backdrop-blur-sm">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Clos du Soleil
           </div>
         </footer>
       </div>

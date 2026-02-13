@@ -6,6 +6,14 @@ type EmailTemplate = {
   html: string;
 };
 
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
 export const buildRendezvousEmail = ({
   name,
   email,
@@ -69,6 +77,66 @@ export const buildRendezvousEmail = ({
   `;
 
   return { subject, text, html };
+};
+
+export const buildContactReservationNotificationEmail = ({
+  name,
+  email,
+  phone,
+  message,
+}: {
+  name: string;
+  email: string;
+  phone: string;
+  message?: string | null;
+}): EmailTemplate => {
+  const subject = "Nouvelle reservation depuis /contact";
+
+  const lines = [
+    "Nouvelle demande de reservation recue.",
+    "",
+    `Nom : ${name}`,
+    `Email : ${email}`,
+    `Telephone : ${phone}`,
+  ];
+
+  if (message) {
+    lines.push("", "Message :", message);
+  }
+
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone);
+  const safeMessage = message ? escapeHtml(message).replaceAll("\n", "<br/>") : null;
+
+  const html = `
+  <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background:#f7f4ef; padding:32px;">
+    <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.08);">
+      <div style="background:linear-gradient(90deg,#f59e0b,#f97316,#fb7185); padding:18px 24px; color:#ffffff;">
+        <h1 style="margin:0; font-size:20px;">Clos du Soleil</h1>
+        <p style="margin:6px 0 0; font-size:13px; opacity:0.9;">Nouvelle reservation</p>
+      </div>
+      <div style="padding:24px; color:#2d241b;">
+        <p style="margin:0 0 12px;">Une nouvelle demande de reservation a ete envoyee depuis le formulaire contact.</p>
+        <div style="background:#fff7ed; border:1px solid #f7d7b8; border-radius:12px; padding:16px;">
+          <p style="margin:0 0 8px;">Nom : <strong>${safeName}</strong></p>
+          <p style="margin:0 0 8px;">Email : <strong>${safeEmail}</strong></p>
+          <p style="margin:0;">Telephone : <strong>${safePhone}</strong></p>
+        </div>
+        ${
+          safeMessage
+            ? `<div style="margin-top:16px;">
+          <p style="margin:0 0 8px; font-weight:600;">Message :</p>
+          <p style="margin:0; line-height:1.6;">${safeMessage}</p>
+        </div>`
+            : ""
+        }
+      </div>
+    </div>
+  </div>
+  `;
+
+  return { subject, text: lines.join("\n"), html };
 };
 
 export const buildAdminOtpEmail = ({ otp }: { otp: string }): EmailTemplate => {

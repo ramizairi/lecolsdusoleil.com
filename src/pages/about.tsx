@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
 import Seo from "@/components/Seo";
+import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -59,10 +60,7 @@ const About = () => {
                 className="animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm shadow-soft">
-                  <Sparkles className="w-4 h-4" />
-                  Qui Sommes-Nous
-                </span>
+                <Eyebrow label="Qui Sommes-Nous" icon={<Sparkles className="w-4 h-4" />} />
               </div>
               
               <h1 
@@ -126,10 +124,7 @@ const About = () => {
             
             <div className="container mx-auto px-6 relative z-10">
               <div className="text-center mb-16">
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 mb-6 shadow-soft">
-                  <Star className="w-4 h-4" />
-                  Ce qui nous définit
-                </span>
+                <Eyebrow label="Ce qui nous définit" icon={<Star className="w-4 h-4" />} className="mb-6" />
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
                   Nos Valeurs
                 </h2>
