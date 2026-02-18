@@ -1,4 +1,4 @@
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, TrendingUp } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ctaBg from "@/assets/cta-bg-sunset.jpg";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const Services = () => {
   const services = [
@@ -63,15 +62,6 @@ const Services = () => {
     },
   ];
 
-  const chartData = [
-    { month: "Jan", satisfaction: 92, residents: 28 },
-    { month: "Fév", satisfaction: 95, residents: 32 },
-    { month: "Mar", satisfaction: 93, residents: 35 },
-    { month: "Avr", satisfaction: 97, residents: 38 },
-    { month: "Mai", satisfaction: 96, residents: 42 },
-    { month: "Juin", satisfaction: 98, residents: 45 },
-  ];
-
   const handleCall = () => {
     window.location.href = "tel:+3228860614";
   };
@@ -122,131 +112,46 @@ const Services = () => {
             </div>
           </section>
 
-          {/* Services Sections - Alternating Layout */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6 space-y-24">
+          {/* Services Sections - Clean Alternating Layout */}
+          <section className="py-24 relative">
+            <div className="container mx-auto px-6 space-y-20">
               {services.map((service, index) => (
                 <div
                   key={service.title}
                   className={`flex flex-col ${
                     service.imagePosition === "left"
-                      ? "lg:flex-row"
-                      : "lg:flex-row-reverse"
-                  } gap-12 items-center animate-fade-up opacity-0`}
+                      ? "md:flex-row"
+                      : "md:flex-row-reverse"
+                  } gap-12 md:gap-16 items-center md:items-stretch animate-fade-up opacity-0`}
                   style={{
-                    animationDelay: `${200 + index * 150}ms`,
+                    animationDelay: `${150 + index * 100}ms`,
                     animationFillMode: "forwards",
                   }}
                 >
-                  {/* Image with frame effect */}
-                  <div className="flex-1 relative group">
-                    <div className="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                    <div className={`relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white/80 backdrop-blur-sm bg-gradient-to-br ${service.color} p-1`}>
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-80 md:h-96 object-cover rounded-xl group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                    {/* Decorative corner element */}
-                    <div className={`absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br ${service.color} rounded-full opacity-20 blur-2xl`} />
+                  {/* Image - Clean and Simple */}
+                  <div className="flex-1">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-72 md:h-96 object-cover rounded-lg"
+                    />
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 space-y-6">
-                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                      <service.icon className="w-10 h-10 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
-                        {service.title}
-                      </h3>
-                      <p className="text-lg md:text-xl text-muted-foreground leading-relaxed whitespace-pre-line">
-                        {service.description}
-                      </p>
-                    </div>
-                    {/* Accent line */}
-                    <div className={`w-20 h-1 bg-gradient-to-r ${service.color} rounded-full`} />
+                  <div className="flex-1 space-y-4">
+                    <h3 className="text-3xl md:text-4xl font-serif font-bold text-foreground leading-tight">
+                      {service.title}
+                    </h3>
+                    <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Statistics Chart Section */}
-          <section className="py-24 bg-card/60 backdrop-blur-sm border-y border-border/50 relative">
-            <SunEffect variant="corner" className="inset-0 z-0" />
-            
-            <div className="container mx-auto px-6 relative z-10">
-              <div className="text-center mb-16 animate-fade-up opacity-0" style={{ animationDelay: "100ms", animationFillMode: "forwards" }}>
-                <Eyebrow label="Notre Évolution" icon={<TrendingUp className="w-4 h-4" />} className="mb-6" />
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  Nos Résultats Parlent Pour Nous
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                  Découvrez notre progression en termes de satisfaction client et d'accueil de nouveaux résidents
-                </p>
-              </div>
 
-              <div className="bg-background/50 rounded-3xl p-8 md:p-12 border border-border/50 backdrop-blur-sm animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
-                <ResponsiveContainer width="100%" height={400}>
-                  <LineChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                    <XAxis dataKey="month" stroke="#9ca3af" />
-                    <YAxis stroke="#9ca3af" />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: "#1f2937",
-                        border: "1px solid #374151",
-                        borderRadius: "8px",
-                        color: "#fff",
-                      }}
-                    />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="satisfaction"
-                      stroke="#f59e0b"
-                      strokeWidth={3}
-                      dot={{ fill: "#f59e0b", r: 6 }}
-                      activeDot={{ r: 8 }}
-                      name="Satisfaction des Résidents (%)"
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="residents"
-                      stroke="#8b5cf6"
-                      strokeWidth={3}
-                      dot={{ fill: "#8b5cf6", r: 6 }}
-                      activeDot={{ r: 8 }}
-                      name="Nombre de Résidents"
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6 mt-16">
-                {[
-                  { label: "Taux de Satisfaction", value: "98%", icon: "⭐" },
-                  { label: "Résidents Heureux", value: "45+", icon: "👥" },
-                  { label: "Services Offerts", value: "6+", icon: "🎯" },
-                ].map((stat, idx) => (
-                  <Card
-                    key={stat.label}
-                    className="text-center p-6 animate-fade-up opacity-0 border-border/50 bg-background/50 backdrop-blur-sm hover:shadow-glow transition-all duration-500"
-                    style={{
-                      animationDelay: `${300 + idx * 100}ms`,
-                      animationFillMode: "forwards",
-                    }}
-                  >
-                    <div className="text-4xl mb-3">{stat.icon}</div>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">{stat.value}</h3>
-                    <p className="text-muted-foreground">{stat.label}</p>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
 
           {/* Qui sommes-nous Section */}
           <section className="py-20 relative">
