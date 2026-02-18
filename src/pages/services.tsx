@@ -1,4 +1,4 @@
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, TrendingUp } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ctaBg from "@/assets/cta-bg-sunset.jpg";
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const Services = () => {
   const services = [
@@ -16,38 +17,59 @@ const Services = () => {
       title: "Accompagnement quotidien et personnalisé",
       description: "Accompagnement quotidien et personnalisé : aide aux gestes de la vie courante avec respect et discrétion.",
       color: "from-rose-500 to-pink-500",
+      image: "/service-accompagnement.jpg",
+      imagePosition: "left",
     },
     {
       icon: Plane,
       title: "Accueil et transport individuel",
       description: "Accueil et transport individuel depuis l'aéroport, avec une prise en charge adaptée aux personnes à mobilité réduite.",
       color: "from-sky-500 to-blue-500",
+      image: "/service-transport.jpg",
+      imagePosition: "right",
     },
     {
       icon: Stethoscope,
       title: "Soins médicaux et paramédicaux",
       description: "Présence d'une équipe compétente composée d'infirmier(ère)s et d'un kinésithérapeute, proposant des séances de rééducation et de maintien de la mobilité adaptées aux besoins de chacun.",
       color: "from-emerald-500 to-teal-500",
+      image: "/service-medical.jpg",
+      imagePosition: "left",
     },
     {
       icon: Palette,
       title: "Activités et loisirs",
       description: "Ateliers créatifs, moments de détente, sorties culturelles et sociales pour stimuler le corps et l'esprit.",
       color: "from-violet-500 to-purple-500",
+      image: "/service-activities.jpg",
+      imagePosition: "right",
     },
     {
       icon: Utensils,
       title: "Repas équilibrés et conviviaux",
       description: "Repas équilibrés et conviviaux : préparés avec soin et adaptés aux besoins de chacun, avec la formule all inclusive soft.",
       color: "from-amber-500 to-orange-500",
+      image: "/service-meals.jpg",
+      imagePosition: "left",
     },
     {
       icon: BedDouble,
       title: "CONFORT ET PROPRETÉ",
       description:
-        "L’hébergement en chambre moderne et spacieuse avec terrasse ou balcon privatif.\nPassage quotidien d’une femme de chambre.\nLa blanchisserie : linge de maison fourni et vêtements personnels entretenus avec soin.",
+        "L'hébergement en chambre moderne et spacieuse avec terrasse ou balcon privatif.\nPassage quotidien d'une femme de chambre.\nLa blanchisserie : linge de maison fourni et vêtements personnels entretenus avec soin.",
       color: "from-indigo-500 to-blue-500",
+      image: "/service-comfort.jpg",
+      imagePosition: "right",
     },
+  ];
+
+  const chartData = [
+    { month: "Jan", satisfaction: 92, residents: 28 },
+    { month: "Fév", satisfaction: 95, residents: 32 },
+    { month: "Mar", satisfaction: 93, residents: 35 },
+    { month: "Avr", satisfaction: 97, residents: 38 },
+    { month: "Mai", satisfaction: 96, residents: 42 },
+    { month: "Juin", satisfaction: 98, residents: 45 },
   ];
 
   const handleCall = () => {
@@ -100,42 +122,129 @@ const Services = () => {
             </div>
           </section>
 
-          {/* Services Grid */}
-          <section className="py-16 bg-card/60 backdrop-blur-sm border-y border-border/50 relative">
-            <div className="container mx-auto px-6">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                {services.map((service, index) => (
-                  <Card 
-                    key={service.title}
-                    className="group relative overflow-hidden hover:shadow-glow transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 animate-fade-up opacity-0 border-2 border-border/50 hover:border-primary/30 bg-card backdrop-blur-sm"
-                    style={{ animationDelay: `${200 + index * 100}ms`, animationFillMode: "forwards" }}
-                  >
-                    {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 bg-gradient-to-br ${service.color}`} />
-                    
-                    {/* Floating sun decoration */}
-                    <div className="absolute -top-16 -right-16 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 group-hover:scale-150 transition-all duration-700" />
-                    
-                    <CardHeader className="pb-3 relative z-10">
-                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                        <service.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <CardTitle className="text-xl font-serif">{service.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <CardDescription className="text-[1.06rem] md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
+          {/* Services Sections - Alternating Layout */}
+          <section className="py-20 relative">
+            <div className="container mx-auto px-6 space-y-24">
+              {services.map((service, index) => (
+                <div
+                  key={service.title}
+                  className={`flex flex-col ${
+                    service.imagePosition === "left"
+                      ? "lg:flex-row"
+                      : "lg:flex-row-reverse"
+                  } gap-12 items-center animate-fade-up opacity-0`}
+                  style={{
+                    animationDelay: `${200 + index * 150}ms`,
+                    animationFillMode: "forwards",
+                  }}
+                >
+                  {/* Image with frame effect */}
+                  <div className="flex-1 relative group">
+                    <div className="absolute -inset-2 bg-gradient-to-br from-amber-200 to-orange-200 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                    <div className={`relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white/80 backdrop-blur-sm bg-gradient-to-br ${service.color} p-1`}>
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-80 md:h-96 object-cover rounded-xl group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                    {/* Decorative corner element */}
+                    <div className={`absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br ${service.color} rounded-full opacity-20 blur-2xl`} />
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 space-y-6">
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                      <service.icon className="w-10 h-10 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
+                        {service.title}
+                      </h3>
+                      <p className="text-lg md:text-xl text-muted-foreground leading-relaxed whitespace-pre-line">
                         {service.description}
-                      </CardDescription>
-                    </CardContent>
-                    
-                    {/* Bottom accent line */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${service.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+                      </p>
+                    </div>
+                    {/* Accent line */}
+                    <div className={`w-20 h-1 bg-gradient-to-r ${service.color} rounded-full`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Statistics Chart Section */}
+          <section className="py-24 bg-card/60 backdrop-blur-sm border-y border-border/50 relative">
+            <SunEffect variant="corner" className="inset-0 z-0" />
+            
+            <div className="container mx-auto px-6 relative z-10">
+              <div className="text-center mb-16 animate-fade-up opacity-0" style={{ animationDelay: "100ms", animationFillMode: "forwards" }}>
+                <Eyebrow label="Notre Évolution" icon={<TrendingUp className="w-4 h-4" />} className="mb-6" />
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  Nos Résultats Parlent Pour Nous
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  Découvrez notre progression en termes de satisfaction client et d'accueil de nouveaux résidents
+                </p>
+              </div>
+
+              <div className="bg-background/50 rounded-3xl p-8 md:p-12 border border-border/50 backdrop-blur-sm animate-fade-up opacity-0" style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
+                <ResponsiveContainer width="100%" height={400}>
+                  <LineChart data={chartData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="month" stroke="#9ca3af" />
+                    <YAxis stroke="#9ca3af" />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1f2937",
+                        border: "1px solid #374151",
+                        borderRadius: "8px",
+                        color: "#fff",
+                      }}
+                    />
+                    <Legend />
+                    <Line
+                      type="monotone"
+                      dataKey="satisfaction"
+                      stroke="#f59e0b"
+                      strokeWidth={3}
+                      dot={{ fill: "#f59e0b", r: 6 }}
+                      activeDot={{ r: 8 }}
+                      name="Satisfaction des Résidents (%)"
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="residents"
+                      stroke="#8b5cf6"
+                      strokeWidth={3}
+                      dot={{ fill: "#8b5cf6", r: 6 }}
+                      activeDot={{ r: 8 }}
+                      name="Nombre de Résidents"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6 mt-16">
+                {[
+                  { label: "Taux de Satisfaction", value: "98%", icon: "⭐" },
+                  { label: "Résidents Heureux", value: "45+", icon: "👥" },
+                  { label: "Services Offerts", value: "6+", icon: "🎯" },
+                ].map((stat, idx) => (
+                  <Card
+                    key={stat.label}
+                    className="text-center p-6 animate-fade-up opacity-0 border-border/50 bg-background/50 backdrop-blur-sm hover:shadow-glow transition-all duration-500"
+                    style={{
+                      animationDelay: `${300 + idx * 100}ms`,
+                      animationFillMode: "forwards",
+                    }}
+                  >
+                    <div className="text-4xl mb-3">{stat.icon}</div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">{stat.value}</h3>
+                    <p className="text-muted-foreground">{stat.label}</p>
                   </Card>
                 ))}
               </div>
-              <p className="text-center text-muted-foreground text-lg max-w-3xl mx-auto mt-10">
-                Chaque service est pensé pour offrir confort, sécurité et plaisir de vivre, tout en respectant le rythme et les envies de nos résidents.
-              </p>
             </div>
           </section>
 
