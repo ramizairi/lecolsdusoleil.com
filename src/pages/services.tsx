@@ -1,4 +1,4 @@
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, Check } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
@@ -175,18 +175,34 @@ const Services = () => {
             <SunEffect variant="subtle" className="inset-0" />
             
             <div className="container mx-auto px-6 relative z-10">
-              <div className="text-center max-w-3xl mx-auto">
+              <div className="text-center max-w-4xl mx-auto">
                 <Eyebrow label="Pourquoi nous choisir ?" icon={<Sun className="w-4 h-4" />} className="mb-6" />
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-8">
                   La Tunisie, un cadre de vie idéal
                 </h2>
-                <h3 className="font-serif text-3xl md:text-lg font-bold text-amber-600 uppercase mb-6">
-                  Le coût en Tunisie est moins cher de <span className="text-2xl">40%</span> qu'en Europe
-                </h3>
-                <div className="text-lg text-muted-foreground  leading-relaxed space-y-3">
-                  <p>La Tunisie, c’est la sécurité, le soleil, la mer et un climat agréable.</p>
-                  <p>C’est aussi une alimentation fraîche et équilibrée.</p>
-                  <p>Au Clos du Soleil, nous offrons à chaque résident une attention personnalisée et un cadre de vie apaisant.</p>
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-xl p-8 md:p-10 border border-amber-200/50 dark:border-amber-800/30 mb-10">
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-amber-700 dark:text-amber-300 mb-3">
+                    40% moins cher qu'en Europe
+                  </h3>
+                  <p className="text-amber-600 dark:text-amber-200 font-medium">
+                    Un coût de vie et d'hébergement significativement réduit pour un même niveau de qualité
+                  </p>
+                </div>
+                <div className="grid md:grid-cols-1 gap-4 text-left">
+                  {[
+                    "La Tunisie, c'est la sécurité, le soleil, la mer et un climat agréable",
+                    "Une alimentation fraîche et équilibrée toute l'année",
+                    "Une attention personnalisée et un cadre de vie apaisant au Clos du Soleil",
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 transition-colors duration-300">
+                      <div className="flex-shrink-0 mt-1">
+                        <Check className="w-6 h-6 text-amber-600 dark:text-amber-400 font-bold" />
+                      </div>
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
