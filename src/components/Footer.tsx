@@ -22,7 +22,7 @@ const Footer = () => {
           <div className="space-y-4">
             <img src={logo.src} alt="Clos du Soleil" className="h-12 w-auto" />
             <p className="text-accessible-base text-muted-foreground max-w-xs">
-              Prendre soin de nos aînés avec dignité, compassion et excellence depuis plus de 20 ans.
+              Séjour de qualité dans une résidence-hôtel pour les personnes âgées en Tunisie, en bord de mer, située dans une ville touristique, avec services personnalisés et assistance médicale.
             </p>
           </div>
 

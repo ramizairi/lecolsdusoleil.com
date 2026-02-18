@@ -51,11 +51,11 @@ const Services = () => {
   ];
 
   const handleCall = () => {
-    window.location.href = "tel:+33123456789";
+    window.location.href = "tel:+3228860614";
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/0032465200310?text=Bonjour, je souhaite en savoir plus sur vos services.", "_blank");
+    window.open("https://wa.me/32465200310?text=Bonjour, je souhaite en savoir plus sur vos services.", "_blank");
   };
 
   return (
@@ -166,7 +166,10 @@ const Services = () => {
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
                   La Tunisie, un cadre de vie idéal
                 </h2>
-                <div className="text-lg text-muted-foreground leading-relaxed space-y-3">
+                <h3 className="font-serif text-3xl md:text-lg font-bold text-amber-600 uppercase mb-6">
+                  Le coût en Tunisie est moins cher de <span className="text-2xl">40%</span> qu'en Europe
+                </h3>
+                <div className="text-lg text-muted-foreground  leading-relaxed space-y-3">
                   <p>La Tunisie, c’est la sécurité, le soleil, la mer et un climat agréable.</p>
                   <p>C’est aussi une alimentation fraîche et équilibrée.</p>
                   <p>Au Clos du Soleil, nous offrons à chaque résident une attention personnalisée et un cadre de vie apaisant.</p>

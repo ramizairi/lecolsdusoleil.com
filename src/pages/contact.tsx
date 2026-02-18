@@ -68,7 +68,7 @@ const Contact = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/0032465200310?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
+    window.open("https://wa.me/32465200310?text=Bonjour, je souhaite prendre rendez-vous.", "_blank");
   };
 
   const handleCall = () => {
@@ -210,7 +210,7 @@ const Contact = () => {
                         <Input
                           id="name"
                           name="name"
-                          placeholder="Jean Dupont"
+                          placeholder=""
                           value={formData.name}
                           onChange={handleChange}
                           required
@@ -224,7 +224,7 @@ const Contact = () => {
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="jean.dupont@email.com"
+                          placeholder=""
                           value={formData.email}
                           onChange={handleChange}
                           required
@@ -238,7 +238,7 @@ const Contact = () => {
                           id="phone"
                           name="phone"
                           type="tel"
-                          placeholder="+33 6 12 34 56 78"
+                          placeholder=""
                           value={formData.phone}
                           onChange={handleChange}
                           required

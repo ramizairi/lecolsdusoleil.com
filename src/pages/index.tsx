@@ -51,7 +51,7 @@ const Index = () => {
 
   const handleWhatsApp = () => {
     window.open(
-      "https://wa.me/0032465200310?text=Bonjour, je souhaite avoir des informations sur vos services.",
+      "https://wa.me/32465200310?text=Bonjour, je souhaite avoir des informations sur vos services.",
       "_blank",
     );
   };
@@ -122,11 +122,16 @@ const Index = () => {
 
       <div className="relative min-h-screen flex flex-col overflow-x-hidden">
         {/* Light Luminous Background */}
-        <div className="absolute inset-0 z-0">
-          <img src={heroImage.src} alt="" className="w-full h-full object-cover object-top" />
+        <div className="fixed inset-2 z-0 pointer-events-none">
+          <img
+            src={heroImage.src}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "center -300px" }}
+          />
           {/* Light overlay with warm cream tones */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-amber-50/70 to-orange-50/80" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-amber-100/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-amber-50/70 to-orange-50/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-amber-100/40" />
 
           {/* Warm golden accent at bottom */}
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-amber-100/50 to-transparent" />
@@ -134,7 +139,7 @@ const Index = () => {
 
         {/* Subtle warm vignette */}
         <div
-          className="absolute inset-0 z-[1] pointer-events-none"
+          className="fixed inset-0 z-[1] pointer-events-none"
           style={{ boxShadow: "inset 0 0 150px rgba(255,248,240,0.4)" }}
         />
 
@@ -224,7 +229,7 @@ const Index = () => {
                 className="text-xl md:text-2xl text-foreground/75 max-w-2xl leading-relaxed tracking-[0.005em] animate-fade-up opacity-0"
                 style={{ animationDelay: "350ms", animationFillMode: "forwards" }}
               >
-                Accompagnement bienveillant et soins personnalisés pour vos proches, partout en Europe.
+                Accompagnement bienveillant et soins personnalisés pour nous aînés.
               </p>
 
               {/* CTA Buttons */}
@@ -373,20 +378,20 @@ const Index = () => {
           <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
             {[
               {
-                value: "5+",
-                label: "Années d'expérience",
+                value: "300",
+                label: "JOURS DE SOLEIL",
               },
               {
-                value: "24/7",
-                label: "Équipe présente",
+                value: "24h/7j",
+                label: "ÉQUIPE PRÉSENTE",
               },
               {
                 value: "4★",
-                label: "Standing hôtelier",
+                label: "STANDING HÔTELIER",
               },
               {
-                value: "300",
-                label: "Jours en soleil",
+                value: "200 m",
+                label: "DE LA MER",
               },
             ].map((stat, index) => (
               <div
