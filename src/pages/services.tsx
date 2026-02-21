@@ -1,54 +1,145 @@
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
+import type { LucideIcon } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, ChevronLeft, ChevronRight } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
 import Seo from "@/components/Seo";
 import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import ServiceBlock, { type ServiceVariant } from "@/components/ServiceBlock";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import ctaBg from "@/assets/cta-bg-sunset.jpg";
 
+type ServiceItem = {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  variant: ServiceVariant;
+  icon: LucideIcon;
+};
+
 const Services = () => {
-  const services = [
+  const services: ServiceItem[] = [
     {
+      id: "accompagnement-quotidien",
       icon: HandHeart,
       title: "Accompagnement quotidien et personnalisé",
       description: "Accompagnement quotidien et personnalisé : aide aux gestes de la vie courante avec respect et discrétion.",
-      color: "from-rose-500 to-pink-500",
+      imageSrc: "/services/accompagnement-quotidien-placeholder.svg",
+      imageAlt: "Aide quotidienne et accompagnement bienveillant au Clos du Soleil",
+      variant: "soft",
     },
     {
+      id: "accueil-transport",
       icon: Plane,
       title: "Accueil et transport individuel",
       description: "Accueil et transport individuel depuis l'aéroport, avec une prise en charge adaptée aux personnes à mobilité réduite.",
-      color: "from-sky-500 to-blue-500",
+      imageSrc: "/services/accueil-transport-placeholder.svg",
+      imageAlt: "Service d'accueil et transport individuel depuis l'aéroport",
+      variant: "outline",
     },
     {
+      id: "soins-medicaux",
       icon: Stethoscope,
       title: "Soins médicaux et paramédicaux",
       description: "Présence d'une équipe compétente composée d'infirmier(ère)s et d'un kinésithérapeute, proposant des séances de rééducation et de maintien de la mobilité adaptées aux besoins de chacun.",
-      color: "from-emerald-500 to-teal-500",
+      imageSrc: "/services/soins-medicaux-placeholder.svg",
+      imageAlt: "Suivi médical et paramédical personnalisé pour seniors",
+      variant: "split",
     },
     {
+      id: "activites-loisirs",
       icon: Palette,
       title: "Activités et loisirs",
       description: "Ateliers créatifs, moments de détente, sorties culturelles et sociales pour stimuler le corps et l'esprit.",
-      color: "from-violet-500 to-purple-500",
+      imageSrc: "/services/activites-loisirs-placeholder.svg",
+      imageAlt: "Activités créatives et moments de loisirs pour les résidents",
+      variant: "glass",
     },
     {
+      id: "repas-equilibres",
       icon: Utensils,
       title: "Repas équilibrés et conviviaux",
       description: "Repas équilibrés et conviviaux : préparés avec soin et adaptés aux besoins de chacun, avec la formule all inclusive soft.",
-      color: "from-amber-500 to-orange-500",
+      imageSrc: "/services/repas-equilibres-placeholder.svg",
+      imageAlt: "Repas équilibrés et conviviaux servis en résidence",
+      variant: "outline",
     },
     {
+      id: "confort-proprete",
       icon: BedDouble,
       title: "CONFORT ET PROPRETÉ",
       description:
         "L’hébergement en chambre moderne et spacieuse avec terrasse ou balcon privatif.\nPassage quotidien d’une femme de chambre.\nLa blanchisserie : linge de maison fourni et vêtements personnels entretenus avec soin.",
-      color: "from-indigo-500 to-blue-500",
+      imageSrc: "/services/confort-proprete-placeholder.svg",
+      imageAlt: "Chambre confortable et entretenue quotidiennement pour les résidents",
+      variant: "soft",
     },
   ];
+
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [galleryApi, setGalleryApi] = useState<CarouselApi>();
+
+  const openLightboxAt = (index: number) => {
+    setActiveImageIndex(index);
+    setIsLightboxOpen(true);
+  };
+
+  useEffect(() => {
+    if (!galleryApi) {
+      return;
+    }
+
+    const onSelect = () => {
+      setActiveImageIndex(galleryApi.selectedScrollSnap());
+    };
+
+    onSelect();
+    galleryApi.on("select", onSelect);
+    galleryApi.on("reInit", onSelect);
+
+    return () => {
+      galleryApi.off("select", onSelect);
+      galleryApi.off("reInit", onSelect);
+    };
+  }, [galleryApi]);
+
+  useEffect(() => {
+    if (!isLightboxOpen || !galleryApi) {
+      return;
+    }
+
+    galleryApi.scrollTo(activeImageIndex, true);
+  }, [isLightboxOpen, galleryApi, activeImageIndex]);
+
+  useEffect(() => {
+    if (!isLightboxOpen) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        galleryApi?.scrollPrev();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        galleryApi?.scrollNext();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isLightboxOpen, galleryApi]);
 
   const handleCall = () => {
     window.location.href = "tel:+3228860614";
@@ -100,44 +191,86 @@ const Services = () => {
             </div>
           </section>
 
-          {/* Services Grid */}
-          <section className="py-16 bg-card/60 backdrop-blur-sm border-y border-border/50 relative">
+          {/* Services Stack */}
+          <section className="py-16 md:py-20 bg-card/55 backdrop-blur-sm border-y border-border/50 relative">
             <div className="container mx-auto px-6">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              <div className="max-w-6xl mx-auto space-y-7 md:space-y-10">
                 {services.map((service, index) => (
-                  <Card 
-                    key={service.title}
-                    className="group relative overflow-hidden hover:shadow-glow transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 animate-fade-up opacity-0 border-2 border-border/50 hover:border-primary/30 bg-card backdrop-blur-sm"
-                    style={{ animationDelay: `${200 + index * 100}ms`, animationFillMode: "forwards" }}
-                  >
-                    {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 bg-gradient-to-br ${service.color}`} />
-                    
-                    {/* Floating sun decoration */}
-                    <div className="absolute -top-16 -right-16 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 group-hover:scale-150 transition-all duration-700" />
-                    
-                    <CardHeader className="pb-3 relative z-10">
-                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                        <service.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <CardTitle className="text-xl font-serif">{service.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <CardDescription className="text-[1.06rem] md:text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
-                        {service.description}
-                      </CardDescription>
-                    </CardContent>
-                    
-                    {/* Bottom accent line */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${service.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
-                  </Card>
+                  <ServiceBlock
+                    key={service.id}
+                    id={service.id}
+                    title={service.title}
+                    description={service.description}
+                    imageSrc={service.imageSrc}
+                    imageAlt={service.imageAlt}
+                    icon={service.icon}
+                    variant={service.variant}
+                    index={index}
+                    onImageClick={() => openLightboxAt(index)}
+                  />
                 ))}
               </div>
-              <p className="text-center text-muted-foreground text-lg max-w-3xl mx-auto mt-10">
+              <p className="text-center text-muted-foreground text-lg max-w-3xl mx-auto mt-12">
                 Chaque service est pensé pour offrir confort, sécurité et plaisir de vivre, tout en respectant le rythme et les envies de nos résidents.
               </p>
             </div>
           </section>
+
+          <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
+            <DialogContent className="w-[calc(100vw-1rem)] max-w-6xl border-white/20 bg-black/85 p-2 sm:p-4 md:p-6 shadow-none [&>button]:h-10 [&>button]:w-10 [&>button]:rounded-full [&>button]:border [&>button]:border-white/30 [&>button]:bg-black/40 [&>button]:text-white [&>button]:opacity-100 [&>button]:hover:bg-black/60">
+              <DialogTitle className="sr-only">Galerie des images de services</DialogTitle>
+              <DialogDescription className="sr-only">
+                Visualisez les images des services en plein écran et balayez de gauche à droite.
+              </DialogDescription>
+
+              <div className="relative">
+                <Carousel
+                  setApi={setGalleryApi}
+                  opts={{ loop: true, align: "start" }}
+                  className="w-full touch-pan-y"
+                  aria-label="Galerie des services"
+                >
+                  <CarouselContent className="-ml-0">
+                    {services.map((service) => (
+                      <CarouselItem key={service.id} className="pl-0">
+                        <figure className="flex min-h-[70vh] flex-col items-center justify-center gap-4">
+                          <img
+                            src={service.imageSrc}
+                            alt={service.imageAlt}
+                            className="h-[58vh] w-full rounded-xl border border-white/20 bg-black/20 object-contain sm:h-[68vh]"
+                          />
+                          <figcaption className="px-4 text-center text-white/85">
+                            <p className="font-serif text-2xl font-semibold">{service.title}</p>
+                            <p className="mt-1 text-sm tracking-wide text-white/70">
+                              {activeImageIndex + 1} / {services.length}
+                            </p>
+                          </figcaption>
+                        </figure>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+
+                <button
+                  type="button"
+                  onClick={() => galleryApi?.scrollPrev()}
+                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:left-4 sm:p-3"
+                  aria-label="Image précédente"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => galleryApi?.scrollNext()}
+                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-4 sm:p-3"
+                  aria-label="Image suivante"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </div>
+            </DialogContent>
+          </Dialog>
 
           {/* Qui sommes-nous Section */}
           <section className="py-20 relative">
