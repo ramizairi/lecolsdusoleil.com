@@ -419,8 +419,11 @@ const Index = () => {
 
         {/* Small Footer */}
         <footer className="relative z-10 border-t border-amber-200/50 bg-white/60 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Clos du Soleil
+          <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between text-sm text-muted-foreground">
+            <div>© {new Date().getFullYear()} Clos du Soleil</div>
+            <p>
+              Developed by <a href="https://www.ridy.tn" target="_blank" rel="noopener noreferrer" className="hover:text-amber-700 transition-colors text-amber-600">Ridy</a>
+            </p>
           </div>
         </footer>
       </div>
