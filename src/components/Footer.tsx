@@ -57,9 +57,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-10 pt-8 text-center">
+        <div className="border-t border-border mt-10 pt-8 flex items-center justify-between">
           <p className="text-muted-foreground text-accessible-sm">© 2026 Clos du Soleil. Tous droits réservés.</p>
+          <p>
+            Developed by <a href="https://www.ridy.tn" target="_blank" rel="noopener noreferrer" className="hover:text-amber-700 transition-colors text-amber-600">Ridy</a>
+          </p>
         </div>
+        
       </div>
     </footer>
   );

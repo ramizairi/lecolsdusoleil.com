@@ -383,6 +383,7 @@ const Index = () => {
               },
               {
                 value: "24h/7j",
+                compactUnits: true,
                 label: "ÉQUIPE PRÉSENTE",
               },
               {
@@ -399,7 +400,17 @@ const Index = () => {
                 className="group rounded-2xl border border-amber-200/80 bg-white/75 backdrop-blur-xl min-h-[130px] md:min-h-[160px] px-3 py-5 md:px-6 md:py-7 flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-200/30 hover:border-amber-300"
                 style={{ animationDelay: `${850 + index * 80}ms` }}
               >
-                <p className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-none text-foreground">{stat.value}</p>
+                <p className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-none text-foreground">
+                  {stat.compactUnits ? (
+                    <>
+                      24
+                      <span className="text-[0.55em] align-top">h</span>/7
+                      <span className="text-[0.55em] align-top">j</span>
+                    </>
+                  ) : (
+                    stat.value
+                  )}
+                </p>
                 <p className="mt-2 text-xs sm:text-sm md:text-base font-semibold text-foreground/85 leading-tight">{stat.label}</p>
               </div>
             ))}
@@ -408,8 +419,11 @@ const Index = () => {
 
         {/* Small Footer */}
         <footer className="relative z-10 border-t border-amber-200/50 bg-white/60 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Clos du Soleil
+          <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between text-sm text-muted-foreground">
+            <div>© {new Date().getFullYear()} Clos du Soleil</div>
+            <p>
+              Developed by <a href="https://www.ridy.tn" target="_blank" rel="noopener noreferrer" className="hover:text-amber-700 transition-colors text-amber-600">Ridy</a>
+            </p>
           </div>
         </footer>
       </div>
