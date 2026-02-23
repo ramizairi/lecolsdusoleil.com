@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import type { LucideIcon } from "lucide-react";
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, ChevronLeft, ChevronRight } from "lucide-react";
+import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, ChevronLeft, ChevronRight, X } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
@@ -9,7 +10,7 @@ import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
 import ServiceBlock, { type ServiceVariant } from "@/components/ServiceBlock";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import ctaBg from "@/assets/cta-bg-sunset.jpg";
 
@@ -21,6 +22,7 @@ type ServiceItem = {
   imageAlt: string;
   variant: ServiceVariant;
   icon: LucideIcon;
+  section: "accompagnement-soins" | "vie-quotidienne-confort";
 };
 
 const Services = () => {
@@ -33,6 +35,7 @@ const Services = () => {
       imageSrc: "/services/accompagnement-quotidien-placeholder.svg",
       imageAlt: "Aide quotidienne et accompagnement bienveillant au Clos du Soleil",
       variant: "soft",
+      section: "accompagnement-soins",
     },
     {
       id: "accueil-transport",
@@ -42,6 +45,7 @@ const Services = () => {
       imageSrc: "/services/accueil-transport-placeholder.svg",
       imageAlt: "Service d'accueil et transport individuel depuis l'aéroport",
       variant: "outline",
+      section: "accompagnement-soins",
     },
     {
       id: "soins-medicaux",
@@ -51,6 +55,7 @@ const Services = () => {
       imageSrc: "/services/soins-medicaux-placeholder.svg",
       imageAlt: "Suivi médical et paramédical personnalisé pour seniors",
       variant: "split",
+      section: "accompagnement-soins",
     },
     {
       id: "activites-loisirs",
@@ -60,6 +65,7 @@ const Services = () => {
       imageSrc: "/services/activites-loisirs-placeholder.svg",
       imageAlt: "Activités créatives et moments de loisirs pour les résidents",
       variant: "glass",
+      section: "vie-quotidienne-confort",
     },
     {
       id: "repas-equilibres",
@@ -69,6 +75,7 @@ const Services = () => {
       imageSrc: "/services/repas-equilibres-placeholder.svg",
       imageAlt: "Repas équilibrés et conviviaux servis en résidence",
       variant: "outline",
+      section: "vie-quotidienne-confort",
     },
     {
       id: "confort-proprete",
@@ -79,6 +86,25 @@ const Services = () => {
       imageSrc: "/services/confort-proprete-placeholder.svg",
       imageAlt: "Chambre confortable et entretenue quotidiennement pour les résidents",
       variant: "soft",
+      section: "vie-quotidienne-confort",
+    },
+  ];
+
+  const serviceIndexById = services.reduce<Record<string, number>>((acc, service, index) => {
+    acc[service.id] = index;
+    return acc;
+  }, {});
+
+  const servicesBySection: Array<{ id: ServiceItem["section"]; title: string; items: ServiceItem[] }> = [
+    {
+      id: "accompagnement-soins",
+      title: "Accompagnement et soins",
+      items: services.filter((service) => service.section === "accompagnement-soins"),
+    },
+    {
+      id: "vie-quotidienne-confort",
+      title: "Vie quotidienne et confort",
+      items: services.filter((service) => service.section === "vie-quotidienne-confort"),
     },
   ];
 
@@ -194,20 +220,31 @@ const Services = () => {
           {/* Services Stack */}
           <section className="py-16 md:py-20 bg-card/55 backdrop-blur-sm border-y border-border/50 relative">
             <div className="container mx-auto px-6">
-              <div className="max-w-6xl mx-auto space-y-7 md:space-y-10">
-                {services.map((service, index) => (
-                  <ServiceBlock
-                    key={service.id}
-                    id={service.id}
-                    title={service.title}
-                    description={service.description}
-                    imageSrc={service.imageSrc}
-                    imageAlt={service.imageAlt}
-                    icon={service.icon}
-                    variant={service.variant}
-                    index={index}
-                    onImageClick={() => openLightboxAt(index)}
-                  />
+              <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
+                {servicesBySection.map((section) => (
+                  <div key={section.id} className="space-y-7 md:space-y-9">
+                    <h2 className="font-serif text-2xl md:text-3xl font-bold text-warm-brown">{section.title}</h2>
+                    <div className="space-y-7 md:space-y-10">
+                      {section.items.map((service) => {
+                        const serviceIndex = serviceIndexById[service.id] ?? 0;
+
+                        return (
+                          <ServiceBlock
+                            key={service.id}
+                            id={service.id}
+                            title={service.title}
+                            description={service.description}
+                            imageSrc={service.imageSrc}
+                            imageAlt={service.imageAlt}
+                            icon={service.icon}
+                            variant={service.variant}
+                            index={serviceIndex}
+                            onImageClick={() => openLightboxAt(serviceIndex)}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
                 ))}
               </div>
               <p className="text-center text-muted-foreground text-lg max-w-3xl mx-auto mt-12">
@@ -217,59 +254,73 @@ const Services = () => {
           </section>
 
           <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
-            <DialogContent className="w-[calc(100vw-1rem)] max-w-6xl border-white/20 bg-black/85 p-2 sm:p-4 md:p-6 shadow-none [&>button]:h-10 [&>button]:w-10 [&>button]:rounded-full [&>button]:border [&>button]:border-white/30 [&>button]:bg-black/40 [&>button]:text-white [&>button]:opacity-100 [&>button]:hover:bg-black/60">
-              <DialogTitle className="sr-only">Galerie des images de services</DialogTitle>
-              <DialogDescription className="sr-only">
-                Visualisez les images des services en plein écran et balayez de gauche à droite.
-              </DialogDescription>
+            <DialogPortal>
+              <DialogOverlay className="z-[80] bg-black/80" />
+              <DialogPrimitive.Content
+                className="fixed inset-0 z-[90] flex h-[100dvh] w-screen flex-col bg-black/92 p-0 outline-none sm:inset-4 sm:mx-auto sm:h-[calc(100dvh-2rem)] sm:max-w-6xl sm:rounded-2xl sm:border sm:border-white/20 sm:bg-black/85 sm:p-4 md:p-6"
+                onOpenAutoFocus={(event) => event.preventDefault()}
+              >
+                <DialogTitle className="sr-only">Galerie des images de services</DialogTitle>
+                <DialogDescription className="sr-only">
+                  Visualisez les images des services en plein écran et balayez de gauche à droite.
+                </DialogDescription>
 
-              <div className="relative">
-                <Carousel
-                  setApi={setGalleryApi}
-                  opts={{ loop: true, align: "start" }}
-                  className="w-full touch-pan-y"
-                  aria-label="Galerie des services"
+                <DialogClose
+                  className="absolute right-[max(0.75rem,env(safe-area-inset-right))] top-[max(0.75rem,env(safe-area-inset-top))] z-20 rounded-full border border-white/30 bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-4 sm:top-4"
+                  aria-label="Fermer la galerie"
                 >
-                  <CarouselContent className="-ml-0">
-                    {services.map((service) => (
-                      <CarouselItem key={service.id} className="pl-0">
-                        <figure className="flex min-h-[70vh] flex-col items-center justify-center gap-4">
-                          <img
-                            src={service.imageSrc}
-                            alt={service.imageAlt}
-                            className="h-[58vh] w-full rounded-xl border border-white/20 bg-black/20 object-contain sm:h-[68vh]"
-                          />
-                          <figcaption className="px-4 text-center text-white/85">
-                            <p className="font-serif text-2xl font-semibold">{service.title}</p>
-                            <p className="mt-1 text-sm tracking-wide text-white/70">
-                              {activeImageIndex + 1} / {services.length}
-                            </p>
-                          </figcaption>
-                        </figure>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                </Carousel>
+                  <X className="h-6 w-6" />
+                </DialogClose>
 
-                <button
-                  type="button"
-                  onClick={() => galleryApi?.scrollPrev()}
-                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:left-4 sm:p-3"
-                  aria-label="Image précédente"
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </button>
+                <div className="relative flex h-full min-h-0 flex-col">
+                  <Carousel
+                    setApi={setGalleryApi}
+                    opts={{ loop: true, align: "start" }}
+                    className="h-full w-full flex-1 touch-pan-y overflow-hidden overscroll-contain"
+                    aria-label="Galerie des services"
+                  >
+                    <CarouselContent className="-ml-0 h-full">
+                      {services.map((service) => (
+                        <CarouselItem key={service.id} className="h-full pl-0">
+                          <figure className="flex h-full min-h-0 flex-col items-center justify-center gap-3 px-2 pb-5 pt-16 sm:gap-4 sm:px-4 sm:pb-2 sm:pt-6">
+                            <img
+                              src={service.imageSrc}
+                              alt={service.imageAlt}
+                              draggable={false}
+                              className="w-full max-h-[68dvh] select-none rounded-xl border border-white/20 bg-black/20 object-contain sm:max-h-[68vh]"
+                            />
+                            <figcaption className="px-2 text-center text-white/85 sm:px-4">
+                              <p className="font-serif text-xl font-semibold sm:text-2xl">{service.title}</p>
+                              <p className="mt-1 text-sm tracking-wide text-white/70">
+                                {activeImageIndex + 1} / {services.length}
+                              </p>
+                            </figcaption>
+                          </figure>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                  </Carousel>
 
-                <button
-                  type="button"
-                  onClick={() => galleryApi?.scrollNext()}
-                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-4 sm:p-3"
-                  aria-label="Image suivante"
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </button>
-              </div>
-            </DialogContent>
+                  <button
+                    type="button"
+                    onClick={() => galleryApi?.scrollPrev()}
+                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:left-4 sm:p-3"
+                    aria-label="Image précédente"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => galleryApi?.scrollNext()}
+                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-4 sm:p-3"
+                    aria-label="Image suivante"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </div>
+              </DialogPrimitive.Content>
+            </DialogPortal>
           </Dialog>
 
           {/* Qui sommes-nous Section */}

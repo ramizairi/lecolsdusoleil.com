@@ -18,7 +18,7 @@ const Header = () => {
               À propos
             </Link>
             <Link
-              href="/services"
+              href="/service"
               className="text-accessible-base font-medium text-foreground hover:text-primary transition-colors"
             >
               Services

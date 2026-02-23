@@ -157,8 +157,9 @@ const ServiceBlock = ({
               <img
                 src={imageSrc}
                 alt={imageAlt}
+                draggable={false}
                 className={cn(
-                  "h-[240px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] sm:h-[300px] md:h-[340px]",
+                  "h-[240px] w-full select-none object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] sm:h-[300px] md:h-[340px]",
                   styles.image,
                 )}
                 loading="lazy"
