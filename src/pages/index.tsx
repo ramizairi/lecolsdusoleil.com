@@ -25,7 +25,7 @@ const Index = () => {
       title: "Nos Services",
       subtitle: "Services sur mesure",
       icon: HeartHandshake,
-      to: "/service",
+      to: "/services",
       accent: "bg-rose-500",
     },
     {
@@ -253,7 +253,7 @@ const Index = () => {
                   variant="ghost"
                   className="text-foreground hover:text-foreground hover:bg-white/80 border border-amber-300 hover:border-amber-400 bg-white/50 backdrop-blur-sm gap-2 text-lg py-7 px-10 rounded-full transition-all duration-300 shadow-lg shadow-amber-100/30"
                 >
-                  <Link href="/service">Découvrir nos services</Link>
+                  <Link href="/services">Découvrir nos services</Link>
                 </Button>
               </div>
             </div>
