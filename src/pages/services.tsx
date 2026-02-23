@@ -8,7 +8,7 @@ import SunEffect from "@/components/SunEffect";
 import Seo from "@/components/Seo";
 import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
-import ServiceBlock, { type ServiceVariant } from "@/components/servicesBlock";
+import ServiceBlock, { type ServiceVariant } from "@/components/ServiceBlock";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
