@@ -79,6 +79,68 @@ export const buildRendezvousEmail = ({
   return { subject, text, html };
 };
 
+export const buildPasswordResetEmail = ({
+  name,
+  email,
+  password,
+  loginUrl,
+}: {
+  name: string;
+  email: string;
+  password: string;
+  loginUrl: string;
+}): EmailTemplate => {
+  const subject = "Nouveau mot de passe - Clos du Soleil";
+
+  const text = [
+    `Bonjour ${name},`,
+    "",
+    "Une demande de reinitialisation de mot de passe a ete effectuee pour votre compte.",
+    "",
+    "Nouveaux identifiants :",
+    `Email : ${email}`,
+    `Mot de passe temporaire : ${password}`,
+    "",
+    "Connectez-vous ici :",
+    loginUrl,
+    "",
+    "Pour votre securite, changez ce mot de passe des votre prochaine connexion.",
+    "",
+    "L'equipe Clos du Soleil",
+  ].join("\n");
+
+  const html = `
+  <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background:#f7f4ef; padding:32px;">
+    <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.08);">
+      <div style="background:linear-gradient(90deg,#f59e0b,#f97316,#fb7185); padding:22px 28px; color:#ffffff;">
+        <h1 style="margin:0; font-size:22px; letter-spacing:0.4px;">Clos du Soleil</h1>
+        <p style="margin:6px 0 0; font-size:14px; opacity:0.9;">Reinitialisation de mot de passe</p>
+      </div>
+      <div style="padding:28px; color:#2d241b;">
+        <p style="font-size:16px; margin:0 0 12px;">Bonjour ${name},</p>
+        <p style="font-size:15px; line-height:1.6; margin:0 0 16px;">
+          Nous avons recu une demande de reinitialisation de mot de passe pour votre compte.
+        </p>
+        <div style="background:#fff7ed; border:1px solid #f7d7b8; border-radius:12px; padding:16px; margin:20px 0;">
+          <p style="margin:0 0 10px; font-weight:600;">Vos nouveaux identifiants :</p>
+          <p style="margin:0; font-size:14px;">Email : <strong>${email}</strong></p>
+          <p style="margin:8px 0 0; font-size:14px;">Mot de passe temporaire : <strong>${password}</strong></p>
+        </div>
+        <a href="${loginUrl}" style="display:inline-block; padding:12px 20px; background:#f97316; color:#ffffff; text-decoration:none; border-radius:999px; font-weight:600; font-size:14px;">Se connecter</a>
+        <p style="font-size:12px; color:#6b5e51; margin:18px 0 0;">
+          Pour votre securite, pensez a modifier ce mot de passe des votre prochaine connexion.
+        </p>
+      </div>
+      <div style="padding:16px 28px 22px; font-size:12px; color:#8b7b6d; border-top:1px solid #f0e7dd;">
+        <p style="margin:0;">L'equipe Clos du Soleil</p>
+      </div>
+    </div>
+  </div>
+  `;
+
+  return { subject, text, html };
+};
+
 export const buildContactReservationNotificationEmail = ({
   name,
   email,

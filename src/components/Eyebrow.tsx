@@ -8,15 +8,17 @@ type EyebrowProps = {
 };
 
 const Eyebrow = ({ label, icon, className }: EyebrowProps) => {
+  const normalizedLabel = label.replace(/\s([!?;:])/g, "\u00A0$1");
+
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 px-5 py-2.5 text-lg font-bold tracking-[0.2em] uppercase text-primary border border-primary/30 rounded-full bg-primary/5 backdrop-blur-sm shadow-soft",
+        "inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-center text-sm font-bold uppercase tracking-[0.12em] text-primary shadow-soft backdrop-blur-sm sm:px-5 sm:py-2.5 sm:text-lg sm:tracking-[0.2em]",
         className,
       )}
     >
-      {icon}
-      {label}
+      {icon ? <span className="shrink-0">{icon}</span> : null}
+      <span className="leading-tight">{normalizedLabel}</span>
     </span>
   );
 };

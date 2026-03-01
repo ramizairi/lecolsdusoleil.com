@@ -39,7 +39,7 @@ const Index = () => {
       title: "Appeler",
       subtitle: "+32 2 886 06 14",
       icon: Phone,
-      to: "tel:+33123456789",
+      to: "tel:+3228860614",
       isExternal: true,
       accent: "bg-emerald-500",
     },
@@ -122,7 +122,7 @@ const Index = () => {
 
       <div className="relative min-h-screen flex flex-col overflow-x-hidden">
         {/* Light Luminous Background */}
-        <div className="fixed inset-2 z-0 pointer-events-none">
+        <div className="fixed inset-0 z-0 pointer-events-none">
           <img
             src={heroImage.src}
             alt=""
@@ -193,17 +193,17 @@ const Index = () => {
 
               {/* Main Headline */}
               <h1
-                className="font-serif text-4xl md:text-7xl lg:text-8xl font-bold text-warm-brown leading-[0.95] tracking-tight animate-fade-up opacity-0"
+                className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-warm-brown leading-[0.95] tracking-tight animate-fade-up opacity-0"
                 style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
-                La douceur du soleil
+                La douceur du soleil,
                 <br />
                 <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-500 to-rose-500">
+                  <span className="pr-[0.08em] text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-500 to-rose-500">
                     la chaleur humaine.
                   </span>
                   {/* Decorative underline with animation */}
-                  <svg className="absolute -bottom-2 left-0 w-full h-4" viewBox="0 0 300 12" preserveAspectRatio="none">
+                  <svg className="absolute -bottom-3 left-0 w-full h-4" viewBox="0 0 300 12" preserveAspectRatio="none">
                     <path
                       d="M0,8 Q75,0 150,8 T300,8"
                       fill="none"

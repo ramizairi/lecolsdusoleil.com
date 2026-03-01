@@ -346,12 +346,16 @@ const Services = () => {
             
             <div className="container mx-auto px-6 relative z-10">
               <div className="text-center max-w-3xl mx-auto">
-                <Eyebrow label="Pourquoi nous choisir ?" icon={<Sun className="w-4 h-4" />} className="mb-6" />
+                <Eyebrow
+                  label="Pourquoi nous choisir ?"
+                  icon={<Sun className="w-4 h-4" />}
+                  className="mb-6"
+                />
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
                   La Tunisie, un cadre de vie idéal
                 </h2>
                 <h3 className="font-serif text-3xl md:text-lg font-bold text-amber-600 uppercase mb-6">
-                  Le coût en Tunisie est moins cher de <span className="text-2xl">40%</span> qu'en Europe
+                  Le coût en Tunisie est <span className="text-2xl">40%</span> moins cher qu'en Europe
                 </h3>
                 <div className="text-lg text-muted-foreground  leading-relaxed space-y-3">
                   <p>La Tunisie, c’est la sécurité, le soleil, la mer et un climat agréable.</p>
