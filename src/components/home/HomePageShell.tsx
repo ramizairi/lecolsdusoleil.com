@@ -13,6 +13,7 @@ import {
 } from "@/components/home/homePageData";
 import Seo from "@/components/Seo";
 import ServiceSiteHeader from "@/components/ServiceSiteHeader";
+import HomeNewsletterSection from "./HomeNewsletterSection";
 
 type HomePageShellProps = {
   canonicalPath: string;
@@ -45,6 +46,7 @@ const HomePageShell = ({
           <HomeIntroductionSection paragraphs={introParagraphs} />
           <HomeServicesSection />
           <HomeReasonsSection reasons={reasons} />
+          <HomeNewsletterSection />
           <HomeCallToActionSection />
         </main>
 

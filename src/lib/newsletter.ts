@@ -104,6 +104,7 @@ export const subscribeNewsletter = async ({
     });
 
     return { status: "subscribed" as const, isNew: true, reactivated: false };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error?.code === 11000) {
       return { status: "subscribed" as const, isNew: false, reactivated: false };
