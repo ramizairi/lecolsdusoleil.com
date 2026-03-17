@@ -1,450 +1,305 @@
 import { useEffect, useState } from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import type { LucideIcon } from "lucide-react";
-import { HandHeart, Plane, Stethoscope, Palette, Utensils, BedDouble, Phone, MessageCircle, ArrowRight, Sparkles, Sun, ChevronLeft, ChevronRight, X } from "lucide-react";
-import PageHeader from "@/components/PageHeader";
+import { Stethoscope } from "lucide-react";
+import { useRouter } from "next/router";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import SunEffect from "@/components/SunEffect";
-import Seo from "@/components/Seo";
-import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
-import ServiceBlock, { type ServiceVariant } from "@/components/ServiceBlock";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogDescription, DialogOverlay, DialogPortal, DialogTitle } from "@/components/ui/dialog";
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import ctaBg from "@/assets/cta-bg-sunset.jpg";
+import PageIntroSection from "@/components/PageIntroSection";
+import Seo from "@/components/Seo";
+import ServiceContactSection from "@/components/ServiceContactSection";
+import ServiceSiteHeader from "@/components/ServiceSiteHeader";
+import { cn } from "@/lib/utils";
 
-type ServiceItem = {
-  id: string;
-  title: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-  variant: ServiceVariant;
-  icon: LucideIcon;
-  section: "accompagnement-soins" | "vie-quotidienne-confort";
+type ServiceBullet = {
+  label: string;
+  text: string;
 };
 
-const Services = () => {
-  const services: ServiceItem[] = [
-    {
-      id: "accompagnement-quotidien",
-      icon: HandHeart,
-      title: "Accompagnement quotidien et personnalisé",
-      description: "Accompagnement quotidien et personnalisé : aide aux gestes de la vie courante avec respect et discrétion.",
-      imageSrc: "/services/accompagnement.png",
-      imageAlt: "Aide quotidienne et accompagnement bienveillant au Clos du Soleil",
-      variant: "soft",
-      section: "accompagnement-soins",
-    },
-    {
-      id: "accueil-transport",
-      icon: Plane,
-      title: "Accueil et transport individuel",
-      description: "Accueil et transport individuel depuis l'aéroport, avec une prise en charge adaptée aux personnes à mobilité réduite.",
-      imageSrc: "/services/transport.png",
-      imageAlt: "Service d'accueil et transport individuel depuis l'aéroport",
-      variant: "outline",
-      section: "accompagnement-soins",
-    },
-    {
-      id: "soins-medicaux",
-      icon: Stethoscope,
-      title: "Soins médicaux et paramédicaux",
-      description: "Présence d'une équipe compétente composée d'infirmier(ère)s et d'un kinésithérapeute, proposant des séances de rééducation et de maintien de la mobilité adaptées aux besoins de chacun.",
-      imageSrc: "/services/soins.png",
-      imageAlt: "Suivi médical et paramédical personnalisé pour seniors",
-      variant: "split",
-      section: "accompagnement-soins",
-    },
-    {
-      id: "activites-loisirs",
-      icon: Palette,
-      title: "Activités et loisirs",
-      description: "Ateliers créatifs, moments de détente, sorties culturelles et sociales pour stimuler le corps et l'esprit.",
-      imageSrc: "/services/loisir.png",
-      imageAlt: "Activités créatives et moments de loisirs pour les résidents",
-      variant: "glass",
-      section: "vie-quotidienne-confort",
-    },
-    {
-      id: "repas-equilibres",
-      icon: Utensils,
-      title: "Repas équilibrés et conviviaux",
-      description: "Repas équilibrés et conviviaux : préparés avec soin et adaptés aux besoins de chacun, avec la formule all inclusive soft.",
-      imageSrc: "/services/repas.png",
-      imageAlt: "Repas équilibrés et conviviaux servis en résidence",
-      variant: "outline",
-      section: "vie-quotidienne-confort",
-    },
-    {
-      id: "confort-proprete",
-      icon: BedDouble,
-      title: "CONFORT ET PROPRETÉ",
-      description:
-        "L’hébergement en chambre moderne et spacieuse avec terrasse ou balcon privatif.\nPassage quotidien d’une femme de chambre.\nLa blanchisserie : linge de maison fourni et vêtements personnels entretenus avec soin.",
-      imageSrc: "/services/confort.png",
-      imageAlt: "Chambre confortable et entretenue quotidiennement pour les résidents",
-      variant: "soft",
-      section: "vie-quotidienne-confort",
-    },
-  ];
+type DetailedService = {
+  id: string;
+  title: string;
+  subtitle: string;
+  intro: string;
+  bullets: ServiceBullet[];
+  imageSrc: string;
+  imageAlt: string;
+};
 
-  const serviceIndexById = services.reduce<Record<string, number>>((acc, service, index) => {
-    acc[service.id] = index;
-    return acc;
-  }, {});
+const detailedServices: DetailedService[] = [
+  {
+    id: "accompagnement-quotidien",
+    title: "Accompagnement quotidien",
+    subtitle: "Une présence ajustée à chacun",
+    intro:
+      "Un accompagnement délicat, présent sans jamais brusquer. Nos équipes soutiennent chaque résident dans les gestes de la vie courante, avec attention, discrétion et respect du rythme personnel.",
+    bullets: [
+      {
+        label: "Gestes essentiels",
+        text: "Aide au lever, à l'habillage, à la toilette et aux déplacements lorsque cela est nécessaire, toujours avec bienveillance.",
+      },
+      {
+        label: "Rythme personnel",
+        text: "Chaque accompagnement s'adapte aux habitudes, à l'autonomie et aux préférences du résident pour préserver ses repères.",
+      },
+      {
+        label: "Lien rassurant",
+        text: "Une équipe stable reste présente au quotidien pour offrir écoute, continuité et sérénité aux résidents comme à leurs proches.",
+      },
+    ],
+    imageSrc: "/services/accompagnement.png",
+    imageAlt: "Accompagnement quotidien et présence bienveillante au Clos du Soleil",
+  },
+  {
+    id: "accueil-transport",
+    title: "Une Logistique « Porte à Porte »",
+    subtitle: "De votre domicile au soleil",
+    intro:
+      "Nous effaçons les distances pour votre confort. L'aventure au Clos du Soleil commence dès le seuil de votre porte en Europe. Contrairement aux séjours classiques, nous organisons votre transfert privé depuis votre domicile jusqu'à l'aéroport de départ.",
+    bullets: [
+      {
+        label: "Prise en charge totale",
+        text: "Un chauffeur vous assiste avec vos bagages jusqu'à l'enregistrement.",
+      },
+      {
+        label: "Accueil à l'arrivée",
+        text: "À votre atterrissage en Tunisie, notre équipe vous attend pour un transfert individuel vers notre établissement.",
+      },
+      {
+        label: "Accessibilité PMR",
+        text: "Tous nos véhicules de transfert sont équipés pour accueillir confortablement les personnes à mobilité réduite et leurs équipements.",
+      },
+    ],
+    imageSrc: "/services/transport.png",
+    imageAlt: "Transport privé et accueil à l'arrivée pour les résidents",
+  },
+  {
+    id: "confort-proprete",
+    title: "Confort Hôtelier 4*",
+    subtitle: "Un séjour de plain-pied",
+    intro:
+      "Le charme d'un hôtel, l'accessibilité en plus. Le Clos du Soleil est un établissement 4 étoiles pensé pour l'autonomie et la sécurité. Oubliez les contraintes architecturales : ici, tout est fluide.",
+    bullets: [
+      {
+        label: "Chambres en rez-de-chaussée",
+        text: "Pour votre confort et votre sécurité, l'ensemble de nos chambres est situé au rez-de-chaussée. Plus besoin d'emprunter d'ascenseur, vous accédez directement aux jardins et aux espaces de vie.",
+      },
+      {
+        label: "Salles de bains privatives PMR",
+        text: "Chaque chambre dispose d'une salle de bains privative entièrement conçue pour l'accessibilité, avec douches à l'italienne, barres d'appui et sièges de douche.",
+      },
+      {
+        label: "Entretien quotidien",
+        text: "La propreté des lieux, le linge de maison et l'entretien des effets personnels sont assurés avec le soin attendu d'une adresse haut de gamme.",
+      },
+    ],
+    imageSrc: "/services/confort.png",
+    imageAlt: "Chambre confortable et environnement hôtelier accessible",
+  },
+  {
+    id: "soins-medicaux",
+    title: "Soins Médicaux & Paramédicaux",
+    subtitle: "Une vigilance de chaque instant",
+    intro:
+      "La sécurité médicale intégrée à votre quotidien. Bien que vous logiez dans un cadre hôtelier, votre santé reste notre priorité absolue. Nous offrons une structure de soins médicalisés pour seniors unique en Tunisie.",
+    bullets: [
+      {
+        label: "Infirmiers & Médecins",
+        text: "Une équipe d'infirmiers diplômés assure une garde 24h/24. Un médecin coordonnateur assure le suivi de votre dossier de santé.",
+      },
+      {
+        label: "Rééducation & Kinésithérapie",
+        text: "Nos kinésithérapeutes interviennent directement sur place pour vos séances de revalidation ou de maintien de la forme physique.",
+      },
+      {
+        label: "Coordination des soins",
+        text: "Nous assurons la liaison avec vos médecins en Europe pour garantir la continuité de vos traitements.",
+      },
+    ],
+    imageSrc: "/services/soins.png",
+    imageAlt: "Equipe médicale et paramédicale dédiée aux seniors",
+  },
+  {
+    id: "repas-equilibres",
+    title: "Gastronomie",
+    subtitle: "L'équilibre parfait avec notre diététicienne",
+    intro:
+      "Une table gourmande adaptée à vos besoins. Parce que bien manger est le secret d'une bonne santé, notre restaurant 4* met l'accent sur la fraîcheur.",
+    bullets: [
+      {
+        label: "Menus personnalisés",
+        text: "En collaboration avec notre diététicienne, nous élaborons des repas sains, équilibrés et adaptés à vos régimes spécifiques, sans jamais renoncer au plaisir.",
+      },
+      {
+        label: "Fraîcheur locale",
+        text: "La proximité de la mer nous permet de vous proposer des produits de la pêche du jour et des fruits gorgés de soleil, essentiels pour faire le plein de vitamines.",
+      },
+      {
+        label: "Moments conviviaux",
+        text: "Les repas deviennent de vrais instants de partage, dans un cadre lumineux et apaisé qui valorise autant la saveur que le bien-être.",
+      },
+    ],
+    imageSrc: "/services/repas.png",
+    imageAlt: "Cuisine équilibrée et repas conviviaux au Clos du Soleil",
+  },
+  {
+    id: "activites-loisirs",
+    title: "Activités & Découvertes",
+    subtitle: "Dynamisme et Culture",
+    intro:
+      "Vivre la Tunisie, entre détente et patrimoine. Le Clos du Soleil n'est pas qu'un lieu de repos, c'est un lieu de vie vibrant.",
+    bullets: [
+      {
+        label: "Aquagym & Bien-être",
+        text: "Profitez de notre piscine pour des séances d'aquagym douce, idéales pour soulager les articulations et tonifier le corps.",
+      },
+      {
+        label: "Vie sociale & Jeux",
+        text: "Participez à nos après-midis conviviaux : tournois de bingo, jeux de société ou rendez-vous thématiques.",
+      },
+      {
+        label: "Culture & Patrimoine",
+        text: "Nous organisons des visites guidées et des excursions pour découvrir la ville, son architecture et l'histoire millénaire de la Tunisie en toute sécurité.",
+      },
+    ],
+    imageSrc: "/services/loisir.png",
+    imageAlt: "Activités culturelles, sociales et bien-être en résidence",
+  },
+];
 
-  const servicesBySection: Array<{ id: ServiceItem["section"]; title: string; items: ServiceItem[] }> = [
-    {
-      id: "accompagnement-soins",
-      title: "Accompagnement et soins",
-      items: services.filter((service) => service.section === "accompagnement-soins"),
-    },
-    {
-      id: "vie-quotidienne-confort",
-      title: "Vie quotidienne et confort",
-      items: services.filter((service) => service.section === "vie-quotidienne-confort"),
-    },
-  ];
-
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [galleryApi, setGalleryApi] = useState<CarouselApi>();
-
-  const openLightboxAt = (index: number) => {
-    setActiveImageIndex(index);
-    setIsLightboxOpen(true);
-  };
+const ServicesPage = () => {
+  const router = useRouter();
+  const [focusedServiceId, setFocusedServiceId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!galleryApi) {
+    if (!router.isReady) {
       return;
     }
 
-    const onSelect = () => {
-      setActiveImageIndex(galleryApi.selectedScrollSnap());
-    };
-
-    onSelect();
-    galleryApi.on("select", onSelect);
-    galleryApi.on("reInit", onSelect);
-
-    return () => {
-      galleryApi.off("select", onSelect);
-      galleryApi.off("reInit", onSelect);
-    };
-  }, [galleryApi]);
-
-  useEffect(() => {
-    if (!isLightboxOpen || !galleryApi) {
+    const hash = router.asPath.split("#")[1];
+    if (!hash) {
+      setFocusedServiceId(null);
       return;
     }
 
-    galleryApi.scrollTo(activeImageIndex, true);
-  }, [isLightboxOpen, galleryApi, activeImageIndex]);
-
-  useEffect(() => {
-    if (!isLightboxOpen) {
-      return;
-    }
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        galleryApi?.scrollPrev();
+    const targetId = decodeURIComponent(hash);
+    const scrollTimer = window.setTimeout(() => {
+      const target = document.getElementById(targetId);
+      if (!target) {
+        return;
       }
 
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        galleryApi?.scrollNext();
-      }
-    };
+      setFocusedServiceId(targetId);
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
 
-    window.addEventListener("keydown", onKeyDown);
+    const clearTimer = window.setTimeout(() => {
+      setFocusedServiceId((current) => (current === targetId ? null : current));
+    }, 2400);
+
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(scrollTimer);
+      window.clearTimeout(clearTimer);
     };
-  }, [isLightboxOpen, galleryApi]);
-
-  const handleCall = () => {
-    window.location.href = "tel:+3228860614";
-  };
-
-  const handleWhatsApp = () => {
-    window.open("https://wa.me/32465200310?text=Bonjour, je souhaite en savoir plus sur vos services.", "_blank");
-  };
+  }, [router.asPath, router.isReady]);
 
   return (
     <>
       <Seo
-        title="Nos Services - Clos du Soleil | Résidence Hôtelière pour Seniors en Tunisie"
-        description="Découvrez nos services : accompagnement quotidien et personnalisé, soins médicaux et paramédicaux, transport aéroport, activités et repas équilibrés au Clos du Soleil en Tunisie."
+        title="Services détaillés - Clos du Soleil"
+        description="Découvrez en détail les services du Clos du Soleil : accompagnement quotidien, transport, confort hôtelier, soins, gastronomie et activités."
+        canonicalPath="/services"
       />
 
-      <div className="min-h-screen flex flex-col">
-        <AnimatedBackground variant="sunset" />
-        <PageHeader />
+      <div className="relative min-h-screen overflow-x-hidden bg-background">
+        <AnimatedBackground variant="sunrise" />
 
-        <main className="flex-1 pt-24">
-          {/* Hero Section */}
-          <section className="py-20 md:py-28 relative">
-            <SunEffect variant="corner" className="inset-0 z-0" />
-            
-            <div className="container mx-auto px-6 text-center relative z-10">
-              {/* Eyebrow */}
-              <div 
-                className="animate-fade-up opacity-0"
-                style={{ animationFillMode: "forwards" }}
-              >
-                <Eyebrow label="Nos Services" icon={<Sparkles className="w-4 h-4" />} className="text-lg" />
-              </div>
-              
-              <h1 
-                className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mt-8 mb-6 animate-fade-up opacity-0" 
-                style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
-              >
-                Une gamme complète pour{" "}
-                <span className="text-gradient-sunset">votre bien-être</span>
-              </h1>
-              
-              <p 
-                className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-up opacity-0" 
-                style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
-              >
-                Au Clos du Soleil, nous offrons une gamme complète de services pour le bien-être de nos résidents.
-              </p>
-            </div>
-          </section>
+        <div className="pointer-events-none fixed inset-0 -z-[5] overflow-hidden">
+          <div className="absolute left-1/2 top-32 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-amber-300/14 blur-3xl" />
+          <div className="absolute -left-20 top-[30rem] h-80 w-80 rounded-full bg-orange-200/16 blur-3xl" />
+          <div className="absolute bottom-[-10rem] right-[-6rem] h-[24rem] w-[24rem] rounded-full bg-yellow-200/18 blur-3xl" />
+        </div>
 
-          {/* Services Stack */}
-          <section className="py-16 md:py-20 bg-card/55 backdrop-blur-sm border-y border-border/50 relative">
-            <div className="container mx-auto px-6">
-              <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
-                {servicesBySection.map((section) => (
-                  <div key={section.id} className="space-y-7 md:space-y-9">
-                    <h2 className="font-serif text-2xl md:text-3xl font-bold text-warm-brown">{section.title}</h2>
-                    <div className="space-y-7 md:space-y-10">
-                      {section.items.map((service) => {
-                        const serviceIndex = serviceIndexById[service.id] ?? 0;
+        <ServiceSiteHeader activeKey="services" logoMode="always" />
 
-                        return (
-                          <ServiceBlock
-                            key={service.id}
-                            id={service.id}
-                            title={service.title}
-                            description={service.description}
-                            imageSrc={service.imageSrc}
-                            imageAlt={service.imageAlt}
-                            icon={service.icon}
-                            variant={service.variant}
-                            index={serviceIndex}
-                            onImageClick={() => openLightboxAt(serviceIndex)}
-                          />
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="text-center text-muted-foreground text-lg max-w-3xl mx-auto mt-12">
-                Chaque service est pensé pour offrir confort, sécurité et plaisir de vivre, tout en respectant le rythme et les envies de nos résidents.
-              </p>
-            </div>
-          </section>
+        <main className="relative z-10">
+          <PageIntroSection
+            label="Services"
+            title="Services"
+            icon={<Stethoscope className="h-4 w-4" />}
+            description="Découvrez, service après service, la manière dont Clos du Soleil organise un séjour fluide, rassurant et profondément humain."
+            sectionClassName="px-6 pb-14 pt-36 md:pb-20 md:pt-40"
+          />
 
-          <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
-            <DialogPortal>
-              <DialogOverlay className="z-[80] bg-black/80" />
-              <DialogPrimitive.Content
-                className="fixed inset-0 z-[90] flex h-[100dvh] w-screen flex-col bg-black/92 p-0 outline-none sm:inset-4 sm:mx-auto sm:h-[calc(100dvh-2rem)] sm:max-w-6xl sm:rounded-2xl sm:border sm:border-white/20 sm:bg-black/85 sm:p-4 md:p-6"
-                onOpenAutoFocus={(event) => event.preventDefault()}
-              >
-                <DialogTitle className="sr-only">Galerie des images de services</DialogTitle>
-                <DialogDescription className="sr-only">
-                  Visualisez les images des services en plein écran et balayez de gauche à droite.
-                </DialogDescription>
+          <section className="px-4 pb-14 md:px-6 md:pb-20">
+            <div className="mx-auto flex max-w-[1380px] flex-col gap-8 md:gap-10">
+              {detailedServices.map((service, index) => {
+                const isFocused = focusedServiceId === service.id;
+                const isReversed = index % 2 === 1;
 
-                <DialogClose
-                  className="absolute right-[max(0.75rem,env(safe-area-inset-right))] top-[max(0.75rem,env(safe-area-inset-top))] z-20 rounded-full border border-white/30 bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-4 sm:top-4"
-                  aria-label="Fermer la galerie"
-                >
-                  <X className="h-6 w-6" />
-                </DialogClose>
-
-                <div className="relative flex h-full min-h-0 flex-col">
-                  <Carousel
-                    setApi={setGalleryApi}
-                    opts={{ loop: true, align: "start" }}
-                    className="h-full w-full flex-1 touch-pan-y overflow-hidden overscroll-contain"
-                    aria-label="Galerie des services"
+                return (
+                  <article
+                    key={service.id}
+                    id={service.id}
+                    className={cn(
+                      "group relative scroll-mt-32 overflow-hidden rounded-[2.25rem] border bg-[linear-gradient(145deg,rgba(255,255,255,0.94)_0%,rgba(255,249,242,0.88)_52%,rgba(255,246,236,0.96)_100%)] px-5 py-5 shadow-[0_26px_70px_rgba(116,84,43,0.1)] ring-1 ring-white/75 transition-all duration-700 md:scroll-mt-36 md:px-7 md:py-7 xl:px-8 xl:py-8",
+                      isFocused
+                        ? "border-primary/30 shadow-[0_34px_90px_rgba(205,126,41,0.18)] ring-2 ring-primary/18"
+                        : "border-black/8 hover:-translate-y-0.5 hover:border-black/10 hover:shadow-[0_30px_80px_rgba(116,84,43,0.14)]",
+                    )}
                   >
-                    <CarouselContent className="-ml-0 h-full">
-                      {services.map((service) => (
-                        <CarouselItem key={service.id} className="h-full pl-0">
-                          <figure className="flex h-full min-h-0 flex-col items-center justify-center gap-3 px-2 pb-5 pt-16 sm:gap-4 sm:px-4 sm:pb-2 sm:pt-6">
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(252,211,77,0.12)_0%,rgba(252,211,77,0)_34%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.08)_0%,rgba(249,115,22,0)_32%)]" />
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-[0.03]"
+                      style={{
+                        backgroundImage:
+                          "radial-gradient(circle at 2px 2px, rgba(145, 92, 29, 0.7) 1px, transparent 0)",
+                        backgroundSize: "24px 24px",
+                      }}
+                    />
+
+                    <div className="relative grid gap-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center lg:gap-10 xl:gap-14">
+                      <div className={cn("relative", isReversed && "lg:order-2")}>
+                        <div className="absolute inset-6 rounded-[2rem] bg-[radial-gradient(circle,rgba(255,223,163,0.22)_0%,rgba(255,223,163,0)_72%)] blur-3xl" />
+                        <div className="relative overflow-hidden rounded-[1.9rem] bg-white/80 p-2 shadow-[0_20px_50px_rgba(120,88,43,0.14)] ring-1 ring-white/80">
+                          <div className="overflow-hidden rounded-[1.45rem]">
                             <img
                               src={service.imageSrc}
                               alt={service.imageAlt}
-                              draggable={false}
-                              className="w-full max-h-[68dvh] select-none rounded-xl border border-white/20 bg-black/20 object-contain sm:max-h-[68vh]"
+                              className="h-[250px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] md:h-[330px] xl:h-[370px]"
+                              loading="lazy"
                             />
-                            <figcaption className="px-2 text-center text-white/85 sm:px-4">
-                              <p className="font-serif text-xl font-semibold sm:text-2xl">{service.title}</p>
-                              <p className="mt-1 text-sm tracking-wide text-white/70">
-                                {activeImageIndex + 1} / {services.length}
-                              </p>
-                            </figcaption>
-                          </figure>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                  </Carousel>
+                          </div>
+                          <div className="pointer-events-none absolute inset-x-6 bottom-5 h-16 rounded-full bg-gradient-to-t from-black/18 to-transparent blur-xl" />
+                        </div>
+                      </div>
 
-                  <button
-                    type="button"
-                    onClick={() => galleryApi?.scrollPrev()}
-                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:left-4 sm:p-3"
-                    aria-label="Image précédente"
-                  >
-                    <ChevronLeft className="h-6 w-6" />
-                  </button>
+                      <div className={cn("relative px-2 py-2 md:px-3", isReversed && "lg:order-1")}>
+                        <div className="h-px w-24 bg-gradient-to-r from-primary via-amber-300/90 to-transparent" />
+                        <h2 className="mt-6 font-serif text-3xl font-bold leading-[1.02] text-warm-brown md:text-5xl">
+                          {service.title}
+                        </h2>
+                        <p className="mt-3 text-xl italic leading-relaxed text-foreground/68 md:text-[1.9rem]">
+                          {service.subtitle}
+                        </p>
+                        <p className="mt-8 text-lg leading-relaxed text-foreground/76 md:text-[1.35rem]">
+                          {service.intro}
+                        </p>
 
-                  <button
-                    type="button"
-                    onClick={() => galleryApi?.scrollNext()}
-                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/35 bg-black/45 p-2 text-white transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-4 sm:p-3"
-                    aria-label="Image suivante"
-                  >
-                    <ChevronRight className="h-6 w-6" />
-                  </button>
-                </div>
-              </DialogPrimitive.Content>
-            </DialogPortal>
-          </Dialog>
-
-          {/* Qui sommes-nous Section */}
-          <section className="py-20 relative">
-            <SunEffect variant="subtle" className="inset-0" />
-
-            <div className="container mx-auto px-6 relative z-10">
-              <div className="text-center max-w-3xl mx-auto">
-                <Eyebrow label="Qui sommes-nous ?" icon={<Sun className="w-4 h-4" />} className="mb-6" />
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  Le Clos du Soleil, une résidence dédiée au bien-être
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Le Clos du Soleil est une résidence hôtelière pour seniors située en Tunisie. Nous accueillons des personnes âgées dans un cadre calme, sécurisé et bienveillant. Nous offrons un accompagnement quotidien, des soins personnalisés et une attention particulière au bien-être et à la dignité de chaque résident.
-                </p>
-              </div>
+                        <ul className="mt-8 space-y-4 pl-6 text-lg leading-relaxed text-foreground/76 marker:text-primary md:text-[1.28rem]">
+                          {service.bullets.map((bullet) => (
+                            <li key={`${service.id}-${bullet.label}`}>
+                              <span className="font-semibold text-warm-brown">{bullet.label} :</span> {bullet.text}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </section>
 
-          {/* Pourquoi nous choisir Section */}
-          <section className="py-20 relative">
-            <SunEffect variant="subtle" className="inset-0" />
-            
-            <div className="container mx-auto px-6 relative z-10">
-              <div className="text-center max-w-3xl mx-auto">
-                <Eyebrow
-                  label="Pourquoi nous choisir ?"
-                  icon={<Sun className="w-4 h-4" />}
-                  className="mb-6"
-                />
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  La Tunisie, un cadre de vie idéal
-                </h2>
-                <h3 className="font-serif text-3xl md:text-lg font-bold text-amber-600 uppercase mb-6">
-                  Le coût en Tunisie est <span className="text-2xl">40%</span> moins cher qu'en Europe
-                </h3>
-                <div className="text-lg text-muted-foreground  leading-relaxed space-y-3">
-                  <p>La Tunisie, c’est la sécurité, le soleil, la mer et un climat agréable.</p>
-                  <p>C’est aussi une alimentation fraîche et équilibrée.</p>
-                  <p>Au Clos du Soleil, nous offrons à chaque résident une attention personnalisée et un cadre de vie apaisant.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section with Background Image */}
-          <section className="py-32 relative overflow-hidden">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
-              <img
-                src={ctaBg.src}
-                alt="" 
-                className="w-full h-full object-cover"
-              />
-              {/* Elegant overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30" />
-            </div>
-            
-            {/* Sun rays effect */}
-            <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-              <div 
-                className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full"
-                style={{
-                  background: "radial-gradient(circle, hsl(42 90% 70% / 0.15) 0%, transparent 50%)",
-                  filter: "blur(40px)",
-                }}
-              />
-            </div>
-            
-            {/* Vignette */}
-            <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 150px rgba(0,0,0,0.4)' }} />
-            
-            <div className="container mx-auto px-6 text-center relative z-10">
-              <div 
-                className="animate-fade-up opacity-0"
-                style={{ animationFillMode: "forwards" }}
-              >
-                <Eyebrow
-                  label="Contactez-nous"
-                  icon={<Phone className="w-4 h-4" />}
-                  className="text-amber-300 border-amber-400/30 bg-amber-400/10 shadow-none"
-                />
-              </div>
-              
-              <h2 
-                className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mt-8 mb-6 animate-fade-up opacity-0"
-                style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
-              >
-                Prêt à découvrir le Clos du Soleil ?
-              </h2>
-              <p 
-                className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-12 animate-fade-up opacity-0"
-                style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
-              >
-                Notre équipe est à votre écoute pour organiser votre séjour et répondre à toutes vos questions.
-              </p>
-              
-              <div 
-                className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up opacity-0"
-                style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
-              >
-                <Button 
-                  onClick={handleCall}
-                  className="group relative overflow-hidden bg-white text-foreground hover:bg-white/95 text-lg py-7 px-10 rounded-full shadow-elevated gap-3 transition-all duration-300 hover:scale-105"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span className="font-semibold">Appelez-nous</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-                </Button>
-                <Button 
-                  onClick={handleWhatsApp}
-                  className="group relative overflow-hidden bg-[#25D366] hover:bg-[#20BD5A] border-none text-white text-lg py-7 px-10 rounded-full shadow-elevated gap-3 transition-all duration-300 hover:scale-105"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span className="font-semibold">WhatsApp</span>
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                </Button>
-              </div>
-            </div>
-          </section>
+          <ServiceContactSection />
         </main>
 
         <Footer />
@@ -453,4 +308,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default ServicesPage;
