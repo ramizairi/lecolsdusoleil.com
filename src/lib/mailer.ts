@@ -3,6 +3,7 @@ import {
   buildAdminOtpEmail,
   buildAppointmentStatusEmail,
   buildContactReservationNotificationEmail,
+  buildPasswordResetEmail,
   buildRendezvousEmail,
 } from "@/lib/emails";
 import { getMailerConfig } from "@/lib/env";
@@ -74,6 +75,23 @@ export const sendRendezvousEmail = async ({
   loginUrl: string;
 }) => {
   const { subject, text, html } = buildRendezvousEmail({ name, email, password, loginUrl });
+  return sendMail({ to, subject, text, html });
+};
+
+export const sendPasswordResetEmail = async ({
+  to,
+  name,
+  email,
+  password,
+  loginUrl,
+}: {
+  to: string;
+  name: string;
+  email: string;
+  password: string;
+  loginUrl: string;
+}) => {
+  const { subject, text, html } = buildPasswordResetEmail({ name, email, password, loginUrl });
   return sendMail({ to, subject, text, html });
 };
 

@@ -4,7 +4,9 @@ import { getAppUrl } from "@/lib/env";
 const PAGES = [
   { path: "/", changefreq: "weekly", priority: 1.0 },
   { path: "/about", changefreq: "monthly", priority: 0.8 },
+  { path: "/service", changefreq: "weekly", priority: 0.9 },
   { path: "/services", changefreq: "monthly", priority: 0.8 },
+  { path: "/formules", changefreq: "monthly", priority: 0.8 },
   { path: "/contact", changefreq: "monthly", priority: 0.7 },
 ];
 

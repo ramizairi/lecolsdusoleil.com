@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,8 @@ type ServiceBlockProps = {
   variant: ServiceVariant;
   index: number;
   onImageClick: () => void;
+  ctaHref?: string;
+  ctaLabel?: string;
 };
 
 const overlayPatternByVariant: Record<ServiceVariant, CSSProperties> = {
@@ -107,6 +110,8 @@ const ServiceBlock = ({
   variant,
   index,
   onImageClick,
+  ctaHref,
+  ctaLabel,
 }: ServiceBlockProps) => {
   const styles = stylesByVariant[variant];
 
@@ -143,7 +148,17 @@ const ServiceBlock = ({
 
           <p className={cn("max-w-2xl whitespace-pre-line text-lg leading-relaxed", styles.description)}>{description}</p>
 
-          <div className={cn("h-1.5 w-28 rounded-full bg-gradient-to-r", styles.accent)} aria-hidden="true" />
+          {ctaHref && ctaLabel ? (
+            <Link
+              href={ctaHref}
+              className="inline-flex w-fit items-center gap-3 text-base font-semibold text-primary transition-all duration-300 hover:gap-4 md:text-lg"
+            >
+              <span className={cn("h-1.5 w-20 rounded-full bg-gradient-to-r", styles.accent)} aria-hidden="true" />
+              <span>{ctaLabel}</span>
+            </Link>
+          ) : (
+            <div className={cn("h-1.5 w-28 rounded-full bg-gradient-to-r", styles.accent)} aria-hidden="true" />
+          )}
         </div>
 
         <div className="w-full md:justify-self-end">
