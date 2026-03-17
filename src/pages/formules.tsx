@@ -33,10 +33,10 @@ const FormulesPage = () => {
             label="Formules"
             title="Formules"
             icon={<Sparkles className="h-4 w-4" />}
-            sectionClassName="px-6 pb-14 pt-36 md:pb-20 md:pt-40"
+            sectionClassName="px-3 pb-14 pt-36 sm:px-6 md:pb-20 md:pt-40"
           />
 
-          <section className="px-4 pb-14 md:px-6 md:pb-18">
+          <section className="px-3 pb-14 sm:px-6 md:pb-18">
             <div className="mx-auto flex max-w-[1280px] flex-col gap-8 md:gap-10">
               {formulaPlans.map((formula, index) => (
                 <FormulaCard key={formula.id} formula={formula} index={index} />

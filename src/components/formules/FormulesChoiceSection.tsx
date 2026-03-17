@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const FormulesChoiceSection = () => {
   return (
-    <section className="px-6 pb-12 pt-4 md:pb-20">
+    <section className="px-3 pb-12 pt-4 sm:px-6 md:pb-20">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid gap-10 rounded-[2.2rem] bg-white/55 px-6 py-8 shadow-[0_20px_60px_rgba(114,83,42,0.08)] ring-1 ring-white/70 backdrop-blur-sm lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-10 lg:py-10">
+        <div className="grid gap-10 rounded-[2.2rem] bg-white/55 px-5 py-8 shadow-[0_20px_60px_rgba(114,83,42,0.08)] ring-1 ring-white/70 backdrop-blur-sm sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-10 lg:py-10">
           <div className="max-w-2xl">
             <p className="text-xl leading-relaxed text-foreground/76 md:text-[1.45rem]">
               Inclus dans tous nos séjours :

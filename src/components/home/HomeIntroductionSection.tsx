@@ -6,7 +6,7 @@ const HomeIntroductionSection = ({
   paragraphs,
 }: HomeIntroductionSectionProps) => {
   return (
-    <section className="px-6 py-12 md:py-20">
+    <section className="py-12 sm:px-3 md:py-20">
       <div className="container mx-auto">
         <div
           className="relative isolate mx-auto max-w-6xl animate-fade-up overflow-hidden rounded-[2.75rem] bg-[linear-gradient(145deg,rgba(255,255,255,0.9)_0%,rgba(255,250,244,0.78)_55%,rgba(255,246,235,0.88)_100%)] opacity-0 shadow-[0_28px_80px_rgba(115,84,43,0.12)] ring-1 ring-white/70 md:rounded-[3rem]"
@@ -24,7 +24,7 @@ const HomeIntroductionSection = ({
           />
           <div className="pointer-events-none absolute inset-x-10 top-0 h-40 bg-[radial-gradient(circle,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0)_72%)] blur-2xl" />
 
-          <div className="relative px-6 py-8 md:px-10 md:py-12 lg:px-14 lg:py-16">
+          <div className="relative px-5 py-8 sm:px-6 md:px-10 md:py-12 lg:px-14 lg:py-16">
             <div className="mx-auto max-w-4xl text-center">
               <div className="mx-auto h-px w-16 bg-gradient-to-r from-transparent via-primary/80 to-transparent" />
               <h2 className="mt-6 font-serif text-4xl font-bold leading-[0.95] text-warm-brown md:text-5xl lg:text-6xl">

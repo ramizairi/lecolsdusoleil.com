@@ -17,7 +17,7 @@ const PageHeader = ({ showBack = true, variant = "light" }: PageHeaderProps) => 
         ? "bg-black/30 border-white/10" 
         : "bg-card/80 dark:bg-black/30 border-border/50 dark:border-white/10 shadow-soft"
     }`}>
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-3 py-4 sm:px-6">
         <div className="flex items-center justify-between">
           {/* Left - Back button or Logo */}
           <div className="flex items-center gap-4">

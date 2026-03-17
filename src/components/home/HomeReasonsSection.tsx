@@ -8,9 +8,9 @@ type HomeReasonsSectionProps = {
 
 const HomeReasonsSection = ({ reasons }: HomeReasonsSectionProps) => {
   return (
-    <section className="px-6 py-14 md:py-20">
+    <section className="px-3 py-14 sm:px-6 md:py-20">
       <div className="w-full">
-        <div className="relative overflow-hidden bg-white/88 px-6 py-10 md:px-10 md:py-14">
+        <div className="relative overflow-hidden bg-white/88 px-5 py-10 sm:px-6 md:px-10 md:py-14">
           <div className="pointer-events-none absolute -left-16 top-16 h-52 w-52 rounded-full bg-amber-200/35 blur-3xl" />
           <div className="pointer-events-none absolute right-[-3rem] bottom-0 h-64 w-64 rounded-full bg-orange-200/25 blur-3xl" />
           <div

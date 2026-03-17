@@ -13,7 +13,7 @@ const HomeServicesSection = () => {
   };
 
   return (
-    <section className="px-6 py-12 md:py-20">
+    <section className="py-12 sm:px-3 md:py-20">
       <div className="container mx-auto">
         <div className="text-center">
           <h2 className="font-serif text-4xl font-bold text-warm-brown md:text-6xl">

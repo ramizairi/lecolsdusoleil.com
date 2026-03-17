@@ -7,11 +7,19 @@ import type { HighlightItem } from "@/components/home/homePageData";
 
 type HomeHeroSectionProps = {
   highlights: HighlightItem[];
+  topSpacing?: "default" | "compact";
 };
 
-const HomeHeroSection = ({ highlights }: HomeHeroSectionProps) => {
+const HomeHeroSection = ({
+  highlights,
+  topSpacing = "default",
+}: HomeHeroSectionProps) => {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden px-6 pb-16 pt-36 md:pb-24 md:pt-40">
+    <section
+      className={`relative flex min-h-screen items-center overflow-hidden px-3 pb-16 sm:px-6 md:pb-24 ${
+        topSpacing === "compact" ? "pt-28 md:pt-32" : "pt-36 md:pt-40"
+      }`}
+    >
       <div className="absolute inset-0">
         <Image
           src={heroImage}
@@ -34,9 +42,9 @@ const HomeHeroSection = ({ highlights }: HomeHeroSectionProps) => {
 
       <div className="container relative mx-auto">
         <div className="mx-auto max-w-5xl text-center">
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_0%,rgba(255,252,246,0.34)_100%)] px-4 py-8 shadow-[0_28px_80px_rgba(114,83,42,0.12)] backdrop-blur-md md:px-10 md:py-12">
-            <div className="pointer-events-none absolute inset-x-8 top-0 h-40 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0)_70%)] blur-2xl" />
-            <div className="pointer-events-none absolute inset-x-10 bottom-6 h-28 rounded-full bg-[radial-gradient(circle,rgba(255,214,153,0.2)_0%,rgba(255,214,153,0)_72%)] blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2.25rem] border border-white/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_0%,rgba(255,252,246,0.34)_100%)] px-3 py-7 shadow-[0_28px_80px_rgba(114,83,42,0.12)] backdrop-blur-md sm:rounded-[2.5rem] sm:px-4 sm:py-8 md:px-10 md:py-12">
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-20 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0)_70%)] blur-2xl" />
+            <div className="pointer-events-none absolute inset-x-10 bottom-6 h-15 rounded-full bg-[radial-gradient(circle,rgba(255,214,153,0.2)_0%,rgba(255,214,153,0)_72%)] blur-3xl" />
 
             <div
               className="relative mx-auto mt-2 flex max-w-3xl animate-fade-up flex-col items-center opacity-0"
@@ -85,7 +93,7 @@ const HomeHeroSection = ({ highlights }: HomeHeroSectionProps) => {
               {highlights.map((item) => (
                 <div
                   key={item.value}
-                  className="relative overflow-hidden rounded-[1.75rem] border border-foreground/10 bg-white/78 px-6 py-6 text-center shadow-[0_14px_34px_rgba(122,93,52,0.08)] backdrop-blur-sm md:min-h-[11.5rem]"
+                  className="relative overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-white/78 px-5 py-6 text-center shadow-[0_14px_34px_rgba(122,93,52,0.08)] backdrop-blur-sm sm:rounded-[1.75rem] sm:px-6 md:min-h-[11.5rem]"
                 >
                   <div className="pointer-events-none absolute inset-x-10 top-0 h-16 bg-[radial-gradient(circle,rgba(255,215,150,0.18)_0%,rgba(255,215,150,0)_72%)] blur-2xl" />
                   <div className="relative flex h-full flex-col items-center justify-center">

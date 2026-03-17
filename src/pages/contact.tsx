@@ -102,13 +102,13 @@ const ContactPage = () => {
             icon={<Phone className="h-4 w-4" />}
           />
 
-          <section className="px-6 pb-10 md:pb-14">
+          <section className="px-3 pb-10 sm:px-6 md:pb-14">
             <div className="container mx-auto max-w-4xl">
               <div
                 className="animate-fade-up opacity-0"
                 style={{ animationDelay: "80ms", animationFillMode: "forwards" }}
               >
-                <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(145deg,rgba(255,255,255,0.94)_0%,rgba(255,249,242,0.9)_55%,rgba(255,246,236,0.98)_100%)] px-6 py-8 text-center shadow-[0_26px_70px_rgba(116,84,43,0.1)] ring-1 ring-white/80 md:px-10 md:py-10">
+                <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(145deg,rgba(255,255,255,0.94)_0%,rgba(255,249,242,0.9)_55%,rgba(255,246,236,0.98)_100%)] px-5 py-8 text-center shadow-[0_26px_70px_rgba(116,84,43,0.1)] ring-1 ring-white/80 sm:px-6 md:px-10 md:py-10">
                   <div className="pointer-events-none absolute left-0 top-0 h-44 w-44 rounded-full bg-amber-200/20 blur-3xl" />
                   <div className="pointer-events-none absolute right-[-2rem] top-4 h-40 w-40 rounded-full bg-orange-200/18 blur-3xl" />
 
@@ -131,7 +131,7 @@ const ContactPage = () => {
             </div>
           </section>
 
-          <section className="relative px-6 pb-20 pt-2 md:pb-24">
+          <section className="relative px-3 pb-20 pt-2 sm:px-6 md:pb-24">
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <div className="absolute left-[8%] top-16 h-64 w-64 rounded-full bg-amber-200/18 blur-3xl" />
               <div className="absolute right-[10%] top-24 h-72 w-72 rounded-full bg-orange-200/16 blur-3xl" />

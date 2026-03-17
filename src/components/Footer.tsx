@@ -41,7 +41,7 @@ const Footer = () => {
         />
       </div>
 
-      <div className="container relative mx-auto px-6 py-14 md:py-16">
+      <div className="container relative mx-auto px-3 py-14 sm:px-6 md:py-16">
         <div className="grid gap-10 md:grid-cols-[1.15fr_0.9fr_1fr]">
           <div className="md:pr-10 md:[border-right:1px_solid_rgba(73,51,30,0.12)]">
             <img src={logo.src} alt="Clos du Soleil" className="h-14 w-auto" />

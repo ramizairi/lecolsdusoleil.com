@@ -36,7 +36,7 @@ const HomeCallToActionSection = () => {
         style={{ boxShadow: "inset 0 0 150px rgba(0,0,0,0.4)" }}
       />
 
-      <div className="container relative z-10 mx-auto px-6 text-center">
+      <div className="container relative z-10 mx-auto px-3 text-center sm:px-6">
         <div
           className="animate-fade-up opacity-0"
           style={{ animationFillMode: "forwards" }}

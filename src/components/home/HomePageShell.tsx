@@ -17,11 +17,15 @@ import ServiceSiteHeader from "@/components/ServiceSiteHeader";
 type HomePageShellProps = {
   canonicalPath: string;
   logoMode?: "scroll" | "always";
+  activeKey?: "accueil" | "services" | "formules" | "contact" | "none";
+  heroTopSpacing?: "default" | "compact";
 };
 
 const HomePageShell = ({
   canonicalPath,
   logoMode = "scroll",
+  activeKey = "services",
+  heroTopSpacing = "default",
 }: HomePageShellProps) => {
   return (
     <>
@@ -34,10 +38,10 @@ const HomePageShell = ({
       <div className="relative min-h-screen overflow-x-hidden bg-background">
         <AnimatedBackground variant="sunrise" />
         <HomeBackgroundDecor />
-        <ServiceSiteHeader activeKey="services" logoMode={logoMode} />
+        <ServiceSiteHeader activeKey={activeKey} logoMode={logoMode} />
 
         <main className="relative z-10">
-          <HomeHeroSection highlights={highlights} />
+          <HomeHeroSection highlights={highlights} topSpacing={heroTopSpacing} />
           <HomeIntroductionSection paragraphs={introParagraphs} />
           <HomeServicesSection />
           <HomeReasonsSection reasons={reasons} />

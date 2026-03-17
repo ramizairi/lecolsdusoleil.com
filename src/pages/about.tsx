@@ -54,7 +54,7 @@ const About = () => {
           <section className="py-20 md:py-28 relative overflow-hidden">
             <SunEffect variant="corner" className="inset-0 z-0" />
             
-            <div className="container mx-auto px-6 text-center relative z-10">
+            <div className="container mx-auto px-3 text-center relative z-10 sm:px-6">
               {/* Eyebrow */}
               <div 
                 className="animate-fade-up opacity-0"
@@ -86,7 +86,7 @@ const About = () => {
           <section className="py-20 bg-card/60 backdrop-blur-sm border-y border-border/50 relative">
             <SunEffect variant="subtle" className="inset-0" />
             
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-3 relative z-10 sm:px-6">
               <div className="max-w-4xl mx-auto text-center">
                 <div 
                   className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-sunset mb-8 shadow-glow animate-fade-up opacity-0"
@@ -122,7 +122,7 @@ const About = () => {
           <section className="py-24 relative">
             <SunEffect variant="corner" className="inset-0" />
             
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-3 relative z-10 sm:px-6">
               <div className="text-center mb-16">
                 <Eyebrow label="Ce qui nous définit" icon={<Star className="w-4 h-4" />} className="mb-6" />
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground">
@@ -192,7 +192,7 @@ const About = () => {
             {/* Vignette */}
             <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 150px rgba(0,0,0,0.4)' }} />
             
-            <div className="container mx-auto px-6 text-center relative z-10">
+            <div className="container mx-auto px-3 text-center relative z-10 sm:px-6">
               <h2 
                 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-up opacity-0"
                 style={{ animationFillMode: "forwards" }}

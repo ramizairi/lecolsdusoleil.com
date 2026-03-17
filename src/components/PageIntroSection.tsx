@@ -21,7 +21,7 @@ const PageIntroSection = ({
 }: PageIntroSectionProps) => {
   return (
     <section
-      className={cn("px-6 pb-10 pt-36 md:pb-14 md:pt-40", sectionClassName)}
+      className={cn("px-3 pb-10 pt-36 sm:px-6 md:pb-14 md:pt-40", sectionClassName)}
     >
       <div className="container mx-auto max-w-6xl">
         <div
@@ -35,7 +35,7 @@ const PageIntroSection = ({
           <Eyebrow
             label={label}
             icon={icon}
-            className="border-amber-300/80 bg-white/82 text-amber-700 shadow-[0_16px_40px_rgba(228,181,82,0.12)]"
+            className="border-amber-300/80 bg-white/40 text-amber-700 shadow-[0_16px_40px_rgba(228,181,82,0.12)]"
           />
           <h1 className="mt-7 font-serif text-5xl font-bold tracking-[-0.04em] text-gradient-sunset md:text-7xl">
             {title}

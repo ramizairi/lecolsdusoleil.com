@@ -226,10 +226,10 @@ const ServicesPage = () => {
             title="Services"
             icon={<Stethoscope className="h-4 w-4" />}
             description="Découvrez, service après service, la manière dont Clos du Soleil organise un séjour fluide, rassurant et profondément humain."
-            sectionClassName="px-6 pb-14 pt-36 md:pb-20 md:pt-40"
+            sectionClassName="px-3 pb-14 pt-36 sm:px-6 md:pb-20 md:pt-40"
           />
 
-          <section className="px-4 pb-14 md:px-6 md:pb-20">
+          <section className="px-3 pb-14 sm:px-6 md:pb-20">
             <div className="mx-auto flex max-w-[1380px] flex-col gap-8 md:gap-10">
               {detailedServices.map((service, index) => {
                 const isFocused = focusedServiceId === service.id;

@@ -11,7 +11,7 @@ const FormulaCard = ({ formula, index }: FormulaCardProps) => {
     <article
       id={formula.id}
       className={cn(
-        "group relative animate-fade-up overflow-hidden rounded-[2.4rem] border bg-[linear-gradient(145deg,rgba(255,255,255,0.95)_0%,rgba(255,249,242,0.92)_55%,rgba(255,246,236,0.98)_100%)] px-6 py-7 opacity-0 shadow-[0_26px_70px_rgba(116,84,43,0.1)] ring-1 ring-white/80 md:px-10 md:py-10 lg:px-12 lg:py-12",
+        "group relative animate-fade-up overflow-hidden rounded-[2.4rem] border bg-[linear-gradient(145deg,rgba(255,255,255,0.95)_0%,rgba(255,249,242,0.92)_55%,rgba(255,246,236,0.98)_100%)] px-5 py-7 opacity-0 shadow-[0_26px_70px_rgba(116,84,43,0.1)] ring-1 ring-white/80 sm:px-6 md:px-10 md:py-10 lg:px-12 lg:py-12",
         formula.featured
           ? "border-primary/35 shadow-[0_34px_90px_rgba(205,126,41,0.16)]"
           : "border-black/8",

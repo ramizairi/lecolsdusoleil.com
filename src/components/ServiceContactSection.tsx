@@ -4,9 +4,9 @@ import Eyebrow from "@/components/Eyebrow";
 
 const ServiceContactSection = () => {
   return (
-    <section className="px-6 pb-20 pt-10 md:pb-24">
+    <section className="px-3 pb-20 pt-10 sm:px-6 md:pb-24">
       <div className="container mx-auto">
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-foreground/75 bg-[linear-gradient(135deg,rgba(255,255,255,0.92)_0%,rgba(255,248,238,0.9)_100%)] px-6 py-10 shadow-elevated md:px-10 md:py-14">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-foreground/75 bg-[linear-gradient(135deg,rgba(255,255,255,0.92)_0%,rgba(255,248,238,0.9)_100%)] px-5 py-10 shadow-elevated sm:px-6 md:px-10 md:py-14">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(251,191,36,0.16)_0%,rgba(251,191,36,0)_68%)]" />
           <div className="pointer-events-none absolute right-[-4rem] top-0 h-72 w-72 rounded-full bg-orange-200/30 blur-3xl" />
           <div
