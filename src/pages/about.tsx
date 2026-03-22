@@ -1,14 +1,12 @@
-import Link from "next/link";
 import { Heart, Shield, Users, Star, Home, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import SunEffect from "@/components/SunEffect";
+import ContactCallToActionSection from "@/components/ContactCallToActionSection";
 import Seo from "@/components/Seo";
 import Eyebrow from "@/components/Eyebrow";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import ctaBg from "@/assets/cta-bg-sunset.jpg";
 
 const About = () => {
   const values = [
@@ -163,62 +161,21 @@ const About = () => {
             </div>
           </section>
 
-          {/* CTA with Background Image */}
-          <section className="py-32 relative overflow-hidden">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
-              <img
-                src={ctaBg.src}
-                alt="" 
-                className="w-full h-full object-cover"
-              />
-              {/* Elegant overlays */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
-            </div>
-            
-            {/* Sun glow effect */}
-            <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-              <div 
-                className="absolute -top-20 right-1/3 w-[400px] h-[400px] rounded-full animate-float"
-                style={{
-                  background: "radial-gradient(circle, hsl(42 90% 70% / 0.12) 0%, transparent 50%)",
-                  filter: "blur(50px)",
-                  animationDuration: "15s",
-                }}
-              />
-            </div>
-            
-            {/* Vignette */}
-            <div className="absolute inset-0 z-[1]" style={{ boxShadow: 'inset 0 0 150px rgba(0,0,0,0.4)' }} />
-            
-            <div className="container mx-auto px-3 text-center relative z-10 sm:px-6">
-              <h2 
-                className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-up opacity-0"
-                style={{ animationFillMode: "forwards" }}
-              >
-                Découvrez Notre Résidence
-              </h2>
-              <p 
-                className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-12 animate-fade-up opacity-0"
-                style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
-              >
-                Contactez-nous pour organiser une visite et découvrir le cadre de vie exceptionnel du Clos du Soleil.
-              </p>
-              <Button
-                asChild
-                className="group relative overflow-hidden bg-white text-foreground hover:bg-white/95 shadow-elevated gap-3 text-lg py-7 px-12 rounded-full transition-all duration-300 hover:scale-105 animate-fade-up opacity-0"
-                style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
-              >
-                <Link href="/contact">
-                  <span className="font-semibold">Prendre Rendez-vous</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
-                </Link>
-              </Button>
-            </div>
-          </section>
+          <ContactCallToActionSection
+            title="Découvrez Notre Résidence"
+            description={
+              <>
+                Contactez-nous pour organiser une visite et découvrir le cadre
+                de vie exceptionnel du Clos du Soleil.
+              </>
+            }
+            buttonLabel="Prendre Rendez-vous"
+            buttonHref="/contact"
+            buttonTrailingIcon={
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            }
+            sectionClassName="py-32"
+          />
         </main>
 
         <Footer />
