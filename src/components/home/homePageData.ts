@@ -38,18 +38,18 @@ export type ServiceItem = {
 export const highlights: HighlightItem[] = [
   {
     eyebrow: "Accompagnement",
-    value: "24/7",
-    detail: "Presence francophone attentive, a toute heure.",
+    value: "24 h/24",
+    detail: "Présence francophone attentive, à toute heure.",
   },
   {
-    eyebrow: "Hebergement",
-    value: "4*",
-    detail: "Monastir Hotel, dans un cadre hotelier soigne.",
+    eyebrow: "Hébergement",
+    value: "Hôtel 4*",
+    detail: "À Monastir, dans un cadre hôtelier soigné.",
   },
   {
     eyebrow: "Tarif",
-    value: "2200€",
-    detail: "A partir de, pour une formule decouverte.",
+    value: "Dès 2 200 €",
+    detail: "Selon la formule choisie.",
   },
 ];
 
@@ -139,23 +139,23 @@ export const reasons: ReasonItem[] = [
   },
   {
     icon: Sun,
-    title: "Un climat privilegie toute l'annee",
+    title: "Un climat privilégié toute l'année",
     description:
-      "Offrez-vous un cadre de vie entre mer et soleil. La douceur du climat mediterraneen est un allie naturel pour le bien-etre et la vitalite.",
+      "Offrez-vous un cadre de vie entre mer et soleil. La douceur du climat méditerranéen est un allié naturel pour le bien-être et la vitalité.",
     accent: "from-yellow-400 to-amber-500",
   },
   {
     icon: Utensils,
     title: "Une table saine et savoureuse",
     description:
-      "Une cuisine equilibree elaboree chaque jour a base de produits frais et locaux, avec une attention particuliere au plaisir et aux bienfaits.",
+      "Une cuisine équilibrée, élaborée chaque jour à base de produits frais et locaux, avec une attention particulière portée au plaisir et aux bienfaits.",
     accent: "from-orange-500 to-rose-500",
   },
   {
     icon: HandHeart,
     title: "Un ratio humain unique",
     description:
-      "Une presence soignante accrue et une structure a taille humaine qui garantit une attention de chaque instant pour chaque resident.",
+      "Une présence soignante accrue et une structure à taille humaine qui garantissent une attention de chaque instant pour chaque résident.",
     accent: "from-amber-400 to-yellow-500",
   },
 ];
