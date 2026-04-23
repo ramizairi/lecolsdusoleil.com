@@ -66,9 +66,51 @@ const FormulaCard = ({ formula, index }: FormulaCardProps) => {
             {formula.audienceIntro}
           </p>
           <ul className="mt-7 space-y-3 pl-6 text-lg leading-relaxed text-foreground/76 marker:text-primary md:text-[1.28rem]">
-            {formula.audienceBullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
+            {formula.audienceBullets.map((bullet) => {
+              const matches = [...bullet.matchAll(/([^:.]+):/g)];
+
+              if (!matches.length) {
+                return <li key={bullet}>{bullet}</li>;
+              }
+
+              let cursor = 0;
+              const parts = [];
+
+              matches.forEach((match, idx) => {
+                const phraseStart = match.index ?? 0;
+                const phraseEnd = phraseStart + match[1].length;
+                const colonEnd = phraseEnd + 1;
+
+                if (cursor < phraseStart) {
+                  parts.push(
+                    <span key={`text-${idx}`}>{bullet.slice(cursor, phraseStart)}</span>,
+                  );
+                }
+
+                parts.push(
+                  <span
+                    key={`title-${idx}`}
+                    className="text-base font-bold uppercase"
+                  >
+                    ✦ {match[1].trim()}
+                  </span>,
+                );
+
+                if (phraseEnd < colonEnd) {
+                  parts.push(
+                    <span key={`colon-${idx}`}>{bullet.slice(phraseEnd, colonEnd)}</span>,
+                  );
+                }
+
+                cursor = colonEnd;
+              });
+
+              if (cursor < bullet.length) {
+                parts.push(<span key="text-end">{bullet.slice(cursor)}</span>);
+              }
+
+              return <li key={bullet}>{parts}</li>;
+            })}
           </ul>
         </div>
 

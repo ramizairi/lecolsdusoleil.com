@@ -11,17 +11,17 @@ const Footer = () => {
 
   const contactInfo = [
     {
-      label: "Adresse complète",
+      label: "Adresse",
       value: "Skanes Tourist Area - B.P. 23, 5065 Monastir, Tunisia",
       href: "https://maps.google.com/?q=Skanes+Tourist+Area+Monastir+Tunisia",
     },
     {
-      label: "Numéro téléphone",
+      label: "Téléphone",
       value: "+32 2 886 06 14",
       href: "tel:+3228860614",
     },
     {
-      label: "Adresse mail",
+      label: "Mail",
       value: "contact@leclosdusoleil.com",
       href: "mailto:contact@leclosdusoleil.com",
     },

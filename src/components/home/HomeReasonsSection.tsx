@@ -29,12 +29,12 @@ const HomeReasonsSection = ({ reasons }: HomeReasonsSectionProps) => {
               className="border-amber-300/60 bg-white/80 text-amber-700"
             />
             <h2 className="mt-6 font-serif text-4xl font-bold text-warm-brown md:text-5xl">
-              Une residence qui allie douceur, expertise et qualite de vie
+              Une résidence qui allie douceur, expertise et qualité de vie
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-foreground/70 md:text-xl">
-              Une approche humaine et chaleureuse, pensee pour offrir aux
-              seniors un environnement serein, stable et veritablement bien
-              accompagne.
+              Une approche humaine et chaleureuse, pensée pour offrir aux
+              seniors un environnement serein, stable et véritablement bien
+              accompagné.
             </p>
           </div>
 

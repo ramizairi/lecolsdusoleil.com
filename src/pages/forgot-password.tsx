@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
       }
 
       toast({
-        title: "Demande envoyee",
+        title: "Demande envoyée",
         description: data?.message ?? "Si un compte existe, vous recevrez un email.",
       });
       setEmail("");

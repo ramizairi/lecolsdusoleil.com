@@ -39,7 +39,7 @@ export const highlights: HighlightItem[] = [
   {
     eyebrow: "Accompagnement",
     value: "24 h/24",
-    detail: "Présence francophone attentive, à toute heure.",
+    detail: "Sécurité et soins francophones : un ratio garanti d'un soignant par patient.",
   },
   {
     eyebrow: "Hébergement",
@@ -58,7 +58,7 @@ const services: ServiceItem[] = [
     id: "accompagnement-quotidien",
     title: "Accompagnement quotidien et personnalisé",
     description:
-      "Accompagnement quotidien et personnalisé : aide aux gestes de la vie courante avec respect et discrétion.",
+      "Un accompagnement au quotidien pour favoriser votre autonomie et sécuriser votre parcours de revalidation. Un soutien bienveillant et personnalisé qui s'adapte au rythme de chaque résident.",
     imageSrc: "/services/accompagnement.png",
     imageAlt:
       "Aide quotidienne et accompagnement bienveillant au Clos du Soleil",
@@ -103,7 +103,7 @@ const services: ServiceItem[] = [
     id: "repas-equilibres",
     title: "Repas équilibrés et conviviaux",
     description:
-      "Repas équilibrés et conviviaux : préparés avec soin et adaptés aux besoins de chacun, avec la formule all inclusive soft.",
+      "Savourez une cuisine saine et conviviale, élaborée par notre diététicienne selon vos besoins médicaux et régimes spécifiques. Chaque repas est une parenthèse de plaisir, préparée avec des produits frais pour soutenir votre vitalité.",
     imageSrc: "/services/repas.png",
     imageAlt: "Repas équilibrés et conviviaux",
     icon: Utensils,

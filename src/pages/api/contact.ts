@@ -108,8 +108,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) =
     }
 
     const responseMessage = result.isNewUser
-      ? "Votre demande a ete envoyee. Vous allez recevoir un email de confirmation."
-      : "Votre demande a ete envoyee. Si vous avez deja un compte, connectez-vous avec vos identifiants.";
+      ? "Votre demande a été envoyée. Vous allez recevoir un email de confirmation."
+      : "Votre demande a été envoyée. Si vous avez deja un compte, connectez-vous avec vos identifiants.";
 
     return res.status(201).json({
       ok: true,

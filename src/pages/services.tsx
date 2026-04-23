@@ -50,7 +50,7 @@ const detailedServices: DetailedService[] = [
   },
   {
     id: "accueil-transport",
-    title: "Une Logistique « Porte à Porte »",
+    title: "Une Logistique Porte à Porte",
     subtitle: "De votre domicile au soleil",
     intro:
       "Nous effaçons les distances pour votre confort. L'aventure au Clos du Soleil commence dès le seuil de votre porte en Europe. Contrairement aux séjours classiques, nous organisons votre transfert privé depuis votre domicile jusqu'à l'aéroport de départ.",
@@ -275,7 +275,7 @@ const ServicesPage = () => {
                       <div className={cn("relative px-2 py-2 md:px-3", isReversed && "lg:order-1")}>
                         <div className="h-px w-24 bg-gradient-to-r from-primary via-amber-300/90 to-transparent" />
                         <h2 className="mt-6 font-serif text-3xl font-bold leading-[1.02] text-warm-brown md:text-5xl">
-                          {service.title}
+                          {service.title.replace(/Porte à Porte/g, "Porte\u00A0à\u00A0Porte")}
                         </h2>
                         <p className="mt-3 text-xl italic leading-relaxed text-foreground/68 md:text-[1.9rem]">
                           {service.subtitle}

@@ -60,7 +60,7 @@ const ContactPage = () => {
       }
 
       toast({
-        title: "Demande envoyee !",
+        title: "Demande envoyée !",
         description:
           data?.message ?? "Nous vous contacterons tres bientot.",
       });

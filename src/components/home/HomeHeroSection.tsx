@@ -93,18 +93,18 @@ const HomeHeroSection = ({
               {highlights.map((item) => (
                 <div
                   key={item.value}
-                  className="relative overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-white/78 px-5 py-6 text-center shadow-[0_14px_34px_rgba(122,93,52,0.08)] backdrop-blur-sm sm:rounded-[1.75rem] sm:px-6 md:min-h-[11.5rem]"
+                  className="relative flex min-h-[11.5rem] overflow-hidden rounded-[1.6rem] border border-foreground/10 bg-white/78 p-6 text-center shadow-[0_14px_34px_rgba(122,93,52,0.08)] backdrop-blur-sm sm:rounded-[1.75rem]"
                 >
                   <div className="pointer-events-none absolute inset-x-10 top-0 h-16 bg-[radial-gradient(circle,rgba(255,215,150,0.18)_0%,rgba(255,215,150,0)_72%)] blur-2xl" />
-                  <div className="relative flex h-full flex-col items-center justify-center">
+                  <div className="relative flex h-full w-full flex-col items-center text-center">
                     <div className="h-px w-14 bg-gradient-to-r from-transparent via-primary/75 to-transparent" />
-                    <p className="mt-4 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-foreground/55 md:text-xs">
+                    <p className="mx-auto mt-4 inline-block text-center text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-foreground/55 md:text-xs">
                       {item.eyebrow}
                     </p>
-                    <p className="mt-3 font-serif text-4xl font-bold leading-none text-warm-brown md:text-5xl">
+                    <p className="mt-3 w-full whitespace-nowrap text-center font-serif text-[2.8rem] font-bold leading-none text-warm-brown md:text-[3.2rem]">
                       {item.value}
                     </p>
-                    <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-foreground/68 md:text-base">
+                    <p className="mt-3 text-sm  leading-relaxed  text-foreground/68 md:text-base">
                       {item.detail}
                     </p>
                   </div>

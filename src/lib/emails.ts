@@ -179,7 +179,7 @@ export const buildContactReservationNotificationEmail = ({
         <p style="margin:6px 0 0; font-size:13px; opacity:0.9;">Nouvelle reservation</p>
       </div>
       <div style="padding:24px; color:#2d241b;">
-        <p style="margin:0 0 12px;">Une nouvelle demande de reservation a ete envoyee depuis le formulaire contact.</p>
+        <p style="margin:0 0 12px;">Une nouvelle demande de reservation a ete envoyée depuis le formulaire contact.</p>
         <div style="background:#fff7ed; border:1px solid #f7d7b8; border-radius:12px; padding:16px;">
           <p style="margin:0 0 8px;">Nom : <strong>${safeName}</strong></p>
           <p style="margin:0 0 8px;">Email : <strong>${safeEmail}</strong></p>

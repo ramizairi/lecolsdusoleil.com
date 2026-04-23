@@ -42,7 +42,7 @@ const HomeNewsletterSection = () => {
       const description = data?.data?.reactivated
         ? "Votre inscription est reactivee."
         : data?.data?.isNew
-          ? "Vous recevrez nos actualites tres prochainement."
+          ? "Vous recevrez nos actualités très prochainement."
           : "Vous etes deja inscrit(e) a notre newsletter.";
 
       toast({
@@ -93,11 +93,11 @@ const HomeNewsletterSection = () => {
             id="newsletter-title"
             className="mt-6 font-serif text-4xl font-bold tracking-[-0.04em] text-warm-brown md:text-5xl"
           >
-            Restez informe
+            Restez informé
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-foreground/70 md:text-lg">
-            Recevez nos actualites et les nouvelles du Clos du Soleil dans une
-            mise a jour sobre et occasionnelle.
+            Recevez nos actualités et les nouvelles du Clos du Soleil dans une
+            mise à jour sobre et occasionnelle.
           </p>
 
           <form
