@@ -70,7 +70,7 @@ const services: ServiceItem[] = [
     id: "accueil-transport",
     title: "Accueil et transport individuel",
     description:
-      "Accueil et transport individuel depuis l'aéroport, avec une prise en charge adaptée aux personnes à mobilité réduite.",
+      "Prise en charge complète depuis votre domicile jusqu'à l'aéroport de départ. Nos véhicules spécialisés garantissent un transfert sécurisé pour les PMR, assurant une transition sereine et adaptée vers votre séjour médicalisé en Tunisie",
     imageSrc: "/services/transport.png",
     imageAlt: "Service d'accueil et transport individuel depuis l'aéroport",
     icon: Plane,

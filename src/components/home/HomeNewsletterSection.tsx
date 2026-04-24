@@ -33,17 +33,17 @@ const HomeNewsletterSection = () => {
         toast({
           title: "Inscription impossible",
           description:
-            data?.error?.message ?? "Une erreur est survenue. Reessayez.",
+            data?.error?.message ?? "Une erreur est survenue. Réessayez.",
           variant: "destructive",
         });
         return;
       }
 
       const description = data?.data?.reactivated
-        ? "Votre inscription est reactivee."
+        ? "Votre inscription est réactivée."
         : data?.data?.isNew
           ? "Vous recevrez nos actualités très prochainement."
-          : "Vous etes deja inscrit(e) a notre newsletter.";
+          : "Vous êtes déjà inscrit(e) à notre newsletter.";
 
       toast({
         title: data?.message ?? "Merci pour votre inscription !",
@@ -53,7 +53,7 @@ const HomeNewsletterSection = () => {
     } catch {
       toast({
         title: "Connexion impossible",
-        description: "Impossible de joindre le serveur. Reessayez plus tard.",
+        description: "Impossible de joindre le serveur. Réessayez plus tard.",
         variant: "destructive",
       });
     } finally {
