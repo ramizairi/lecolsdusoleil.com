@@ -101,7 +101,7 @@ const HomeHeroSection = ({
                     <p className="mx-auto mt-4 inline-block text-center text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-foreground/55 md:text-xs">
                       {item.eyebrow}
                     </p>
-                    <p className="mt-3 w-full whitespace-nowrap text-center font-serif text-[2.8rem] font-bold leading-none text-warm-brown md:text-[3.2rem]">
+                    <p className="mt-3 w-full whitespace-nowrap text-center font-serif text-[2.8rem] font-bold leading-none text-warm-brown md:text-[3.2rem] sm:text-[2.8rem]">
                       {item.value}
                     </p>
                     <p className="mt-3 text-sm  leading-relaxed  text-foreground/68 md:text-base">
