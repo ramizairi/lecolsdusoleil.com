@@ -66,14 +66,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) =
     if (result.already) {
       return res.status(200).json({
         ok: true,
-        message: "Vous etes deja desinscrit(e).",
+        message: "Vous êtes déjà déinscrit(e).",
         data: result,
       });
     }
 
     return res.status(200).json({
       ok: true,
-      message: "Desinscription confirmee.",
+      message: "Désinscription confirmée.",
       data: result,
     });
   } catch (error) {

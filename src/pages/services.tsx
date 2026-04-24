@@ -153,7 +153,7 @@ const detailedServices: DetailedService[] = [
       },
       {
         label: "Vie sociale & Jeux",
-        text: "Participez à nos après-midis conviviaux : tournois de bingo, jeux de société ou rendez-vous thématiques.",
+        text: "Participez à nos après-midis conviviaux: tournois de bingo, jeux de société ou rendez-vous thématiques.",
       },
       {
         label: "Culture & Patrimoine",

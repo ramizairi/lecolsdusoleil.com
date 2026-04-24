@@ -75,7 +75,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<ApiResponse>) =
 
     return res.status(200).json({
       ok: true,
-      message: "Vous etes deja inscrit(e).",
+      message: "Vous êtes déjà inscrit(e).",
       data: result,
     });
   } catch (error) {
